@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeMenu"
+        android:enabled="true"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Trang chủ"/>
+    <item
+        android:id="@+id/categoryMenu"
+        android:enabled="true"
+        android:icon="@drawable/baseline_category_24"
+        android:title="Danh mục"/>
+    <item
+        android:id="@+id/receiptMenu"
+        android:enabled="true"
+        android:icon="@drawable/baseline_receipt_long_24"
+        android:title="Phiếu mượn"/>
+    <item
+        android:id="@+id/memberMenu"
+        android:enabled="true"
+        android:icon="@drawable/baseline_group_24"
+        android:title="Thành viên"/>
+    <item
+        android:id="@+id/profileMenu"
+        android:enabled="true"
+        android:icon="@drawable/baseline_person_24"
+        android:title="Hồ sơ"/>
+</menu>

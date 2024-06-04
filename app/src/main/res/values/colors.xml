@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary_alpha1">#ffd1db</color>
+    <color name="primary_alpha2">#ffe5ef</color>
+
+    <color name="primary_color">#f04d7f</color>
+    <color name="gray1" >#686868</color>
+    <color name="text1">#5a5f7d</color>
+    <color name="background1">#eff0f3</color>
+    <color name="background2">#f4f5f7</color>
+    <color name="background3">#f8f9fb</color>
+    <color name="background4">#fafafa</color>
+    <color name="border1">#c6d0dc</color>
+    <color name="border2">#e3e6ef</color>
+    <color name="border3">#f1f2f6</color>
+    <color name="icon1">#272b41</color>
+
+    <color name="background_blur">#66000000</color>
+
+
+    <color name="cate1" >#d81587</color>
+    <color name="cate2" >#00644d</color>
+    <color name="cate3" >#8300e5</color>
+    <color name="cate4" >#1e3162</color>
+    <color name="cate5" >#e80f59</color>
+    <color name="cate6" >#5d8006</color>
+    <color name="cate7" >#0a8905</color>
+    <color name="cate8" >#4e354f</color>
+    <color name="cate9" >#0374e9</color>
+    <color name="cate10" >#5179a2</color>
+    <color name="cate11" >#bb5d0a</color>
+    <color name="cate12" >#7d4b33</color>
+    <color name="cate13" >#b02996</color>
+    <color name="cate14" >#bc2e01</color>
+
+
+</resources>

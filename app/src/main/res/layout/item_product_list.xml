@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:padding="20dp">
+    <TextView
+        android:id="@+id/ratingBookTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textStyle="bold"
+        android:textSize="28dp"
+        android:text="1"
+        android:layout_marginEnd="20dp"
+        android:textColor="@color/black"/>
+   <androidx.cardview.widget.CardView
+       android:layout_width="80dp"
+       android:layout_height="100dp"
+       app:cardCornerRadius="6dp"
+       android:layout_marginEnd="20dp">
+       <ImageView
+           android:id="@+id/bookImageListImv"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_gravity="center_vertical"
+           android:src="@mipmap/product1"
+           android:scaleType="centerCrop" />
+   </androidx.cardview.widget.CardView>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+        <TextView
+            android:id="@+id/bookNameListTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chúng Ta Của Tương Lai"
+            android:textSize="17sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/quantityBookListTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="14,052,775"
+            android:textSize="14sp"
+            android:textColor="@color/gray1" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/imgMoreOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/baseline_more_horiz_24" />
+</LinearLayout>
