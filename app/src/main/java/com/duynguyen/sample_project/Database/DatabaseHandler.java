@@ -8,7 +8,7 @@ import com.duynguyen.sample_project.R;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Library";
-    private static final int DATABASE_VERSION = 16;
+    private static final int DATABASE_VERSION = 17;
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -26,16 +26,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(createCategory);
 
         String insertCategory = "INSERT INTO CATEGORY (categoryID, categoryName, categoryImage, categoryColor) VALUES" +
-                "(1,'Pháp luật', "+ R.mipmap.bg_law +", "+ R.color.cate1 + ")," +
-                "(2, 'Công nghệ',"+ R.mipmap.bg_technology +","+ R.color.cate2 + ")," +
-                "(3, 'Văn học',"+ R.mipmap.bg_literature +","+ R.color.cate3 + ")," +
-                "(4, 'Khám phá',"+ R.mipmap.bg_explore +","+ R.color.cate4 + ")," +
-                "(5, 'Kỹ năng sống',"+ R.mipmap.bg_skill +", "+ R.color.cate5 +")," +
-                "(6, 'Truyện tranh',"+ R.mipmap.bg_comic +","+ R.color.cate6 + ")," +
-                "(7, 'Khoa học',"+ R.mipmap.bg_science +","+ R.color.cate11 + ")," +
-                "(8, 'Tâm linh',"+ R.mipmap.bg_spirituality +","+ R.color.cate9 + ")," +
-                "(9, 'Thiên văn học',"+ R.mipmap.bg_astronomy +","+ R.color.cate8 + ")," +
-                "(10, 'Triết học',"+ R.mipmap.bg_philosophy +","+ R.color.cate12 + ")";
+                "(1,'Pháp luật', " + R.mipmap.bg_law + ", " + R.color.cate1 + ")," +
+                "(2, 'Công nghệ'," + R.mipmap.bg_technology + "," + R.color.cate2 + ")," +
+                "(3, 'Văn học'," + R.mipmap.bg_literature + "," + R.color.cate3 + ")," +
+                "(4, 'Khám phá'," + R.mipmap.bg_explore + "," + R.color.cate4 + ")," +
+                "(5, 'Kỹ năng sống'," + R.mipmap.bg_skill + ", " + R.color.cate5 + ")," +
+                "(6, 'Truyện tranh'," + R.mipmap.bg_comic + "," + R.color.cate6 + ")," +
+                "(7, 'Khoa học'," + R.mipmap.bg_science + "," + R.color.cate11 + ")," +
+                "(8, 'Tâm linh'," + R.mipmap.bg_spirituality + "," + R.color.cate9 + ")," +
+                "(9, 'Thiên văn học'," + R.mipmap.bg_astronomy + "," + R.color.cate8 + ")," +
+                "(10, 'Triết học'," + R.mipmap.bg_philosophy + "," + R.color.cate12 + ")";
         db.execSQL(insertCategory);
 
 
@@ -52,18 +52,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(createBookTable);
 
         String insertBook = "INSERT INTO BOOK (bookID, bookName, bookImage, description, author, inStock, categoryID) VALUES" +
-                "(0, 'Đừng Để Nỗi Sợ Cản Đường Bạn', 'product3.png','Bởi nỗi sợ hãi là vô cùng phức tạp, nên ta sẽ không thể chỉ đơn giản là \"không sợ hãi\" hay \"buông bỏ\". Rốt cuộc, tất cả chúng ta đều phải đương đầu với những thử thách của cuộc sống bằng cả nỗi sợ hãi và lòng dũng cảm. Trở nên dũng cảm không phải là con đường thẳng tắp, mà nó được tích lũy dần dần khi đối mặt mới nỗi sợ hãi và những trở ngại. Khi chúng ta bắt đầu hiểu nỗi sợ hãi của mình và biết được chúng là thế nào, chúng ta có thể kiểm soát và tận dụng chúng. Khi chúng ta đã nhận biết, chấp nhận và hành động có mục đích đối mặt với nỗi sợ hãi, khi đó chúng ta sẽ trở nên am tường về nỗi sợ hãi', 'Helen Odessky', 10, 5)," +
-                "(1, 'Điểm Số Không Phải Là Tất Cả', 'product4.jpeg','Vậy nhưng “Điểm số không phải là tất cả”. Điểm số sẽ chỉ là một con số vô tri nếu các bạn học sinh không thể lĩnh hội được những kiến thức, rèn luyện tu dưỡng được những phẩm chất tốt đẹp để chuẩn bị cho dấu mốc quan trọng nhất - kỳ thi đại học cũng như cho cuộc sống tươi lai. So với việc cố gắng thúc ép bản thân, thúc ép con em mình, thúc ép học trò của mình đạt được những mốc điểm cao, việc nỗ lực không ngừng nghỉ kết hợp với một phương pháp học tập, phát triển bản thân hiệu quả, các bạn học sinh hoàn toàn có thể chạm đến những mục tiêu mà mình mong muốn và đặt chân vào những trường đại học chất lượng.', 'Chu Chính Minh - Lý Thừa Vận', 5, 5)," +
-                "(2, 'Khéo Ăn Nói Sẽ Có Được Thiên Hạ (Tái Bản)','product5.png', 'Trong xã hội thông tin hiện đại, sự im lặng không còn là vàng nữa, nếu không biết cách giao tiếp thì dù là vàng cũng sẽ bị chôn vùi. Trong cuộc đời một con người, từ xin việc đến thăng tiến, từ tình yêu đến hôn nhân, từ tiếp thị cho đến đàm phán, từ xã giao đến làm việc… không thể không cần đến kĩ năng và khả năng giao tiếp. Khéo ăn khéo nói thì đi đâu, làm gì cũng gặp thuận lợi. Không khéo ăn nói, bốn bề đều là trở ngại khó khăn.', 'Trác Nhã', 8, 6)," +
-                "(3, 'Mỗi Lần Vấp Ngã Là Một Lần Trưởng Thành (Tái Bản)','product6.png', 'Trong cuộc đời, mỗi chúng ta dù ít dù nhiều đều đã từng trải qua những thời khắc khó khăn, đau khổ. Đặc biệt đối với những bạn rời xa vòng tay che chở, bao bọc của cha mẹ và nhà trường, bước chân vào xã hội, bạn sẽ gặp phải rất nhiều trở ngại và nhận ra xã hội ngày vốn không hề đơn giản như bạn tưởng tượng.', 'Liêu Trí Phong', 8, 6), " +
-                "(4, 'Tư duy pháp lý của luật sư','product7.jpeg', 'Phần một: Giới thiệu với bạn về tư duy pháp lý và đưa ra các điều kiện bạn phải có, hay phải thay đổi so với trước kia để có thể có tư duy pháp lý. Tốt nghiệp trường luật xong bạn chưa có khả năng tư duy pháp lý để làm luật sư; vì trường luật đào tạo bạn làm cán bộ pháp chế (tức là soạn luật để cho người khác áp dụng, và giám sát việc thực hiện luật). Bạn sẽ biết về điều này rõ hơn khi đọc Chương 2 của phần này.\n" +
+                "(0, 'Đừng Để Nỗi Sợ Cản Đường Bạn', 'product3.jpg','Bởi nỗi sợ hãi là vô cùng phức tạp, nên ta sẽ không thể chỉ đơn giản là \"không sợ hãi\" hay \"buông bỏ\". Rốt cuộc, tất cả chúng ta đều phải đương đầu với những thử thách của cuộc sống bằng cả nỗi sợ hãi và lòng dũng cảm. Trở nên dũng cảm không phải là con đường thẳng tắp, mà nó được tích lũy dần dần khi đối mặt mới nỗi sợ hãi và những trở ngại. Khi chúng ta bắt đầu hiểu nỗi sợ hãi của mình và biết được chúng là thế nào, chúng ta có thể kiểm soát và tận dụng chúng. Khi chúng ta đã nhận biết, chấp nhận và hành động có mục đích đối mặt với nỗi sợ hãi, khi đó chúng ta sẽ trở nên am tường về nỗi sợ hãi', 'Helen Odessky', 10, 5)," +
+                "(1, 'Điểm Số Không Phải Là Tất Cả', 'product4.jpg','Vậy nhưng “Điểm số không phải là tất cả”. Điểm số sẽ chỉ là một con số vô tri nếu các bạn học sinh không thể lĩnh hội được những kiến thức, rèn luyện tu dưỡng được những phẩm chất tốt đẹp để chuẩn bị cho dấu mốc quan trọng nhất - kỳ thi đại học cũng như cho cuộc sống tươi lai. So với việc cố gắng thúc ép bản thân, thúc ép con em mình, thúc ép học trò của mình đạt được những mốc điểm cao, việc nỗ lực không ngừng nghỉ kết hợp với một phương pháp học tập, phát triển bản thân hiệu quả, các bạn học sinh hoàn toàn có thể chạm đến những mục tiêu mà mình mong muốn và đặt chân vào những trường đại học chất lượng.', 'Chu Chính Minh - Lý Thừa Vận', 5, 5)," +
+                "(2, 'Khéo Ăn Nói Sẽ Có Được Thiên Hạ (Tái Bản)','product5.jpg', 'Trong xã hội thông tin hiện đại, sự im lặng không còn là vàng nữa, nếu không biết cách giao tiếp thì dù là vàng cũng sẽ bị chôn vùi. Trong cuộc đời một con người, từ xin việc đến thăng tiến, từ tình yêu đến hôn nhân, từ tiếp thị cho đến đàm phán, từ xã giao đến làm việc… không thể không cần đến kĩ năng và khả năng giao tiếp. Khéo ăn khéo nói thì đi đâu, làm gì cũng gặp thuận lợi. Không khéo ăn nói, bốn bề đều là trở ngại khó khăn.', 'Trác Nhã', 8, 6)," +
+                "(3, 'Mỗi Lần Vấp Ngã Là Một Lần Trưởng Thành (Tái Bản)','product6.jpg', 'Trong cuộc đời, mỗi chúng ta dù ít dù nhiều đều đã từng trải qua những thời khắc khó khăn, đau khổ. Đặc biệt đối với những bạn rời xa vòng tay che chở, bao bọc của cha mẹ và nhà trường, bước chân vào xã hội, bạn sẽ gặp phải rất nhiều trở ngại và nhận ra xã hội ngày vốn không hề đơn giản như bạn tưởng tượng.', 'Liêu Trí Phong', 8, 6), " +
+                "(4, 'Tư duy pháp lý của luật sư','product7.jpg', 'Phần một: Giới thiệu với bạn về tư duy pháp lý và đưa ra các điều kiện bạn phải có, hay phải thay đổi so với trước kia để có thể có tư duy pháp lý. Tốt nghiệp trường luật xong bạn chưa có khả năng tư duy pháp lý để làm luật sư; vì trường luật đào tạo bạn làm cán bộ pháp chế (tức là soạn luật để cho người khác áp dụng, và giám sát việc thực hiện luật). Bạn sẽ biết về điều này rõ hơn khi đọc Chương 2 của phần này.\n" +
                 "Phần hai: Trình bày cách tư duy pháp lý; gồm phương pháp thực hiện; các vụ án để bạn… luyện chưởng và biết tính chất của các câu hỏi pháp lý.\n" +
                 "Phần ba: Đưa ra một số vụ án để các bạn tập làm một mình hầu kiểm tra mức độ sử dụng tư duy pháp lý\n" +
-                "Phần bốn: Một số bài đọc thêm để bạn mở rộng kiến thức.', 'Nguyễn Ngọc Bích', 18, 1), "+
-                "(5, 'Luật Pháp - Khái Lược Những Tư Tưởng Lớn (Bìa Cứng)','product8.jpeg', 'Trong cuộc đời, mỗi chúng ta dù ít dù nhiều đều đã từng trải qua những thời khắc khó khăn, đau khổ. Đặc biệt đối với những bạn rời xa vòng tay che chở, bao bọc của cha mẹ và nhà trường, bước chân vào xã hội, bạn sẽ gặp phải rất nhiều trở ngại và nhận ra xã hội ngày vốn không hề đơn giản như bạn tưởng tượng.', 'Liêu Trí Phong', 8, 1), " +
-                "(6, 'Mỗi Lần Vấp Ngã Là Một Lần Trưởng Thành (Tái Bản)','product6.png', 'Trong cuộc đời, mỗi chúng ta dù ít dù nhiều đều đã từng trải qua những thời khắc khó khăn, đau khổ. Đặc biệt đối với những bạn rời xa vòng tay che chở, bao bọc của cha mẹ và nhà trường, bước chân vào xã hội, bạn sẽ gặp phải rất nhiều trở ngại và nhận ra xã hội ngày vốn không hề đơn giản như bạn tưởng tượng.', 'Liêu Trí Phong', 8, 6)";
+                "Phần bốn: Một số bài đọc thêm để bạn mở rộng kiến thức.', 'Nguyễn Ngọc Bích', 18, 1), " +
+                "(5, 'Luật Pháp - Khái Lược Những Tư Tưởng Lớn (Bìa Cứng)','product8.jpg', 'Trong cuộc đời, mỗi chúng ta dù ít dù nhiều đều đã từng trải qua những thời khắc khó khăn, đau khổ. Đặc biệt đối với những bạn rời xa vòng tay che chở, bao bọc của cha mẹ và nhà trường, bước chân vào xã hội, bạn sẽ gặp phải rất nhiều trở ngại và nhận ra xã hội ngày vốn không hề đơn giản như bạn tưởng tượng.', 'Liêu Trí Phong', 8, 1), " +
+                "(6, 'Mỗi Lần Vấp Ngã Là Một Lần Trưởng Thành (Tái Bản)','product6.jpg', 'Trong cuộc đời, mỗi chúng ta dù ít dù nhiều đều đã từng trải qua những thời khắc khó khăn, đau khổ. Đặc biệt đối với những bạn rời xa vòng tay che chở, bao bọc của cha mẹ và nhà trường, bước chân vào xã hội, bạn sẽ gặp phải rất nhiều trở ngại và nhận ra xã hội ngày vốn không hề đơn giản như bạn tưởng tượng.', 'Liêu Trí Phong', 8, 6)";
         db.execSQL(insertBook);
-
 
 
         String createMember =
@@ -83,7 +82,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(insertMember);
 
 
-
         String createReceipt =
                 "CREATE TABLE RECEIPT(" +
                         "receiptID INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -99,7 +97,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "('2024-06-15', '2024-06-25', 'Cân nhắc mua luôn', 2)," +
                 "('2024-07-20', '2024-07-30', '', 3)";
         db.execSQL(insertReceipt);
-
 
 
         String createReceiptDetail =
@@ -123,7 +120,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(oldVersion != newVersion) {
+        if (oldVersion != newVersion) {
             db.execSQL("DROP TABLE IF EXISTS CATEGORY");
             db.execSQL("DROP TABLE IF EXISTS BOOK");
             db.execSQL("DROP TABLE IF EXISTS MEMBER");

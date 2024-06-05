@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FDFCFC"
+    android:orientation="vertical"
     tools:context=".Fragments.HomeFragment">
-    <TextView
-        android:layout_width="wrap_content"
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="RECEIPT FRAGMENT" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/custom_tablayout_bg"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        app:tabIconTint="@color/tablayout_icon"
+        app:tabIndicatorColor="#009688"
+        app:tabSelectedTextColor="#333"
+        app:tabTextColor="#9C9B9A" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
 </LinearLayout>
