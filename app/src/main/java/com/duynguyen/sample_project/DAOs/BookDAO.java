@@ -27,9 +27,13 @@ public class BookDAO {
             cursor.moveToFirst();
 
             do {
-                list.add(new Book(cursor.getInt(0), cursor.getString(1),
-                        cursor.getString(2), cursor.getString(3),
-                        cursor.getString(4), cursor.getInt(5)));
+                list.add(new Book(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getInt(5)));
             } while (cursor.moveToNext());
         }
 
@@ -74,25 +78,7 @@ public class BookDAO {
 
         return list;
     }
-    public ArrayList<Book> getAllBooks() {
-        SQLiteDatabase sqLiteDatabase = databaseHandler.getReadableDatabase();
-        ArrayList<Book> list = new ArrayList<>();
 
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM BOOK", null);
-
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            do {
-                list.add(new Book(cursor.getInt(0), cursor.getString(1),
-                        cursor.getString(2), cursor.getString(3),
-                        cursor.getString(4), cursor.getInt(5)));
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-
-        return list;
-    }
 
     public boolean addBook(Book book) {
         SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();

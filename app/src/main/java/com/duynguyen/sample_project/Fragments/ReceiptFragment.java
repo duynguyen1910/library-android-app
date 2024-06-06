@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.duynguyen.sample_project.Adapters.BookForSearchAdapter;
 import com.duynguyen.sample_project.Adapters.MemberNameArrayAdapter;
 import com.duynguyen.sample_project.DAOs.BookDAO;
+import com.duynguyen.sample_project.DAOs.MemberDAO;
 import com.duynguyen.sample_project.Models.Book;
 import com.duynguyen.sample_project.Models.Member;
 import com.duynguyen.sample_project.R;
@@ -48,7 +49,7 @@ public class ReceiptFragment extends Fragment {
         autotxt.setAdapter(memberNameAdapter);
 
         bookDAO = new BookDAO(requireActivity());
-        listBook = bookDAO.getAllBooks();
+        listBook = bookDAO.getListProduct();
         adapter = new BookForSearchAdapter(requireActivity(), mListSuggest);
 
 
@@ -99,16 +100,10 @@ public class ReceiptFragment extends Fragment {
 
     }
     private List<Member> getListMembers() {
-        List<Member> list = new ArrayList<>();
-        list.add(new Member("Ngọc Đại", "0868441273", "quận Bình Thạnh, HCM", "12345678", 2));
-        list.add(new Member("Tấn Duy", "123456789", "quận 7, HCM", "12345678", 1));
-        list.add(new Member("Tấn Bảo", "987654321", "Gò Vấp, HCM", "12345678", 0));
-        list.add(new Member("Chí Thành", "555666777", "quận Bình Thạnh, HCM", "12345678", 0));
+        MemberDAO memberDAO = new MemberDAO(getActivity());
+        ArrayList<Member> list = memberDAO.getListMembers();
         return list;
     }
 
-//    @Override
-//    public void fillFullnameToEditText(String fullname) {
-//        edtFullname.setText(fullname);
-//    }
+
 }
