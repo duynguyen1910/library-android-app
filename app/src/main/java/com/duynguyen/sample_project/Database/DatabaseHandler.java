@@ -80,6 +80,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(createMember);
 
         String insertMember = "INSERT INTO MEMBER (fullname, phoneNumber, address, password, role) VALUES" +
+                "('Ngọc Đại', '0868441273', 'quận Bình Thạnh, HCM', '12345678', 2)," +
                 "('Tấn Duy', '123456789', 'quận 7, HCM', '12345678', 1)," +
                 "('Tấn Bảo', '987654321', 'Gò Vấp, HCM', '12345678', 0)," +
                 "('Chí Thành', '555666777', 'quận Bình Thạnh, HCM', '12345678', 0)";

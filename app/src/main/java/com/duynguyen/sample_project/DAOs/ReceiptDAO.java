@@ -2,11 +2,15 @@ package com.duynguyen.sample_project.DAOs;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import com.duynguyen.sample_project.Database.DatabaseHandler;
 import com.duynguyen.sample_project.Models.Receipt;
+import com.duynguyen.sample_project.Models.ReceiptDetail;
+
+import java.util.ArrayList;
 
 public class ReceiptDAO {
     private final DatabaseHandler databaseHandler;
@@ -41,5 +45,48 @@ public class ReceiptDAO {
         contentValues.put("note", note);
         long check = sqLiteDatabase.update("RECEIPT", contentValues, "memberID = ?", new String[]{String.valueOf(memberID)});
         return check > 0;
+    }
+
+    public ArrayList<ReceiptDetail> getReceipt(){
+        ArrayList<ReceiptDetail> receipt = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
+        String query = " SELECT b.bookID, b.bookName, b.author, m.memberID, m.fullname, r.startDay, r.endDay, r.note, r.receiptID,  d.quantity, d.status\n" +
+                "   FROM BOOK b, MEMBER m, RECEIPT r, RECEIPTDETAIL d\n" +
+                "   WHERE b.bookID = d.bookID and m.memberID = r.memberID \n" +
+                "   and r.receiptID = d.receiptID";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                receipt.add(new ReceiptDetail(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getInt(3),
+                        cursor.getString(4),
+                        cursor.getString(5),
+                        cursor.getString(6),
+                        cursor.getString(7),
+                        cursor.getInt(8),
+                        cursor.getInt(9),
+                        cursor.getInt(10)
+                ));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        return receipt;
+    }
+
+    public int getReceiptDetailCount(){
+        SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
+        String query = " SELECT b.bookID, b.bookName, b.author, m.memberID, m.fullname, r.startDay, r.endDay, r.note, r.receiptID,  d.quantity, d.status\n" +
+                "   FROM BOOK b, MEMBER m, RECEIPT r, RECEIPTDETAIL d\n" +
+                "   WHERE b.bookID = d.bookID and m.memberID = r.memberID \n" +
+                "   and r.receiptID = d.receiptID";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count;
     }
 }
