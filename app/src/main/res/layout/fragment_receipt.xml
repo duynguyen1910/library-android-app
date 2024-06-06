@@ -4,29 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FDFCFC"
     android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".Fragments.HomeFragment">
 
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/custom_tablayout_bg"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        app:tabIconTint="@color/tablayout_icon"
-        app:tabIndicatorColor="#009688"
-        app:tabSelectedTextColor="#333"
-        app:tabTextColor="#9C9B9A" />
+        app:cardCornerRadius="8dp"
+        app:cardUseCompatPadding="true">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager2"
+        <androidx.appcompat.widget.SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchView"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@android:color/transparent"
+            app:queryHint="Search here..." />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-
+        android:layout_height="wrap_content" />
 </LinearLayout>

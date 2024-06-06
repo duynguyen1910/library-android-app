@@ -64,7 +64,7 @@ public class BookFragment extends Fragment {
         getActivity().getWindow().setStatusBarColor(Color.TRANSPARENT);
         getActivity().getWindow().setNavigationBarColor(Color.TRANSPARENT);
         getActivity().getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         );
 
         ImageView categoryImgImv = view.findViewById(R.id.categoryImgImv);
@@ -101,6 +101,8 @@ public class BookFragment extends Fragment {
         }
     }
 
+
+
     @Override
     public void onPause() {
         super.onPause();
@@ -130,9 +132,10 @@ public class BookFragment extends Fragment {
     private void resetSystemUiVisibility() {
         Activity activity = getActivity();
         if (activity != null) {
-            activity.getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-            );
+//            activity.getWindow().getDecorView().setSystemUiVisibility(
+//                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+//                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//            );
 
             activity.getWindow().setStatusBarColor(Color.parseColor("#F04D7F"));
             activity.getWindow().setNavigationBarColor(Color.WHITE);

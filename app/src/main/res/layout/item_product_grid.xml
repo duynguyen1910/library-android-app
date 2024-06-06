@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:text="A Magical Journey"
         android:layout_below="@id/productImageImv"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold" />
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:text="Comics"
         android:layout_below="@id/bookNameTv"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textColor="@color/gray1"
         android:textSize="13sp"
         android:textStyle="bold" />

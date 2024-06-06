@@ -1,5 +1,6 @@
 package com.duynguyen.sample_project.Adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -21,38 +22,38 @@ import com.duynguyen.sample_project.R;
 
 import java.util.ArrayList;
 
-public class BookGridAdapter extends RecyclerView.Adapter<BookGridAdapter.ViewHolder> {
+public class BookForSearchAdapter extends RecyclerView.Adapter<BookForSearchAdapter.ViewHolder>{
     private Context context;
     private ArrayList<Book> bookList;
 
-    public BookGridAdapter(Context context, ArrayList<Book> bookList) {
+    public BookForSearchAdapter(Context context, ArrayList<Book> bookList) {
         this.context = context;
         this.bookList = bookList;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BookForSearchAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-        View view = inflater.inflate(R.layout.item_product_grid, parent, false);
+        View view = inflater.inflate(R.layout.item_book_for_search, parent, false);
 
-        return new ViewHolder(view);
+        return new BookForSearchAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BookForSearchAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+
         String stringFilePath = Environment.getExternalStorageDirectory().getPath() + "/Download/" + bookList.get(position).getBookImageURI();
         Bitmap bitmap = BitmapFactory.decodeFile(stringFilePath);
+        holder.bookImage.setImageBitmap(bitmap);
+        holder.bookImage.setImageBitmap(bitmap);
+        holder.bookName.setText(bookList.get(position).getBookName());
+        holder.bookAuthor.setText(bookList.get(holder.getAdapterPosition()).getAuthor());
 
-        holder.bookImageImv.setImageBitmap(bitmap);
-        holder.bookNameTv.setText(bookList.get(holder.getAdapterPosition()).getBookName());
-        holder.authorBookTv.setText(bookList.get(holder.getAdapterPosition()).getAuthor());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, BookDetailActivity.class);
-                intent.putExtra("bookID", bookList.get(holder.getAdapterPosition()).getBookID());
-                context.startActivity(intent);
+
             }
         });
     }
@@ -63,29 +64,15 @@ public class BookGridAdapter extends RecyclerView.Adapter<BookGridAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView bookImageImv;
-        TextView bookNameTv, authorBookTv;
+        ImageView bookImage;
+        TextView bookName, bookAuthor;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            bookImageImv = itemView.findViewById(R.id.bookImageImv);
-            bookNameTv = itemView.findViewById(R.id.bookNameTv);
-            authorBookTv = itemView.findViewById(R.id.authorBookTv);
-
-
+            bookImage = itemView.findViewById(R.id.bookImage);
+            bookName = itemView.findViewById(R.id.bookName);
+            bookAuthor = itemView.findViewById(R.id.bookAuthor);
         }
     }
 
-
-//    private String getCategoryNameById(int categoryId) {
-//
-//        for (Category item : categoryDAO.getListCategory()) {
-//            if (item.getCategoryId() == categoryId) {
-//                return item.getCategoryName();
-//            }
-//        }
-//
-//        return "";
-//    }
 }

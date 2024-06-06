@@ -1,14 +1,11 @@
 package com.duynguyen.sample_project.Adapters;
 
-import android.widget.ImageView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-
-import com.duynguyen.sample_project.Fragments.BookFragment;
 import com.duynguyen.sample_project.Fragments.CategoryFragment;
 import com.duynguyen.sample_project.Fragments.HomeFragment;
 import com.duynguyen.sample_project.Fragments.MemberFragment;
@@ -19,16 +16,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
-    private final List<Fragment> fragmentList = new ArrayList<>();
-    private final List<String> fragmentTitleList = new ArrayList<>();
+     List<Fragment> fragmentList = new ArrayList<>();
+     List<String> fragmentTitleList = new ArrayList<>();
 
     public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
+        init();
+
+    }
+
+    private void init(){
         fragmentList.add(new HomeFragment());
         fragmentList.add(new CategoryFragment());
         fragmentList.add(new ReceiptFragment());
         fragmentList.add(new MemberFragment());
         fragmentList.add(new ProfileFragment());
+
+        fragmentTitleList.add("Home");
+        fragmentTitleList.add("Category");
+        fragmentTitleList.add("Receipt");
+        fragmentTitleList.add("Member");
+        fragmentTitleList.add("Profile");
+
     }
 
     @NonNull
@@ -43,9 +52,11 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     public void addFragment(Fragment fragment, String title) {
-        fragmentList.add(fragment);
-        fragmentTitleList.add(title);
-        notifyDataSetChanged();
+
+            fragmentList.add(fragment);
+            fragmentTitleList.add(title);
+            notifyDataSetChanged();
+
     }
 
     public void replaceFragment(int position, Fragment fragment) {

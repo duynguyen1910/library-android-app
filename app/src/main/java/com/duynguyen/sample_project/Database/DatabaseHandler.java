@@ -8,7 +8,7 @@ import com.duynguyen.sample_project.R;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Library";
-    private static final int DATABASE_VERSION = 17;
+    private static final int DATABASE_VERSION = 20;
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -17,6 +17,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+        // CATEGORY CATEGORY CATEGORY
         String createCategory =
                 "CREATE TABLE CATEGORY(" +
                         "categoryID INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -39,6 +41,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(insertCategory);
 
 
+
+        // BOOK BOOK BOOK
         String createBookTable =
                 "CREATE TABLE BOOK(" +
                         "bookID INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -60,11 +64,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "Phần hai: Trình bày cách tư duy pháp lý; gồm phương pháp thực hiện; các vụ án để bạn… luyện chưởng và biết tính chất của các câu hỏi pháp lý.\n" +
                 "Phần ba: Đưa ra một số vụ án để các bạn tập làm một mình hầu kiểm tra mức độ sử dụng tư duy pháp lý\n" +
                 "Phần bốn: Một số bài đọc thêm để bạn mở rộng kiến thức.', 'Nguyễn Ngọc Bích', 18, 1), " +
-                "(5, 'Luật Pháp - Khái Lược Những Tư Tưởng Lớn (Bìa Cứng)','product8.jpg', 'Trong cuộc đời, mỗi chúng ta dù ít dù nhiều đều đã từng trải qua những thời khắc khó khăn, đau khổ. Đặc biệt đối với những bạn rời xa vòng tay che chở, bao bọc của cha mẹ và nhà trường, bước chân vào xã hội, bạn sẽ gặp phải rất nhiều trở ngại và nhận ra xã hội ngày vốn không hề đơn giản như bạn tưởng tượng.', 'Liêu Trí Phong', 8, 1), " +
-                "(6, 'Mỗi Lần Vấp Ngã Là Một Lần Trưởng Thành (Tái Bản)','product6.jpg', 'Trong cuộc đời, mỗi chúng ta dù ít dù nhiều đều đã từng trải qua những thời khắc khó khăn, đau khổ. Đặc biệt đối với những bạn rời xa vòng tay che chở, bao bọc của cha mẹ và nhà trường, bước chân vào xã hội, bạn sẽ gặp phải rất nhiều trở ngại và nhận ra xã hội ngày vốn không hề đơn giản như bạn tưởng tượng.', 'Liêu Trí Phong', 8, 6)";
+                "(5, 'Luật Pháp - Khái Lược Những Tư Tưởng Lớn (Bìa Cứng)','product8.jpg', 'Trong cuộc đời, mỗi chúng ta dù ít dù nhiều đều đã từng trải qua những thời khắc khó khăn, đau khổ. Đặc biệt đối với những bạn rời xa vòng tay che chở, bao bọc của cha mẹ và nhà trường, bước chân vào xã hội, bạn sẽ gặp phải rất nhiều trở ngại và nhận ra xã hội ngày vốn không hề đơn giản như bạn tưởng tượng.', 'Liêu Trí Phong', 8, 1)" ;
         db.execSQL(insertBook);
 
 
+        // MEMBER MEMBER
         String createMember =
                 "CREATE TABLE MEMBER(" +
                         "memberID INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -82,6 +86,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(insertMember);
 
 
+
+
+        // RECEIPT RECEIPT
         String createReceipt =
                 "CREATE TABLE RECEIPT(" +
                         "receiptID INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -99,11 +106,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(insertReceipt);
 
 
+
+        // RECEIPT DETAIL      RECEIPT DETAIL
         String createReceiptDetail =
                 "CREATE TABLE RECEIPTDETAIL(" +
                         "receiptID INTEGER NOT NULL," +
                         " bookID INTEGER NOT NULL," +
-                        " status INTEGER NOT NULL," +
+                        " status INTEGER NOT NULL," + // 0 có sẵn, 1 đang mượn, 2 bị mất
+
                         " quantity INTEGER NOT NULL," +
                         " PRIMARY KEY (receiptID, bookID)," +
                         " FOREIGN KEY (receiptID) REFERENCES RECEIPT(receiptID)," +

@@ -1,95 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragments.HomeFragment"
+    android:background="@color/lightgray"
     android:orientation="vertical"
-    android:paddingVertical="20dp">
+    android:padding="20dp"
+    tools:context=".Fragments.HomeFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginHorizontal="20dp">
+        android:gravity="center_vertical">
+
         <androidx.cardview.widget.CardView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            app:cardCornerRadius="80dp"
-            android:layout_marginEnd="10dp">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/wave" />
-        </androidx.cardview.widget.CardView>
-        <LinearLayout
-            android:layout_width="0dp"
+            android:id="@+id/home_cardView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            app:cardCornerRadius="40dp">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/meo" />
+        </androidx.cardview.widget.CardView>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_gravity="center_vertical"
-            >
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/namePersonnel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:textColor="#000"
-                    android:text="Hello, Tấn Duy"
-                    android:layout_marginEnd="5dp"/>
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:src="@mipmap/wave" />
-            </LinearLayout>
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
             <TextView
-                android:id="@+id/departmentPersonnel"
+                android:id="@+id/HomeTxtHello"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:textColor="@color/primary_color"
+                android:drawableEnd="@drawable/ic_hello"
+                android:text="Hello, Ngọc Đại!"
+                android:textColor="#333" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Have a nice day!"
-                android:textStyle="bold"/>
+                android:textSize="14dp"
+                android:textStyle="bold" />
         </LinearLayout>
+
         <ImageView
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:src="@mipmap/qr_code" />
     </LinearLayout>
+
+
     <EditText
         android:id="@+id/searchEdt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/custom_searchview_corners"
+        android:drawableStart="@drawable/baseline_search_24"
+        android:drawableEnd="@null"
+        android:drawablePadding="10dp"
+        android:hint="Tìm kiếm thông tin"
         android:paddingHorizontal="16dp"
         android:paddingVertical="10dp"
         android:textColor="#fff"
-        android:hint="Tìm kiếm thông tin"
-        android:textSize="14dp"
         android:textColorHint="@color/black"
-        android:background="@drawable/custom_searchview_corners"
-        android:drawableEnd="@null"
-        android:drawableStart="@drawable/baseline_search_24"
-        android:drawablePadding="10dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginHorizontal="20dp"/>
+        android:textSize="14dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tagFilterRecyclerView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        />
+        android:layout_height="wrap_content" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productRecyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="10dp"
-        android:layout_marginBottom="34dp"/>
+        android:layout_marginBottom="34dp" />
 </LinearLayout>

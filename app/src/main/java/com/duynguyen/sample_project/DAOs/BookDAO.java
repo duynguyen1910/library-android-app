@@ -74,6 +74,25 @@ public class BookDAO {
 
         return list;
     }
+    public ArrayList<Book> getAllBooks() {
+        SQLiteDatabase sqLiteDatabase = databaseHandler.getReadableDatabase();
+        ArrayList<Book> list = new ArrayList<>();
+
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM BOOK", null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                list.add(new Book(cursor.getInt(0), cursor.getString(1),
+                        cursor.getString(2), cursor.getString(3),
+                        cursor.getString(4), cursor.getInt(5)));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return list;
+    }
 
     public boolean addBook(Book book) {
         SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
@@ -89,5 +108,18 @@ public class BookDAO {
         long newRowId =  sqLiteDatabase.insert("BOOK", null, contentValues);
 
         return newRowId != -1;
+    }
+
+    public boolean updateBook(Book book) {
+        SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("bookName", book.getBookName());
+        contentValues.put("bookImage", book.getBookImageURI());
+        contentValues.put("description", book.getDesc());
+        contentValues.put("author", book.getAuthor());
+        contentValues.put("inStock", book.getQuantity());
+        contentValues.put("categoryID", book.getBookCategoryID());
+        long check = sqLiteDatabase.update("BOOK", contentValues, "bookID = ?", new String[]{String.valueOf(book.getBookID())});
+        return check > 0;
     }
 }
