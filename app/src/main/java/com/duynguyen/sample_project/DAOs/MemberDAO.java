@@ -42,7 +42,8 @@ public class MemberDAO {
         SQLiteDatabase sqLiteDatabase = databaseHandler.getReadableDatabase();
         Member member = null;
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM MEMBER WHERE phoneNumber = ?", new String[]{phoneNumber});
-        if (cursor != null && cursor.moveToFirst()) {
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
             member = new Member(cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getString(2),

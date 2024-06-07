@@ -12,29 +12,38 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.duynguyen.sample_project.Activities.BookDetailActivity;
 import com.duynguyen.sample_project.Models.Book;
+import com.duynguyen.sample_project.Models.ReceiptDetail;
 import com.duynguyen.sample_project.R;
 
 import java.util.ArrayList;
 
-public class BookForSearchAdapter extends RecyclerView.Adapter<BookForSearchAdapter.ViewHolder>{
+public class BookForSearchAdapter extends RecyclerView.Adapter<BookForSearchAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Book> bookList;
+    private ArrayList<ReceiptDetail> tempoList;
+    private ReceiptAdapter receiptAdapter;
 
-    public BookForSearchAdapter(Context context, ArrayList<Book> bookList) {
+    RecyclerView recyclerViewBook;
+
+    public BookForSearchAdapter(Context context, ArrayList<ReceiptDetail> tempoList, ArrayList<Book> bookList, ReceiptAdapter receiptAdapter, RecyclerView recyclerViewBook) {
         this.context = context;
         this.bookList = bookList;
+        this.tempoList = tempoList;
+        this.receiptAdapter = receiptAdapter;
+        this.recyclerViewBook = recyclerViewBook;
     }
 
     @NonNull
     @Override
     public BookForSearchAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+        LayoutInflater inflater = ((Activity) context).getLayoutInflater();
         View view = inflater.inflate(R.layout.item_book_for_search, parent, false);
 
         return new BookForSearchAdapter.ViewHolder(view);
@@ -53,7 +62,29 @@ public class BookForSearchAdapter extends RecyclerView.Adapter<BookForSearchAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                recyclerViewBook.setVisibility(View.GONE);
+                ReceiptDetail receiptDetail = new ReceiptDetail(
+                        bookList.get(holder.getAdapterPosition()).getBookID(),
+                        bookList.get(holder.getAdapterPosition()).getBookImageURI(),
+                        bookList.get(holder.getAdapterPosition()).getBookName(),
+                        bookList.get(holder.getAdapterPosition()).getAuthor(),
+                        1, // quantity: 1
+                        0 // status 0: có sẵn, chưa mượn
+                );
+                boolean existed = false;
+                for (ReceiptDetail detail : tempoList) {
+                    if (detail.getBookID() == receiptDetail.getBookID()) {
+                        existed = true;
+                        detail.setQuantity(detail.getQuantity() + 1);
 
+                        break;
+                    }
+                }
+                if (existed == false){
+                    tempoList.add(receiptDetail);
+                }
+
+                receiptAdapter.notifyDataSetChanged();
             }
         });
     }

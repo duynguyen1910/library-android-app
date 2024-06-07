@@ -1,17 +1,40 @@
 package com.duynguyen.sample_project.Models;
 
 public class ReceiptDetail {
-    private int bookID;
-    private String bookName, author;
+    private int receiptID, bookID;
+    private String bookImageURI, bookName, author;
     private int memberID;
     private String fullname, startDay, endDay, note;
-    private int receiptID, quantity, status;
+    private int quantity;
+    private int status; // 0: có sẵn, 1: đang mượn, 2: bị mất
 
     public ReceiptDetail() {
     }
 
-    public ReceiptDetail(int bookID, String bookName, String author, int memberID, String fullname, String startDay, String endDay, String note, int receiptID, int quantity, int status) {
+
+    // Constructor này để tạo UI hiển thị cartItem khi tạo phiếu mượn (Không insert vào database)
+    public ReceiptDetail(int bookID, String bookImageURI, String bookName, String author, int quantity, int status) {
         this.bookID = bookID;
+        this.bookImageURI = bookImageURI;
+        this.bookName = bookName;
+        this.author = author;
+        this.quantity = quantity;
+        this.status = status;
+    }
+
+    // Constructor này để tạo chi tiết phiếu mượn và insert vào database,
+    // sử dụng phương thức ReceiptDetailDAO.addReceiptDetail(int receiptID, int bookID, int status, int quantity)
+    public ReceiptDetail(int receiptID, int bookID, int quantity, int status) {
+        this.receiptID = receiptID;
+        this.bookID = bookID;
+        this.quantity = quantity;
+        this.status = status;
+    }
+
+    public ReceiptDetail(int receiptID, int bookID, String bookImageURI, String bookName, String author, int memberID, String fullname, String startDay, String endDay, String note, int quantity, int status) {
+        this.receiptID = receiptID;
+        this.bookID = bookID;
+        this.bookImageURI = bookImageURI;
         this.bookName = bookName;
         this.author = author;
         this.memberID = memberID;
@@ -19,9 +42,16 @@ public class ReceiptDetail {
         this.startDay = startDay;
         this.endDay = endDay;
         this.note = note;
-        this.receiptID = receiptID;
         this.quantity = quantity;
         this.status = status;
+    }
+
+    public String getBookImageURI() {
+        return bookImageURI;
+    }
+
+    public void setBookImageURI(String bookImageURI) {
+        this.bookImageURI = bookImageURI;
     }
 
     public int getBookID() {

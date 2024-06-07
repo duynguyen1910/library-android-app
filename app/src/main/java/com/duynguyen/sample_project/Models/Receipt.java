@@ -10,6 +10,8 @@ public class Receipt {
     public Receipt() {
     }
 
+
+    // Constructor này dùng để lấy phiếu mượn trả về từ database qua phương thức, ReceiptDAO.getReceiptByMemberID(int memberID)
     public Receipt(int ID, String startDay, String endDay, String note, int memberID) {
         this.ID = ID;
         this.startDay = startDay;
@@ -18,6 +20,7 @@ public class Receipt {
         this.memberID = memberID;
     }
 
+    // Constructor này để tạo phiếu mượn, insert vào database, sử dụng phương thức,  ReceiptDAO.addReceipt(Receipt receipt)
     public Receipt(String startDay, String endDay, String note, int memberID) {
         this.startDay = startDay;
         this.endDay = endDay;

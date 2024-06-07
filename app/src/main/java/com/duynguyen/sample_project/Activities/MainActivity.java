@@ -34,7 +34,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity implements
-        CategoryFragment.OnCategorySelectedListener, BookFragment.OnBackButtonClickListener {
+        CategoryFragment.OnCategorySelectedListener, BookFragment.OnBackButtonClickListener{
     private BottomNavigationView bottomNavigation;
     private ViewPager mViewPager;
     private TextView toolbarTitleTv;

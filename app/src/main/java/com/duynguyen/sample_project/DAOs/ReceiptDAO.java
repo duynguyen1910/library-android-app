@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.duynguyen.sample_project.Database.DatabaseHandler;
@@ -21,20 +22,53 @@ public class ReceiptDAO {
         databaseHandler = new DatabaseHandler(context);
     }
 
-    public void addReceipt(Receipt receipt) {
-        SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("startDay", receipt.getStartDay());
-        contentValues.put("endDay", receipt.getEndDay());
-        contentValues.put("note", receipt.getNote());
-        contentValues.put("memberID", receipt.getMemberID());
+    public int addReceipt(Receipt receipt) {
+        // Phương thức này trả về id của dòng được insert vào database nếu thành công
+        // trả về -1 nếu thành viên chưa trả sách hoặc đã trả sách nhưng có lỗi xảy ra trong quá trình insert
+        int newReceiptID = 0;// Khởi tạo giá trị trả về
 
-        long check = sqLiteDatabase.insert("RECEIPT", null, contentValues);
-        if (check != -1) {
-            Toast.makeText(context, "Receipt created successfully", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(context, "Receipt created failed", Toast.LENGTH_SHORT).show();
+        SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
+
+        // Kiểm tra đã trả phiếu mượn trước đó chưa
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM RECEIPT WHERE memberID = ?", new String[]{String.valueOf(receipt.getMemberID())});
+
+//        boolean canBorrow = true;
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();  // Kiểm tra nếu có ít nhất một dòng kết quả
+            // Lấy giá trị cột endDay của dòng đầu tiên
+            String endDay = cursor.getString(2);
+            if (endDay.length() == 0) {
+                Toast.makeText(context, "Thành viên này có phiếu chưa trả. Không thể mượn", Toast.LENGTH_SHORT).show();
+                newReceiptID = -1;
+                return newReceiptID;
+            }
         }
+        cursor.close();
+        if (newReceiptID != -1){
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("startDay", receipt.getStartDay());
+            contentValues.put("endDay", receipt.getEndDay());
+            contentValues.put("note", receipt.getNote());
+            contentValues.put("memberID", receipt.getMemberID());
+
+
+            long check = sqLiteDatabase.insert("RECEIPT", null, contentValues);
+            // phương thức insert return  ID của dòng mới được insert vào database nếu thành công
+            // return -1 nếu có lỗi xảy ra
+            if (check != -1) {
+                Toast.makeText(context, "Receipt created successfully", Toast.LENGTH_SHORT).show();
+                newReceiptID = (int) check;
+
+            } else {
+                Toast.makeText(context, "Receipt created failed", Toast.LENGTH_SHORT).show();
+                newReceiptID = -1;
+
+            }
+
+        }
+        return newReceiptID;
+
+
 
     }
 
@@ -47,10 +81,34 @@ public class ReceiptDAO {
         return check > 0;
     }
 
-    public ArrayList<ReceiptDetail> getReceipt(){
+    public ArrayList<Receipt> getReceiptByMemberID(int memberID) {
+
+        // This method returns a new ArrayList<ReceiptDetail>  with constructor ReceiptDetail(receptID, startDay, endDay, note, memeberID);
+        ArrayList<Receipt> receipt = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
+        String query = "SELECT * FROM RECEIPT WHERE memberID = ?";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, new String[]{String.valueOf(memberID)});
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                receipt.add(new Receipt(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getInt(4)
+                ));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        return receipt;
+    }
+
+    public ArrayList<ReceiptDetail> getReceiptWithAllOfItsDetail() {
         ArrayList<ReceiptDetail> receipt = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
-        String query = " SELECT b.bookID, b.bookName, b.author, m.memberID, m.fullname, r.startDay, r.endDay, r.note, r.receiptID,  d.quantity, d.status\n" +
+        String query = " SELECT r.receiptID, b.bookID, b.bookImage, b.bookName, b.author, m.memberID, m.fullname, r.startDay, r.endDay, r.note,  d.quantity, d.status\n" +
                 "   FROM BOOK b, MEMBER m, RECEIPT r, RECEIPTDETAIL d\n" +
                 "   WHERE b.bookID = d.bookID and m.memberID = r.memberID \n" +
                 "   and r.receiptID = d.receiptID";
@@ -60,16 +118,17 @@ public class ReceiptDAO {
             do {
                 receipt.add(new ReceiptDetail(
                         cursor.getInt(0),
-                        cursor.getString(1),
+                        cursor.getInt(1),
                         cursor.getString(2),
-                        cursor.getInt(3),
+                        cursor.getString(3),
                         cursor.getString(4),
-                        cursor.getString(5),
+                        cursor.getInt(5),
                         cursor.getString(6),
                         cursor.getString(7),
-                        cursor.getInt(8),
-                        cursor.getInt(9),
-                        cursor.getInt(10)
+                        cursor.getString(8),
+                        cursor.getString(9),
+                        cursor.getInt(10),
+                        cursor.getInt(11)
                 ));
             } while (cursor.moveToNext());
         }
@@ -78,7 +137,7 @@ public class ReceiptDAO {
         return receipt;
     }
 
-    public int getReceiptDetailCount(){
+    public int getReceiptDetailCount() {
         SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
         String query = " SELECT b.bookID, b.bookName, b.author, m.memberID, m.fullname, r.startDay, r.endDay, r.note, r.receiptID,  d.quantity, d.status\n" +
                 "   FROM BOOK b, MEMBER m, RECEIPT r, RECEIPTDETAIL d\n" +
