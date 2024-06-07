@@ -1,13 +1,19 @@
 package com.duynguyen.sample_project.Activities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -34,6 +40,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class CreateReceiptActivity extends AppCompatActivity {
     RecyclerView recyclerViewBook, recyclerViewReceipt;
@@ -182,7 +190,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
         recyclerViewBook.setVisibility(View.VISIBLE);
         mListSuggest.clear();
         if (newText == null || newText.length() == 0) {
-            mListSuggest.addAll(listBook);
+            bookForSearchAdapter.notifyDataSetChanged();
         } else {
             String filter = newText.toLowerCase().trim();
             for (Book book : listBook) {
@@ -213,6 +221,43 @@ public class CreateReceiptActivity extends AppCompatActivity {
 
         recyclerViewReceipt.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewReceipt.setAdapter(receiptAdapter);
+
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getLayoutPosition();
+                tempoReceiptDetailsList.remove(position);
+                receiptAdapter.notifyItemRemoved(position);
+
+            }
+
+            @Override
+            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                new RecyclerViewSwipeDecorator.Builder(c, recyclerViewReceipt, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                        .addSwipeLeftBackgroundColor(ContextCompat.getColor(CreateReceiptActivity.this, R.color.primary_color))
+                        .addActionIcon(R.drawable.ic_delete)
+                        .setSwipeLeftLabelColor(ContextCompat.getColor(CreateReceiptActivity.this, R.color.white))
+                        .addSwipeLeftLabel("Delete")
+                        .setIconHorizontalMargin(TypedValue.COMPLEX_UNIT_DIP, 16)
+                        .addCornerRadius(TypedValue.COMPLEX_UNIT_DIP, 12)
+                        .setSwipeLeftLabelTextSize(TypedValue.COMPLEX_UNIT_SP, 14)
+                        .create()
+                        .decorate();
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+
+            @Override
+            public void onSelectedChanged(@Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
+                super.onSelectedChanged(viewHolder, actionState);
+            }
+        };
+        new ItemTouchHelper(simpleCallback).attachToRecyclerView(recyclerViewReceipt);
+
     }
 
     private void getDateToday(EditText edt) {
