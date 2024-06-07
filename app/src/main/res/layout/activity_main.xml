@@ -35,6 +35,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+
         <ImageView
             android:id="@+id/notificationImv"
             android:layout_width="24dp"

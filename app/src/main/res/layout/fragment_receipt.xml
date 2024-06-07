@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,132 +8,25 @@
     tools:context=".Fragments.HomeFragment">
 
 
-    <AutoCompleteTextView
-        android:id="@+id/autotxtPhoneNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/custom_edit_text_border"
-        android:completionThreshold="1"
-        android:hint="Phone number"
-        android:inputType="number"
-        android:padding="15dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:textSize="15sp" />
-
-
-    <EditText
-        android:id="@+id/edtFullname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/custom_edit_text_border"
-        android:hint="Fullname"
-        android:inputType="text"
-        android:padding="15dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:textSize="15sp" />
-
-    <EditText
-        android:id="@+id/edtNote"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/custom_edit_text_border"
-        android:hint="Note"
-        android:inputType="text"
-        android:padding="15dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:textSize="15sp" />
-
-    <EditText
-        android:id="@+id/edtStartDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/custom_edit_text_border"
-        android:focusable="false"
-        android:hint="Borrow Date"
-        android:inputType="datetime"
-        android:padding="15dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:textSize="15sp" />
-
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/custom_edit_text_border"
-        app:iconifiedByDefault="false"
-        app:queryBackground="@android:color/transparent"
-        app:queryHint="Book name..." />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewBook"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewReceipt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-    </ScrollView>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true">
 
-        <Button
-            android:id="@+id/btnReset"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/custom_button_close"
-            android:padding="8dp"
-            android:text="Reset"
-            android:textAllCaps="false"
-            android:textColor="@color/text1"
-            android:textSize="14dp"
-            android:textStyle="bold"
-            app:backgroundTint="@null" />
-
-        <Button
-            android:id="@+id/btnSubmit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/custom_button_green"
-            android:padding="8dp"
-            android:text="Submit"
-            android:textAllCaps="false"
-            android:textSize="14dp"
-            android:textStyle="bold"
-            app:backgroundTint="@null" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabCreateReceipt"
+            style="@style/FloatingActionButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="80dp"
+            android:backgroundTint="@color/primary_color"
+            android:elevation="10dp"
+            android:src="@drawable/baseline_add_24"
+            app:tint="#fff" />
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

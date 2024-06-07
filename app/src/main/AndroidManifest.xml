@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Sample_Project"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.CreateReceiptActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.BookDetailActivity"
             android:exported="false" />
         <activity
