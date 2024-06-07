@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -44,14 +45,14 @@ public class ReceiptFragment extends Fragment {
     EditText edtFullname, edtStartDate, edtNote;
     ArrayList<Book> listBook = new ArrayList<>();
     SearchView searchView;
-    AutoCompleteTextView autotxt;
+    AutoCompleteTextView autotxtPhoneNumber;
     MemberNameArrayAdapter memberNameAdapter;
     View view;
     BookForSearchAdapter bookForSearchAdapter;
     ReceiptAdapter receiptAdapter;
     BookDAO bookDAO;
     ArrayList<Book> mListSuggest;
-    AppCompatButton btnSubmit;
+    Button btnSubmit, btnReset;
     ArrayList<ReceiptDetail> tempoReceiptDetailsList;
 
     @Nullable
@@ -61,7 +62,7 @@ public class ReceiptFragment extends Fragment {
         Mapping();
 
         memberNameAdapter = new MemberNameArrayAdapter(requireActivity(), edtFullname, R.layout.item_member_name, getListMembers());
-        autotxt.setAdapter(memberNameAdapter);
+        autotxtPhoneNumber.setAdapter(memberNameAdapter);
 
         bookDAO = new BookDAO(requireActivity());
         listBook = bookDAO.getListProduct();
@@ -105,20 +106,45 @@ public class ReceiptFragment extends Fragment {
                 return true;
             }
         });
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onClick(View v) {
+                autotxtPhoneNumber.setText("");
+                edtFullname.setText("");
+                edtNote.setText("");
+                searchView.setQuery("", true);
+                tempoReceiptDetailsList.clear();
+                receiptAdapter.notifyDataSetChanged();
+            }
+        });
         getDateToday(edtStartDate);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String phoneNumber = autotxtPhoneNumber.getText().toString().trim();
+                String startDay = edtStartDate.getText().toString();
+                String endDay = "08/06/2024";
+                String fullname = edtFullname.getText().toString().trim();
+                String note = edtNote.getText().toString().trim();
+                if (phoneNumber.isEmpty()) {
+                    autotxtPhoneNumber.setError("Vui lòng nhập trường này");
+                    return;
+                }
+                if (fullname.isEmpty()) {
+                    edtFullname.setError("Vui lòng nhập trường này");
+                    return;
+                }
+
+
                 if (tempoReceiptDetailsList.isEmpty()) {
                     Toast.makeText(getActivity(), "Hãy chọn sách để mượn đi nào", Toast.LENGTH_SHORT).show();
                     return;
 
                 }
-                String startDay = edtStartDate.getText().toString();
-                String endDay = "08/06/2024";
-                String note = edtNote.getText().toString().trim();
-                String phoneNumber = autotxt.getText().toString().trim();
                 int receiptID = -1; // Khởi tạo ID của receipt
                 MemberDAO memberDAO = new MemberDAO(requireActivity());
                 Member member = memberDAO.getMemberByPhoneNumber(phoneNumber);
@@ -135,6 +161,7 @@ public class ReceiptFragment extends Fragment {
                     ReceiptDAO receiptDAO = new ReceiptDAO(requireActivity());
                     int check = receiptDAO.addReceipt(receipt);
 
+                    // Bước 2:  tạo các receipt detail liên kết với phiếu mượn vừa tạo
                     // Nếu tạo phiếu mượn thành công thì kết quả của quá trình insert chính là receiptID
                     if (check != -1) {
                         receiptID = check;
@@ -142,14 +169,6 @@ public class ReceiptFragment extends Fragment {
 
                         // Dùng vòng lặp for trong tempoReceiptDetailsList để khởi tạo receipt detail để insert vào database,
                         ReceiptDetailDAO receiptDetailDAO = new ReceiptDetailDAO(requireActivity());
-
-
-                        // public ReceiptDetail( int receiptID, int bookID, int quantity, int status){
-//                        this.receiptID = receiptID;
-//                        this.bookID = bookID;
-//                        this.quantity = quantity;
-//                        this.status = status;
-//                    }
 
                         String listTacGia = "";
                         for (ReceiptDetail detail : tempoReceiptDetailsList) {
@@ -168,10 +187,10 @@ public class ReceiptFragment extends Fragment {
                             // insert detail thành công
                             else {
 
-                                listTacGia +=  bookDAO.getBookById(bookID).getAuthor() + ", ";
+                                listTacGia += bookDAO.getBookById(bookID).getAuthor() + ", ";
                             }
                         }
-                        Toast.makeText(getActivity(),"listTacGia:  "  + listTacGia, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "listTacGia:  " + listTacGia, Toast.LENGTH_SHORT).show();
 
 
                     }
@@ -179,8 +198,6 @@ public class ReceiptFragment extends Fragment {
                     else {
                         Toast.makeText(requireActivity(), "Gặp lỗi trong quá trình insert", Toast.LENGTH_SHORT).show();
                     }
-
-                    // Bước 2:  tạo các receipt detail liên kết với phiếu mượn vừa tạo
 
 
                 }
@@ -191,7 +208,7 @@ public class ReceiptFragment extends Fragment {
                 }
                 if (isSuccess) {
                     Toast.makeText(getActivity(), "Tạo phiếu mượn thành công", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     Toast.makeText(getActivity(), "Tạo phiếu mượn thất bại", Toast.LENGTH_SHORT).show();
                 }
 
@@ -200,6 +217,10 @@ public class ReceiptFragment extends Fragment {
 
 
         return view;
+    }
+
+    private void validateFormReceipt() {
+
     }
 
     @Override
@@ -233,9 +254,10 @@ public class ReceiptFragment extends Fragment {
         recyclerViewBook = view.findViewById(R.id.recyclerViewBook);
         recyclerViewReceipt = view.findViewById(R.id.recyclerViewReceipt);
         searchView = view.findViewById(R.id.searchView);
-        autotxt = view.findViewById(R.id.autotxt);
+        autotxtPhoneNumber = view.findViewById(R.id.autotxtPhoneNumber);
         edtFullname = view.findViewById(R.id.edtFullname);
         btnSubmit = view.findViewById(R.id.btnSubmit);
+        btnReset = view.findViewById(R.id.btnReset);
         edtStartDate = view.findViewById(R.id.edtStartDate);
         edtNote = view.findViewById(R.id.edtNote);
         mListSuggest = new ArrayList<>();

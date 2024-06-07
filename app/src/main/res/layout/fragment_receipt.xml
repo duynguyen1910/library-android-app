@@ -7,118 +7,80 @@
     android:paddingHorizontal="20dp"
     tools:context=".Fragments.HomeFragment">
 
-    <LinearLayout
+
+    <AutoCompleteTextView
+        android:id="@+id/autotxtPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Phone: "
-                android:textStyle="bold" />
-
-            <AutoCompleteTextView
-                android:id="@+id/autotxt"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:completionThreshold="1"
-                android:inputType="number"
-                android:textSize="16sp" />
-        </LinearLayout>
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/custom_edit_text_border"
+        android:completionThreshold="1"
+        android:hint="Phone number"
+        android:inputType="number"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="15sp" />
 
 
-    </LinearLayout>
-
-
-    <LinearLayout
+    <EditText
+        android:id="@+id/edtFullname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical">
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/custom_edit_text_border"
+        android:hint="Fullname"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fullname: "
-            android:textStyle="bold" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtFullname"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:inputType="text"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Note: "
-            android:textStyle="bold" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtNote"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:inputType="text"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date: "
-            android:textStyle="bold" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtStartDate"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:focusable="false"
-            android:inputType="text"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+    <EditText
+        android:id="@+id/edtNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:cardCornerRadius="8dp">
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/custom_edit_text_border"
+        android:hint="Note"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="15sp" />
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:iconifiedByDefault="false"
-            app:queryBackground="@android:color/transparent"
-            app:queryHint="Book name..." />
-    </androidx.cardview.widget.CardView>
+    <EditText
+        android:id="@+id/edtStartDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/custom_edit_text_border"
+        android:focusable="false"
+        android:hint="Borrow Date"
+        android:inputType="datetime"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="15sp" />
+
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_edit_text_border"
+        app:iconifiedByDefault="false"
+        app:queryBackground="@android:color/transparent"
+        app:queryHint="Book name..." />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewBook"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content" />
 
     <ScrollView
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -138,18 +100,40 @@
         </LinearLayout>
     </ScrollView>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSubmit"
-        style="@android:style/Widget.Button"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/custom_button_green"
-        android:text="Submit"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:backgroundTint="@null" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button_close"
+            android:padding="8dp"
+            android:text="Reset"
+            android:textAllCaps="false"
+            android:textColor="@color/text1"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button_green"
+            android:padding="8dp"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:backgroundTint="@null" />
+    </LinearLayout>
 
 
 </LinearLayout>
