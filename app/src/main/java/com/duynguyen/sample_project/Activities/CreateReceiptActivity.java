@@ -183,7 +183,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
         edtNote.setText("");
         searchView.setQuery("", true);
         tempoReceiptDetailsList.clear();
-        receiptAdapter.notifyDataSetChanged();
+        receiptAdapter.notifyItemRangeRemoved(0, tempoReceiptDetailsList.size() - 1);
     }
 
     private void handleQueryInSearchView(String newText) {
@@ -196,12 +196,11 @@ public class CreateReceiptActivity extends AppCompatActivity {
             for (Book book : listBook) {
                 if (book.getBookName().toLowerCase().contains(filter)) {
                     mListSuggest.add(book);
+                    bookForSearchAdapter.notifyDataSetChanged();
                 }
             }
             if (mListSuggest.isEmpty()) {
                 Toast.makeText(CreateReceiptActivity.this, "No book found", Toast.LENGTH_SHORT).show();
-            } else {
-                bookForSearchAdapter.notifyDataSetChanged();
             }
         }
     }

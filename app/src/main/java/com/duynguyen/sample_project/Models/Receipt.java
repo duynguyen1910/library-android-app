@@ -1,19 +1,29 @@
 package com.duynguyen.sample_project.Models;
 
 public class Receipt {
-    private int ID;
-    private String startDay,endDay, note;
+    private int receiptID;
+    private String fullname;
+    private String startDay;
+    private String endDay;
+    private String note;
     private int memberID;
-
 
 
     public Receipt() {
     }
 
+    // Constructor này dùng để lấy header của History
+    public Receipt(int receiptID, String fullname, String startDay, String endDay, String note) {
+        this.receiptID = receiptID;
+        this.fullname = fullname;
+        this.startDay = startDay;
+        this.endDay = endDay;
+        this.note = note;
+    }
 
     // Constructor này dùng để lấy phiếu mượn trả về từ database qua phương thức, ReceiptDAO.getReceiptByMemberID(int memberID)
-    public Receipt(int ID, String startDay, String endDay, String note, int memberID) {
-        this.ID = ID;
+    public Receipt(int receiptID, String startDay, String endDay, String note, int memberID) {
+        this.receiptID = receiptID;
         this.startDay = startDay;
         this.endDay = endDay;
         this.note = note;
@@ -28,12 +38,12 @@ public class Receipt {
         this.memberID = memberID;
     }
 
-    public int getID() {
-        return ID;
+    public int getReceiptID() {
+        return receiptID;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setReceiptID(int receiptID) {
+        this.receiptID = receiptID;
     }
 
     public int getMemberID() {

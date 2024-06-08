@@ -17,15 +17,16 @@ import com.duynguyen.sample_project.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MemberNameArrayAdapter extends ArrayAdapter {
-    private List<Member> mListMembers;
-    private EditText edtFullname;
+    private final ArrayList<Member> mListMembers;
+    private final EditText edtFullname;
 
 
-    public MemberNameArrayAdapter(@NonNull Context context, EditText edtFullname, int resource, @NonNull List objects) {
+    public MemberNameArrayAdapter(@NonNull Context context, EditText edtFullname, int resource, @NonNull List<Member> objects) {
         super(context, resource, objects);
-        mListMembers = new ArrayList<>(objects);
+        mListMembers = new ArrayList<>(Objects.requireNonNull(objects));
         this.edtFullname = edtFullname;
     }
 
@@ -39,6 +40,7 @@ public class MemberNameArrayAdapter extends ArrayAdapter {
         TextView txtPhonenumber = convertView.findViewById(R.id.txtPhonenumber);
 
         Member member = (Member) getItem(position);
+        assert member != null;
         txtPhonenumber.setText(member.getPhoneNumber());
         txtBookName.setText(member.getFullname());
 

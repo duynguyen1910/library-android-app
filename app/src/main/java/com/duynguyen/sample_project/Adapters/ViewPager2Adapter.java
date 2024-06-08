@@ -16,8 +16,6 @@ public class ViewPager2Adapter extends FragmentStateAdapter {
 
     private void initFragmentsList(){
         list = new ArrayList<>();
-//        list.add(new ReceiptStateOneFragment());
-//        list.add(new ReceiptStateTwoFragment());
     }
 
     @NonNull

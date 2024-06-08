@@ -1,51 +1,70 @@
 package com.duynguyen.sample_project.DAOs;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
-
 import com.duynguyen.sample_project.Database.DatabaseHandler;
-import com.duynguyen.sample_project.Models.Receipt;
+import com.duynguyen.sample_project.Models.History;
 import com.duynguyen.sample_project.Models.ReceiptDetail;
+
+import java.util.ArrayList;
 
 public class ReceiptDetailDAO {
     private final DatabaseHandler databaseHandler;
-    private final Context context;
 
     public ReceiptDetailDAO(Context context) {
-        this.context = context;
         databaseHandler = new DatabaseHandler(context);
     }
 
     // Method sử dụng khi ấn Submit để tạo phiếu mượn
     public long addReceiptDetail(int receiptID, int bookID, int status, int quantity) {
         SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
-
-        // kiểm tra ReceiptDetail có tồn tại chưa
-//        Cursor cursor = sqLiteDatabase.rawQuery("SELECT quantity, status FROM RECEIPTDETAIL WHERE receiptID = ? AND bookID = ?", new String[]{String.valueOf(receiptID), String.valueOf(bookID)});
-
-//
-//        // Nếu đã tồn tại thì tăng số lượng lên 1
-//        if (cursor.getCount() > 0){
-//            cursor.moveToFirst();
-//            ContentValues contentValues = new ContentValues();
-//            contentValues.put("quantity", cursor.getInt(0) + quantity);
-//            contentValues.put("status", status);
-//            sqLiteDatabase.update("RECEIPTDETAIL", contentValues , "receiptID = ? AND bookID = ?", new String[]{String.valueOf(receiptID), String.valueOf(bookID)});
-//        }
-//        // Nếu chưa tồn tại thì insert vào database
-//        else {
         ContentValues contentValues = new ContentValues();
         contentValues.put("receiptID", receiptID);
         contentValues.put("bookID", bookID);
         contentValues.put("quantity", quantity);
         contentValues.put("status", status);
-        long check = sqLiteDatabase.insert("RECEIPTDETAIL", null, contentValues);
 
-        return check;
-//        }
+        return sqLiteDatabase.insert("RECEIPTDETAIL", null, contentValues);
+    }
+
+    public ArrayList<History> getALLReceiptDetails() {
+        ArrayList<History> listHistories = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
+        // firstQuery sẽ tạo ra được phần header của History
+        String firstQuery = "SELECT  r.receiptID,  m.fullname, r.note,  r.startDay, r.endDay\n" +
+                            "FROM MEMBER m, RECEIPT r, RECEIPTDETAIL d\n" +
+                            "WHERE  m.memberID = r.memberID AND r.receiptID = d.receiptID\n" +
+                            "ORDER BY r.receiptID;";
+
+
+        Cursor firstCursor = sqLiteDatabase.rawQuery(firstQuery, null);
+        if (firstCursor.getCount() > 0) {
+            firstCursor.moveToFirst();
+            do {
+
+            } while (firstCursor.moveToNext());
+        }
+
+
+        firstCursor.close();
+        // Second Query sẽ lấy được 1 item phần body của History
+        // Sử dụng vòng lặp for cho receiptID để lấy toàn bộ phần body
+        String secondQuery = "SELECT r.receiptID,  b.bookImage, b.bookName, b.author, d.quantity\n" +
+                             "FROM BOOK b, RECEIPT r, RECEIPTDETAIL d\n" +
+                             "WHERE b.bookID = d.bookID and r.receiptID = d.receiptID AND r.receiptID = 3;";
+        Cursor secondCursor = sqLiteDatabase.rawQuery(secondQuery, null);
+
+        if (secondCursor.getCount() > 0) {
+            secondCursor.moveToFirst();
+            do {
+
+            } while (secondCursor.moveToNext());
+        }
+        secondCursor.close();
+
+
+        return listHistories;
     }
 
     public void plusAReceiptDetail(ReceiptDetail detail) {

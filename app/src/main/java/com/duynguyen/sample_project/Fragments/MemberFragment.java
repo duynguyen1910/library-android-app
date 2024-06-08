@@ -12,11 +12,11 @@ import androidx.fragment.app.Fragment;
 import com.duynguyen.sample_project.R;
 
 public class MemberFragment extends Fragment {
+    View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_member, container, false);
-
+        view = inflater.inflate(R.layout.fragment_member, container, false);
         return view;
     }
 }

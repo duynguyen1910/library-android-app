@@ -65,7 +65,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
 
+                android:layout_width="match_parent"
+                android:text="Status: "
+                android:textStyle="bold"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtStatus"
+                android:layout_width="match_parent"
+                android:text="Chưa trả"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -126,23 +142,7 @@
                             android:text="1"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
 
-                            android:layout_width="match_parent"
-                            android:text="Status: "
-                            android:textStyle="bold"
-                            android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:id="@+id/txtStatus"
-                            android:layout_width="match_parent"
-                            android:text="Chưa trả"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -153,6 +153,16 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/closeDialogBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#BFBABA"
+            android:text="See more..."
+            android:layout_gravity="center_horizontal"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:backgroundTint="@null" />
 
 
 

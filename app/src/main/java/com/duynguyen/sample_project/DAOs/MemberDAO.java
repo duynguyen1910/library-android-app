@@ -6,13 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.duynguyen.sample_project.Database.DatabaseHandler;
-import com.duynguyen.sample_project.Models.Book;
 import com.duynguyen.sample_project.Models.Member;
 
 import java.util.ArrayList;
 
 public class MemberDAO {
-    private DatabaseHandler databaseHandler;
+    private final DatabaseHandler databaseHandler;
     public MemberDAO(Context context) {
         databaseHandler = new DatabaseHandler(context);
     }
@@ -52,13 +51,15 @@ public class MemberDAO {
                     cursor.getInt(5));
         }
 
+        cursor.close();
         return member;
     }
     public Member getMemberByMemberID(int memberID) {
         SQLiteDatabase sqLiteDatabase = databaseHandler.getReadableDatabase();
         Member member = null;
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM MEMBER WHERE memberID = ?", new String[]{String.valueOf(memberID)});
-        if (cursor != null && cursor.moveToFirst()) {
+        if (cursor.getCount() > 0 ) {
+            cursor.moveToFirst();
             member = new Member(cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getString(2),
@@ -66,6 +67,8 @@ public class MemberDAO {
                     cursor.getString(4),
                     cursor.getInt(5));
         }
+
+        cursor.close();
         return member;
     }
 

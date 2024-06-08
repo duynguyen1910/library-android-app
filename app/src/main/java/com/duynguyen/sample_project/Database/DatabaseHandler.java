@@ -95,6 +95,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         "receiptID INTEGER PRIMARY KEY AUTOINCREMENT," +
                         " startDay TEXT NOT NULL," +
                         " endDay TEXT NOT NULL," +
+                        " status INTEGER NOT NULL," + // 0 có sẵn, 1 đang mượn, 2 bị mất
                         " note TEXT," +
                         " memberID INTEGER NOT NULL," +
                         " FOREIGN KEY (memberID) REFERENCES MEMBER(memberID))";
@@ -113,8 +114,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "CREATE TABLE RECEIPTDETAIL(" +
                         "receiptID INTEGER NOT NULL," +
                         " bookID INTEGER NOT NULL," +
-                        " status INTEGER NOT NULL," + // 0 có sẵn, 1 đang mượn, 2 bị mất
-
                         " quantity INTEGER NOT NULL," +
                         " PRIMARY KEY (receiptID, bookID)," +
                         " FOREIGN KEY (receiptID) REFERENCES RECEIPT(receiptID)," +

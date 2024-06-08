@@ -8,9 +8,6 @@ public class ReceiptDetail {
     private int quantity;
     private int status; // 0: có sẵn, 1: đang mượn, 2: bị mất
 
-    public ReceiptDetail() {
-    }
-
 
     // Constructor này để tạo UI hiển thị cartItem khi tạo phiếu mượn (Không insert vào database)
     public ReceiptDetail(int bookID, String bookImageURI, String bookName, String author, int quantity, int status) {
@@ -22,28 +19,14 @@ public class ReceiptDetail {
         this.status = status;
     }
 
-    // Constructor này để tạo chi tiết phiếu mượn và insert vào database,
-    // sử dụng phương thức ReceiptDetailDAO.addReceiptDetail(int receiptID, int bookID, int status, int quantity)
-    public ReceiptDetail(int receiptID, int bookID, int quantity, int status) {
-        this.receiptID = receiptID;
-        this.bookID = bookID;
-        this.quantity = quantity;
-        this.status = status;
-    }
 
-    public ReceiptDetail(int receiptID, int bookID, String bookImageURI, String bookName, String author, int memberID, String fullname, String startDay, String endDay, String note, int quantity, int status) {
+    // Constructor này để lấy phần body của History
+    public ReceiptDetail(int receiptID, String bookImageURI, String bookName, String author, int quantity) {
         this.receiptID = receiptID;
-        this.bookID = bookID;
         this.bookImageURI = bookImageURI;
         this.bookName = bookName;
         this.author = author;
-        this.memberID = memberID;
-        this.fullname = fullname;
-        this.startDay = startDay;
-        this.endDay = endDay;
-        this.note = note;
         this.quantity = quantity;
-        this.status = status;
     }
 
     public String getBookImageURI() {
