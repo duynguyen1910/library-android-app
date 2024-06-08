@@ -12,76 +12,91 @@ import java.util.ArrayList;
 
 public class MemberDAO {
     private final DatabaseHandler databaseHandler;
+
     public MemberDAO(Context context) {
         databaseHandler = new DatabaseHandler(context);
     }
 
     public ArrayList<Member> getListMembers() {
-        SQLiteDatabase sqLiteDatabase = databaseHandler.getReadableDatabase();
+        SQLiteDatabase sqLiteDatabase = null;
         ArrayList<Member> list = new ArrayList<>();
 
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM MEMBER", null);
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            do {
-                list.add(new Member(
-                        cursor.getInt(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getString(4),
-                        cursor.getInt(5)));
-            } while (cursor.moveToNext());
+        try {
+            sqLiteDatabase = databaseHandler.getReadableDatabase();
+            try (Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM MEMBER", null)) {
+                if (cursor.moveToFirst()) {
+                    do {
+                        list.add(new Member(
+                                cursor.getInt(0),
+                                cursor.getString(1),
+                                cursor.getString(2),
+                                cursor.getString(3),
+                                cursor.getString(4),
+                                cursor.getInt(5)
+                        ));
+                    } while (cursor.moveToNext());
+                }
+            }
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
+                sqLiteDatabase.close();
+            }
         }
-        cursor.close();
+
         return list;
     }
 
+
     public Member getMemberByPhoneNumber(String phoneNumber) {
-        SQLiteDatabase sqLiteDatabase = databaseHandler.getReadableDatabase();
+        SQLiteDatabase sqLiteDatabase = null;
         Member member = null;
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM MEMBER WHERE phoneNumber = ?", new String[]{phoneNumber});
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            member = new Member(cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getString(4),
-                    cursor.getInt(5));
+
+        try {
+            sqLiteDatabase = databaseHandler.getReadableDatabase();
+            try (Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM MEMBER WHERE phoneNumber = ?", new String[]{phoneNumber})) {
+                if (cursor.moveToFirst()) {
+                    member = new Member(
+                            cursor.getInt(0),
+                            cursor.getString(1),
+                            cursor.getString(2),
+                            cursor.getString(3),
+                            cursor.getString(4),
+                            cursor.getInt(5)
+                    );
+                }
+            }
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
+                sqLiteDatabase.close();
+            }
         }
 
-        cursor.close();
         return member;
     }
-    public Member getMemberByMemberID(int memberID) {
-        SQLiteDatabase sqLiteDatabase = databaseHandler.getReadableDatabase();
-        Member member = null;
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM MEMBER WHERE memberID = ?", new String[]{String.valueOf(memberID)});
-        if (cursor.getCount() > 0 ) {
-            cursor.moveToFirst();
-            member = new Member(cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getString(4),
-                    cursor.getInt(5));
-        }
 
-        cursor.close();
-        return member;
-    }
 
     public boolean updateMember(Member member) {
-        SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("fullname", member.getFullname());
-        contentValues.put("phoneNumber", member.getPhoneNumber());
-        contentValues.put("address", member.getAddress());
-        contentValues.put("password", member.getPassword());
-        contentValues.put("role", member.getRole());
+        SQLiteDatabase sqLiteDatabase = null;
+        long check;
 
-        long check = sqLiteDatabase.update("MEMBER", contentValues, "memberID = ?", new String[]{String.valueOf(member.getMemberID())});
+        try {
+            sqLiteDatabase = databaseHandler.getWritableDatabase();
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("fullname", member.getFullname());
+            contentValues.put("phoneNumber", member.getPhoneNumber());
+            contentValues.put("address", member.getAddress());
+            contentValues.put("password", member.getPassword());
+            contentValues.put("role", member.getRole());
+
+            check = sqLiteDatabase.update("MEMBER", contentValues, "memberID = ?", new String[]{String.valueOf(member.getMemberID())});
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
+                sqLiteDatabase.close();
+            }
+        }
+
         return check > 0;
     }
+
 }
