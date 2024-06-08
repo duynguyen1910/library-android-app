@@ -46,6 +46,7 @@ public class ReceiptDAO {
         contentValues.put("endDay", receipt.getEndDay());
         contentValues.put("note", receipt.getNote());
         contentValues.put("memberID", receipt.getMemberID());
+        contentValues.put("status", receipt.getStatus());
 
 
         long check = sqLiteDatabase.insert("RECEIPT", null, contentValues);
@@ -78,7 +79,7 @@ public class ReceiptDAO {
 
     public ArrayList<Receipt> getReceiptByMemberID(int memberID) {
 
-        // This method returns a new ArrayList<ReceiptDetail>  with constructor ReceiptDetail(receptID, startDay, endDay, note, memeberID);
+        // This method returns a new ArrayList<Receip>  with constructor Receipt(receptID, startDay, endDay, note, memeberID, status);
         ArrayList<Receipt> receipt = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
         String query = "SELECT * FROM RECEIPT WHERE memberID = ?";
@@ -91,7 +92,8 @@ public class ReceiptDAO {
                         cursor.getString(1),
                         cursor.getString(2),
                         cursor.getString(3),
-                        cursor.getInt(4)
+                        cursor.getInt(4),
+                        cursor.getInt(5)
                 ));
             } while (cursor.moveToNext());
         }

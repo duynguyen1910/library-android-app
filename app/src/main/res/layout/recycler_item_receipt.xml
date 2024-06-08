@@ -33,8 +33,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -48,45 +48,79 @@
                 android:layout_height="wrap_content"
                 android:text="Giới thiệu sách cho bạn khác" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ngày mượn: "
-                android:textStyle="bold" />
+                android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/txtStartDay"
-                android:text="2024-05-01"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày mượn: "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtStartDay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2024-05-01" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày trả: "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtEndDate"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/cate14"
+                    android:layout_height="wrap_content"
+                    android:text="null" />
+            </LinearLayout>
+
+
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
+
             <TextView
 
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Status: "
-                android:textStyle="bold"
-                android:layout_height="wrap_content" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtStatus"
                 android:layout_width="match_parent"
-                android:text="Chưa trả"
-                android:layout_height="wrap_content" />
+                android:textColor="@color/cate14"
+                android:layout_height="wrap_content"
+                android:text="Chưa trả" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="48dp"
@@ -121,31 +155,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Helen Odessky" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
                         android:orientation="horizontal">
+
                         <TextView
 
                             android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:text="Quantity: "
-                            android:textStyle="bold"
-                            android:layout_height="wrap_content" />
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/txtQuantity"
                             android:layout_width="match_parent"
-                            android:text="1"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="1" />
                     </LinearLayout>
 
 
                 </LinearLayout>
-
 
 
             </LinearLayout>
@@ -157,14 +193,12 @@
             android:id="@+id/closeDialogBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:background="#BFBABA"
             android:text="See more..."
-            android:layout_gravity="center_horizontal"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:backgroundTint="@null" />
-
-
 
 
     </LinearLayout>

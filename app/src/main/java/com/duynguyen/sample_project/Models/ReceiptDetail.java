@@ -1,33 +1,36 @@
 package com.duynguyen.sample_project.Models;
 
 public class ReceiptDetail {
-    private int receiptID, bookID;
+    private int receiptID;
+    private int bookID;
     private String bookImageURI, bookName, author;
     private int memberID;
     private String fullname, startDay, endDay, note;
     private int quantity;
-    private int status; // 0: có sẵn, 1: đang mượn, 2: bị mất
+
 
 
     // Constructor này để tạo UI hiển thị cartItem khi tạo phiếu mượn (Không insert vào database)
-    public ReceiptDetail(int bookID, String bookImageURI, String bookName, String author, int quantity, int status) {
+
+    public ReceiptDetail(int bookID, String bookImageURI, String bookName, String author, int quantity) {
         this.bookID = bookID;
         this.bookImageURI = bookImageURI;
         this.bookName = bookName;
         this.author = author;
         this.quantity = quantity;
-        this.status = status;
     }
 
 
     // Constructor này để lấy phần body của History
-    public ReceiptDetail(int receiptID, String bookImageURI, String bookName, String author, int quantity) {
-        this.receiptID = receiptID;
-        this.bookImageURI = bookImageURI;
-        this.bookName = bookName;
-        this.author = author;
-        this.quantity = quantity;
-    }
+//    public ReceiptDetail(int receiptID, String bookImageURI, String bookName, String author, int quantity) {
+//        this.receiptID = receiptID;
+//        this.bookImageURI = bookImageURI;
+//        this.bookName = bookName;
+//        this.author = author;
+//        this.quantity = quantity;
+//    }
+
+
 
     public String getBookImageURI() {
         return bookImageURI;
@@ -117,11 +120,5 @@ public class ReceiptDetail {
         this.quantity = quantity;
     }
 
-    public int getStatus() {
-        return status;
-    }
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
 }

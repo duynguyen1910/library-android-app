@@ -41,32 +41,9 @@ public class ReceiptFragment extends Fragment {
         fabCreateReceipt.setOnClickListener(v -> startActivity(new Intent(requireActivity(), CreateReceiptActivity.class)));
         return view;
     }
-
-    private void initUI(){
-        recyclerViewReceiptDetails.setLayoutManager(new LinearLayoutManager(requireActivity()));
-        ReceiptDetailDAO receiptDetailDAO = new ReceiptDetailDAO(requireActivity());
+    private void initUI(){};
 
 
-        for (ReceiptDetail detail : detailsList){
-//            private String fullname;
-//            private String note;
-//            private String startDay;
-//            private String endDay;
-//            private ArrayList<ReceiptDetail> list;
-//            ArrayList<ReceiptDetail> receiptCom
-            int receiptID = detail.getReceiptID();
-            String fullname = detail.getFullname();
-            String note = detail.getNote();
-            String startDay = detail.getStartDay();
-            String endDay = detail.getEndDay();
-            ArrayList<ReceiptDetail> listItems = new ArrayList<>();
-            History history = new History(receiptID, fullname, note, startDay, endDay, listItems);
-        }
-
-
-
-
-    }
 
     private void Mapping() {
         fabCreateReceipt = view.findViewById(R.id.fabCreateReceipt);

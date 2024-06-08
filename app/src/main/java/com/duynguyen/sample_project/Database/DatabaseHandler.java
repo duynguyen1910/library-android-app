@@ -8,7 +8,7 @@ import com.duynguyen.sample_project.R;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Library";
-    private static final int DATABASE_VERSION = 22;
+    private static final int DATABASE_VERSION = 24;
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -95,16 +95,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         "receiptID INTEGER PRIMARY KEY AUTOINCREMENT," +
                         " startDay TEXT NOT NULL," +
                         " endDay TEXT NOT NULL," +
-                        " status INTEGER NOT NULL," + // 0 có sẵn, 1 đang mượn, 2 bị mất
                         " note TEXT," +
                         " memberID INTEGER NOT NULL," +
+                        " status INTEGER NOT NULL," + // 0: chưa trả , 1: đã trả
                         " FOREIGN KEY (memberID) REFERENCES MEMBER(memberID))";
         db.execSQL(createReceipt);
 
-        String insertReceipt = "INSERT INTO RECEIPT (startDay, endDay, note, memberID) VALUES" +
-                "('2024-05-01', '2024-05-10', 'Giới thiệu sách cho bạn khác', 1)," +
-                "('2024-06-15', '2024-06-25', 'Cân nhắc mua luôn', 2)," +
-                "('2024-07-20', '2024-07-30', '', 3)";
+        String insertReceipt = "INSERT INTO RECEIPT (startDay, endDay, note, memberID, status) VALUES" +
+                "('2024-05-01', '2024-05-10', 'Giới thiệu sách cho bạn khác', 1, 1)," +
+                "('2024-06-15', '2024-06-25', 'Cân nhắc mua luôn', 2, 1)," +
+                "('2024-07-20', '2024-07-30', '', 3, 1)";
         db.execSQL(insertReceipt);
 
 
@@ -120,11 +120,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         " FOREIGN KEY (bookID) REFERENCES BOOK(bookID))";
         db.execSQL(createReceiptDetail);
 
-        String insertReceiptDetail = "INSERT INTO RECEIPTDETAIL (receiptID, bookID, status, quantity) VALUES" +
-                "(1, 1, 1, 1)," +
-                "(1, 2, 1, 1)," +
-                "(2, 3, 0, 1)," +
-                "(3, 1, 1, 2)";
+        String insertReceiptDetail = "INSERT INTO RECEIPTDETAIL (receiptID, bookID, quantity) VALUES" +
+                "(1, 1, 1)," +
+                "(1, 2, 1)," +
+                "(2, 3, 1)," +
+                "(3, 1, 2)";
         db.execSQL(insertReceiptDetail);
     }
 

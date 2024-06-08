@@ -57,19 +57,18 @@ public class BookForSearchAdapter extends RecyclerView.Adapter<BookForSearchAdap
         holder.bookImage.setImageBitmap(bitmap);
         holder.bookImage.setImageBitmap(bitmap);
         holder.bookName.setText(bookList.get(position).getBookName());
-        holder.bookAuthor.setText(bookList.get(holder.getAdapterPosition()).getAuthor());
+        holder.bookAuthor.setText(bookList.get(holder.getBindingAdapterPosition()).getAuthor());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 recyclerViewBook.setVisibility(View.GONE);
+
                 ReceiptDetail receiptDetail = new ReceiptDetail(
-                        bookList.get(holder.getAdapterPosition()).getBookID(),
-                        bookList.get(holder.getAdapterPosition()).getBookImageURI(),
-                        bookList.get(holder.getAdapterPosition()).getBookName(),
-                        bookList.get(holder.getAdapterPosition()).getAuthor(),
-                        1, // quantity: 1
-                        0 // status 0: có sẵn, chưa mượn
+                        bookList.get(holder.getBindingAdapterPosition()).getBookID(),
+                        bookList.get(holder.getBindingAdapterPosition()).getBookImageURI(),
+                        bookList.get(holder.getBindingAdapterPosition()).getBookName(),
+                        bookList.get(holder.getBindingAdapterPosition()).getAuthor(), 1
                 );
                 boolean existed = false;
                 for (ReceiptDetail detail : tempoList) {
@@ -80,7 +79,7 @@ public class BookForSearchAdapter extends RecyclerView.Adapter<BookForSearchAdap
                         break;
                     }
                 }
-                if (existed == false){
+                if (existed == false) {
                     tempoList.add(receiptDetail);
                 }
 

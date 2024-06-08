@@ -120,7 +120,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
             Toast.makeText(CreateReceiptActivity.this, member.getFullname() + ", ID: " + member.getMemberID(), Toast.LENGTH_SHORT).show();
             int memeberID = member.getMemberID();
 
-            Receipt receipt = new Receipt(startDay, endDay, note, memeberID);
+            Receipt receipt = new Receipt(startDay, endDay, note, memeberID, 0);
             ReceiptDAO receiptDAO = new ReceiptDAO(CreateReceiptActivity.this);
             int check = receiptDAO.addReceipt(receipt);
 
@@ -137,10 +137,10 @@ public class CreateReceiptActivity extends AppCompatActivity {
                 for (ReceiptDetail detail : tempoReceiptDetailsList) {
                     int bookID = detail.getBookID();
                     int quantity = detail.getQuantity();
-                    int status = 1; // Chuyển trạng thái từ 0 (có sẵn) thành 1 (đang mượn)
+
 
                     // Insert vào database
-                    long checkDetail = receiptDetailDAO.addReceiptDetail(receiptID, bookID, quantity, status);
+                    long checkDetail = receiptDetailDAO.addReceiptDetail(receiptID, bookID, quantity);
                     // Insert detail thất bại
                     if (checkDetail == -1) {
                         isSuccess = false;
