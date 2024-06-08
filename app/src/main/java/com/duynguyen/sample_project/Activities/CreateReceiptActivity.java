@@ -92,7 +92,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
     private void handleSubmitReceipt() {
         String phoneNumber = autotxtPhoneNumber.getText().toString().trim();
         String startDay = edtStartDate.getText().toString();
-        String endDay = "08/06/2024";
+        String endDay = "";
         String fullname = edtFullname.getText().toString().trim();
         String note = edtNote.getText().toString().trim();
         if (phoneNumber.isEmpty()) {

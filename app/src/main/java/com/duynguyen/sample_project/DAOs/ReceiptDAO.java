@@ -59,12 +59,13 @@ public class ReceiptDAO {
 
     }
 
-    public boolean updateReceipt(int memberID, String endDay, String note) {
+    public boolean updateReceipt(int receiptID, String endDay, int status) {
         SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("endDay", endDay);
-        contentValues.put("note", note);
-        long check = sqLiteDatabase.update("RECEIPT", contentValues, "memberID = ?", new String[]{String.valueOf(memberID)});
+        contentValues.put("status", status);
+
+        long check = sqLiteDatabase.update("RECEIPT", contentValues, "receiptID = ?", new String[]{String.valueOf(receiptID)});
         return check > 0;
     }
 
