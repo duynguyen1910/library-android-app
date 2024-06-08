@@ -62,9 +62,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.recyclerViewDetails.setLayoutManager(new LinearLayoutManager(holder.recyclerViewDetails.getContext()));
         holder.recyclerViewDetails.setAdapter(historyDetailsAdapter);
 
-
-
-
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,9 +42,6 @@ public class ReceiptFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_receipt, container, false);
         Mapping();
-
-        initUI();
-
         fabCreateReceipt.setOnClickListener(v -> startActivity(new Intent(requireActivity(), CreateReceiptActivity.class)));
         return view;
     }
@@ -53,9 +51,14 @@ public class ReceiptFragment extends Fragment {
         historyAdapter = new HistoryAdapter(requireActivity(), historiesList);
         recyclerViewHistory.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerViewHistory.setAdapter(historyAdapter);
+        Toast.makeText(requireActivity(), "lich su co: "+ historiesList.size() + " phieu muon", Toast.LENGTH_SHORT).show();
     };
 
-
+    @Override
+    public void onResume() {
+        initUI();
+        super.onResume();
+    }
 
     private void Mapping() {
         fabCreateReceipt = view.findViewById(R.id.fabCreateReceipt);

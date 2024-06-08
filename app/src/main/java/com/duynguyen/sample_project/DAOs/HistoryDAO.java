@@ -27,7 +27,7 @@ public class HistoryDAO {
         String firstQuery = "SELECT  r.receiptID, m.fullname, r.startDay, r.endDay, r.note, r.status\n" +
                 "FROM MEMBER m, RECEIPT r, RECEIPTDETAIL d\n" +
                 "WHERE  m.memberID = r.memberID AND r.receiptID = d.receiptID\n" +
-                "ORDER BY r.receiptID;";
+                "GROUP BY r.receiptID;";
 
 
         ArrayList<Receipt> headers = new ArrayList<>();
