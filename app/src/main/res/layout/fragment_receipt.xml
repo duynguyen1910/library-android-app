@@ -87,8 +87,9 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="80dp"
-            android:backgroundTint="@color/primary_color"
+            app:backgroundTint="@color/primary_color"
             android:elevation="10dp"
+            app:background="@null"
             android:src="@drawable/baseline_add_24"
             app:tint="#fff" />
     </LinearLayout>

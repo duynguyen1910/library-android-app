@@ -89,6 +89,7 @@ public class ReceiptFragment extends Fragment {
 
 
     private void initUI() {
+        chkOption.setChecked(false);
         memberNameAdapter = new MemberNameArrayAdapter(requireActivity(), edtFullname, R.layout.item_member_name, getListMembers());
         autotxtPhoneNumber.setAdapter(memberNameAdapter);
         historyDAO = new HistoryDAO(requireActivity());
