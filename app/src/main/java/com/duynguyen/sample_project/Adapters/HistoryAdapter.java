@@ -58,10 +58,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.txtStartDay.setText(history.getStartDay());
         holder.txtEndDay.setText(history.getEndDay());
         holder.txtNote.setText(history.getNote());
-
-        ReceiptDetailsAdapter receiptDetailsAdapter = new ReceiptDetailsAdapter(holder.recyclerViewDetails.getContext(), history.getDetailsList());
+        HistoryDetailsAdapter historyDetailsAdapter = new HistoryDetailsAdapter(holder.recyclerViewDetails.getContext(), history.getDetailsList());
         holder.recyclerViewDetails.setLayoutManager(new LinearLayoutManager(holder.recyclerViewDetails.getContext()));
-        holder.recyclerViewDetails.setAdapter(receiptDetailsAdapter);
+        holder.recyclerViewDetails.setAdapter(historyDetailsAdapter);
 
 
 
