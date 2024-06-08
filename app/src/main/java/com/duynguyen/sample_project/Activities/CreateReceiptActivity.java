@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import com.duynguyen.sample_project.Adapters.BookForSearchAdapter;
 import com.duynguyen.sample_project.Adapters.MemberNameArrayAdapter;
-import com.duynguyen.sample_project.Adapters.ReceiptAdapter;
+import com.duynguyen.sample_project.Adapters.ReceiptDetailsAdapter;
 import com.duynguyen.sample_project.DAOs.BookDAO;
 import com.duynguyen.sample_project.DAOs.MemberDAO;
 import com.duynguyen.sample_project.DAOs.ReceiptDAO;
@@ -51,7 +51,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
     AutoCompleteTextView autotxtPhoneNumber;
     MemberNameArrayAdapter memberNameAdapter;
     BookForSearchAdapter bookForSearchAdapter;
-    ReceiptAdapter receiptAdapter;
+    ReceiptDetailsAdapter receiptDetailsAdapter;
     BookDAO bookDAO;
     ArrayList<Book> mListSuggest;
     Button btnSubmit, btnReset;
@@ -183,7 +183,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
         edtNote.setText("");
         searchView.setQuery("", true);
         tempoReceiptDetailsList.clear();
-        receiptAdapter.notifyItemRangeRemoved(0, tempoReceiptDetailsList.size() - 1);
+        receiptDetailsAdapter.notifyItemRangeRemoved(0, tempoReceiptDetailsList.size() - 1);
     }
 
     private void handleQueryInSearchView(String newText) {
@@ -211,15 +211,15 @@ public class CreateReceiptActivity extends AppCompatActivity {
 
         bookDAO = new BookDAO(this);
         listBook = bookDAO.getListProduct();
-        receiptAdapter = new ReceiptAdapter(this, tempoReceiptDetailsList);
-        bookForSearchAdapter = new BookForSearchAdapter(this, tempoReceiptDetailsList, mListSuggest, receiptAdapter, recyclerViewBook);
+        receiptDetailsAdapter = new ReceiptDetailsAdapter(this, tempoReceiptDetailsList);
+        bookForSearchAdapter = new BookForSearchAdapter(this, tempoReceiptDetailsList, mListSuggest, receiptDetailsAdapter, recyclerViewBook);
 
 
         recyclerViewBook.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewBook.setAdapter(bookForSearchAdapter);
 
         recyclerViewReceipt.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewReceipt.setAdapter(receiptAdapter);
+        recyclerViewReceipt.setAdapter(receiptDetailsAdapter);
 
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
@@ -231,7 +231,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getLayoutPosition();
                 tempoReceiptDetailsList.remove(position);
-                receiptAdapter.notifyItemRemoved(position);
+                receiptDetailsAdapter.notifyItemRemoved(position);
 
             }
 

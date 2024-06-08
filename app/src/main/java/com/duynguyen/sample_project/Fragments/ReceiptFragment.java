@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.duynguyen.sample_project.Activities.CreateReceiptActivity;
+import com.duynguyen.sample_project.Adapters.HistoryAdapter;
+import com.duynguyen.sample_project.DAOs.HistoryDAO;
 import com.duynguyen.sample_project.DAOs.ReceiptDetailDAO;
 import com.duynguyen.sample_project.Models.History;
 import com.duynguyen.sample_project.Models.ReceiptDetail;
@@ -25,8 +27,10 @@ import java.util.ArrayList;
 public class ReceiptFragment extends Fragment {
 
     View view;
-    RecyclerView recyclerViewReceiptDetails;
+    RecyclerView recyclerViewHistory;
     FloatingActionButton fabCreateReceipt;
+    HistoryDAO historyDAO;
+    HistoryAdapter historyAdapter;
 
 
 
@@ -44,15 +48,18 @@ public class ReceiptFragment extends Fragment {
         return view;
     }
     private void initUI(){
-
-
+        historyDAO = new HistoryDAO(requireActivity());
+        ArrayList<History> historiesList = historyDAO.getALLHistories();
+        historyAdapter = new HistoryAdapter(requireActivity(), historiesList);
+        recyclerViewHistory.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        recyclerViewHistory.setAdapter(historyAdapter);
     };
 
 
 
     private void Mapping() {
         fabCreateReceipt = view.findViewById(R.id.fabCreateReceipt);
-        recyclerViewReceiptDetails = view.findViewById(R.id.recyclerViewReceiptDetails);
+        recyclerViewHistory = view.findViewById(R.id.recyclerViewHistory);
     }
 
 

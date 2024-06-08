@@ -13,17 +13,17 @@ public class History {
 
 
     // ArrayList này là Body của History, chứa tất cả ReceiptDetails
-    private ArrayList<ReceiptDetail> list;
+    private ArrayList<ReceiptDetail> detailsList;
     // ReceiptDetail(receiptID, bookID, bookImage, bookName, author, quantity)
 
 
-    public History(int receiptID, String fullname, String startDay, String endDay, String note, ArrayList<ReceiptDetail> list) {
+    public History(int receiptID, String fullname, String startDay, String endDay, String note, ArrayList<ReceiptDetail> detailsList) {
         this.receiptID = receiptID;
         this.fullname = fullname;
         this.startDay = startDay;
         this.endDay = endDay;
         this.note = note;
-        this.list = list;
+        this.detailsList = detailsList;
     }
 
     public String getFullname() {
@@ -58,11 +58,11 @@ public class History {
         this.endDay = endDay;
     }
 
-    public ArrayList<ReceiptDetail> getList() {
-        return list;
+    public ArrayList<ReceiptDetail> getDetailsList() {
+        return detailsList;
     }
 
-    public void setList(ArrayList<ReceiptDetail> list) {
-        this.list = list;
+    public void setDetailsList(ArrayList<ReceiptDetail> detailsList) {
+        this.detailsList = detailsList;
     }
 }

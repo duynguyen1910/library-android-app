@@ -3,7 +3,6 @@ package com.duynguyen.sample_project.Adapters;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -12,12 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.duynguyen.sample_project.Activities.BookDetailActivity;
 import com.duynguyen.sample_project.Models.Book;
 import com.duynguyen.sample_project.Models.ReceiptDetail;
 import com.duynguyen.sample_project.R;
@@ -28,15 +25,15 @@ public class BookForSearchAdapter extends RecyclerView.Adapter<BookForSearchAdap
     private Context context;
     private ArrayList<Book> bookList;
     private ArrayList<ReceiptDetail> tempoList;
-    private ReceiptAdapter receiptAdapter;
+    private ReceiptDetailsAdapter receiptDetailsAdapter;
 
     RecyclerView recyclerViewBook;
 
-    public BookForSearchAdapter(Context context, ArrayList<ReceiptDetail> tempoList, ArrayList<Book> bookList, ReceiptAdapter receiptAdapter, RecyclerView recyclerViewBook) {
+    public BookForSearchAdapter(Context context, ArrayList<ReceiptDetail> tempoList, ArrayList<Book> bookList, ReceiptDetailsAdapter receiptDetailsAdapter, RecyclerView recyclerViewBook) {
         this.context = context;
         this.bookList = bookList;
         this.tempoList = tempoList;
-        this.receiptAdapter = receiptAdapter;
+        this.receiptDetailsAdapter = receiptDetailsAdapter;
         this.recyclerViewBook = recyclerViewBook;
     }
 
@@ -83,7 +80,7 @@ public class BookForSearchAdapter extends RecyclerView.Adapter<BookForSearchAdap
                     tempoList.add(receiptDetail);
                 }
 
-                receiptAdapter.notifyDataSetChanged();
+                receiptDetailsAdapter.notifyDataSetChanged();
             }
         });
     }

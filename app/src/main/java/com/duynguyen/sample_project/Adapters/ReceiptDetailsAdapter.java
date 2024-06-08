@@ -18,11 +18,11 @@ import com.duynguyen.sample_project.Models.ReceiptDetail;
 import com.duynguyen.sample_project.R;
 import java.util.ArrayList;
 
-public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHolder> {
+public class ReceiptDetailsAdapter extends RecyclerView.Adapter<ReceiptDetailsAdapter.ViewHolder> {
     private final Context context;
     private final ArrayList<ReceiptDetail> tempoList;
 
-    public ReceiptAdapter(Context context, ArrayList<ReceiptDetail> tempoList) {
+    public ReceiptDetailsAdapter(Context context, ArrayList<ReceiptDetail> tempoList) {
         this.context = context;
         this.tempoList = tempoList;
     }
@@ -46,9 +46,6 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
         holder.txtBookName.setText(tempoList.get(holder.getBindingAdapterPosition()).getBookName());
         holder.txtAuthor.setText(tempoList.get(holder.getBindingAdapterPosition()).getAuthor());
         holder.txtQuantity.setText(String.valueOf(tempoList.get(holder.getBindingAdapterPosition()).getQuantity()));
-        holder.layoutStatus.setVisibility(View.GONE);
-        holder.textView.setVisibility(View.GONE);
-
         holder.itemView.setOnClickListener(v -> {
 
 
@@ -89,7 +86,6 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.ViewHold
             txtBookName = itemView.findViewById(R.id.txtBookName);
             txtAuthor = itemView.findViewById(R.id.txtAuthor);
             txtQuantity = itemView.findViewById(R.id.txtQuantity);
-            layoutStatus = itemView.findViewById(R.id.layoutStatus);
             textView = itemView.findViewById(R.id.textView);
             btnMinus = itemView.findViewById(R.id.btnMinus);
             btnPlus = itemView.findViewById(R.id.btnPlus);

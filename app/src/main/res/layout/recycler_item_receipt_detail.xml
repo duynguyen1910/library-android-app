@@ -53,9 +53,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="Helen Odessky" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -93,7 +91,6 @@
                         android:layout_height="24dp"
                         android:text="1"
                         android:gravity="center_horizontal"
-
                         android:textColor="#333" />
 
                     <ImageButton
@@ -113,27 +110,6 @@
 
 
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/layoutStatus"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Status: "
-                        android:textColor="#333"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txtStatus"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Chưa trả" />
-                </LinearLayout>
-
-            </LinearLayout>
 
 
         </LinearLayout>
