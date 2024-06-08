@@ -22,25 +22,24 @@ public class ReceiptDAO {
     }
 
     public int addReceipt(Receipt receipt) {
-        // Phương thức này trả về id của dòng được insert vào database nếu thành công
-        // trả về -1 nếu thành viên chưa trả sách hoặc đã trả sách nhưng có lỗi xảy ra trong quá trình insert
+        // This method returns the ID of the inserted row if successful
+        // Returns -1 if the member hasn't returned previous books or if an error occurs during insertion
         int newReceiptID = 0;
+        SQLiteDatabase sqLiteDatabase = null;
+        Cursor cursor = null;
 
-        SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
+        try {
+            sqLiteDatabase = databaseHandler.getWritableDatabase();
 
-        // Kiểm tra đã trả phiếu mượn trước đó chưa
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM RECEIPT WHERE memberID = ?", new String[]{String.valueOf(receipt.getMemberID())});
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();  // Kiểm tra nếu có ít nhất một dòng kết quả
-            // Lấy giá trị cột endDay của dòng đầu tiên
-            String endDay = cursor.getString(2);
-            cursor.close();
-            if (endDay.length() == 0) {
-                Toast.makeText(context, "Thành viên này có phiếu chưa trả. Không thể mượn", Toast.LENGTH_SHORT).show();
-                newReceiptID = -1;
+            // Check if there are any unreturned receipts for the member
+            cursor = sqLiteDatabase.rawQuery("SELECT * FROM RECEIPT WHERE memberID = ?", new String[]{String.valueOf(receipt.getMemberID())});
+            if (cursor.moveToFirst()) {  // Check if there is at least one result row
+                String endDay = cursor.getString(cursor.getColumnIndexOrThrow("endDay"));
+                if (endDay == null || endDay.isEmpty()) {
+                    Toast.makeText(context, "This member has an unreturned receipt. Cannot borrow.", Toast.LENGTH_SHORT).show();
+                    return -1;
+                }
             }
-
-        } else {
 
             ContentValues contentValues = new ContentValues();
             contentValues.put("startDay", receipt.getStartDay());
@@ -49,15 +48,30 @@ public class ReceiptDAO {
             contentValues.put("memberID", receipt.getMemberID());
             contentValues.put("status", receipt.getStatus());
 
-            // phương thức insert return  ID của dòng mới được insert vào database nếu thành công
-            // return -1 nếu có lỗi xảy ra
-            newReceiptID = (int) sqLiteDatabase.insert("RECEIPT", null, contentValues);
+            // insert() method returns the row ID of the newly inserted row, or -1 if an error occurred
+            long result = sqLiteDatabase.insert("RECEIPT", null, contentValues);
+            if (result != -1) {
+                newReceiptID = (int) result;
+            } else {
+                newReceiptID = -1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            newReceiptID = -1;
+        } finally {
+            // Ensure the cursor is closed
+            if (cursor != null) {
+                cursor.close();
+            }
+            // Ensure the database is closed
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
+                sqLiteDatabase.close();
+            }
         }
 
-
         return newReceiptID;
-
     }
+
 
     public boolean updateReceipt(int receiptID, String endDay, int status) {
         SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();

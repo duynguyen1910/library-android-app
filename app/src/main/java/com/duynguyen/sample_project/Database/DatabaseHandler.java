@@ -8,7 +8,7 @@ import com.duynguyen.sample_project.R;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Library";
-    private static final int DATABASE_VERSION = 29;
+    private static  int DATABASE_VERSION = 32;
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -101,11 +101,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         " FOREIGN KEY (memberID) REFERENCES MEMBER(memberID))";
         db.execSQL(createReceipt);
 
-//        String insertReceipt = "INSERT INTO RECEIPT (startDay, endDay, note, memberID, status) VALUES" +
-//                "('2024-05-01', '2024-05-10', 'Giới thiệu sách cho bạn khác', 1, 1)," +
-//                "('2024-06-15', '2024-06-25', 'Cân nhắc mua luôn', 2, 1)," +
-//                "('2024-07-20', '2024-07-30', '', 3, 1)";
-//        db.execSQL(insertReceipt);
+        String insertReceipt = "INSERT INTO RECEIPT (startDay, endDay, note, memberID, status) VALUES" +
+                "('2024-05-01', '2024-05-10', 'Giới thiệu sách cho bạn khác', 1, 1)," +
+                "('2024-06-15', '2024-06-25', 'Cân nhắc mua luôn', 2, 1)," +
+                "('2024-07-20', '2024-07-30', '', 3, 1)";
+        db.execSQL(insertReceipt);
 
 
 
@@ -120,12 +120,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         " FOREIGN KEY (bookID) REFERENCES BOOK(bookID))";
         db.execSQL(createReceiptDetail);
 
-//        String insertReceiptDetail = "INSERT INTO RECEIPTDETAIL (receiptID, bookID, quantity) VALUES" +
-//                "(1, 1, 1)," +
-//                "(1, 2, 1)," +
-//                "(2, 3, 1)," +
-//                "(3, 1, 2)";
-//        db.execSQL(insertReceiptDetail);
+        String insertReceiptDetail = "INSERT INTO RECEIPTDETAIL (receiptID, bookID, quantity) VALUES" +
+                "(1, 1, 1)," +
+                "(1, 2, 1)," +
+                "(2, 3, 1)," +
+                "(3, 1, 2)";
+        db.execSQL(insertReceiptDetail);
     }
 
     @Override

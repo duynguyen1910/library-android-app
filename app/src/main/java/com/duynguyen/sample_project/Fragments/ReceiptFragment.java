@@ -72,11 +72,11 @@ public class ReceiptFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    borrowingList = historyDAO.getALLBorrowingHistories();
+                    borrowingList = historyDAO.getAllBorrowingHistories();
                     historyAdapter = new HistoryAdapter(requireActivity(), borrowingList);
                     recyclerViewHistory.setAdapter(historyAdapter);
                 }else {
-                    historiesList = historyDAO.getALLHistories();
+                    historiesList = historyDAO.getAllHistories();
                     historyAdapter = new HistoryAdapter(requireActivity(), historiesList);
                     recyclerViewHistory.setAdapter(historyAdapter);
                 }
@@ -92,7 +92,7 @@ public class ReceiptFragment extends Fragment {
         memberNameAdapter = new MemberNameArrayAdapter(requireActivity(), edtFullname, R.layout.item_member_name, getListMembers());
         autotxtPhoneNumber.setAdapter(memberNameAdapter);
         historyDAO = new HistoryDAO(requireActivity());
-        historiesList = historyDAO.getALLHistories();
+        historiesList = historyDAO.getAllHistories();
         historyAdapter = new HistoryAdapter(requireActivity(), historiesList);
         recyclerViewHistory.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerViewHistory.setAdapter(historyAdapter);
@@ -102,20 +102,32 @@ public class ReceiptFragment extends Fragment {
     private void handleQuerySearch() {
         String phoneNumber = autotxtPhoneNumber.getText().toString().trim();
         mListSuggest.clear();
+
+
+
         if (phoneNumber.length() == 0) {
             Toast.makeText(requireActivity(), "Hãy nhập số điện thoại để tìm phiếu mượn nhé", Toast.LENGTH_SHORT).show();
         } else {
+            if (chkOption.isChecked()){
+                for (History history : borrowingList) {
+                    if (history.getPhoneNumber().startsWith(phoneNumber)) {
+                        mListSuggest.add(history);
 
-            for (History history : historiesList) {
-                if (history.getPhoneNumber().startsWith(phoneNumber)) {
-                    mListSuggest.add(history);
-
+                    }
+                }
+            }else {
+                for (History history : historiesList) {
+                    if (history.getPhoneNumber().startsWith(phoneNumber)) {
+                        mListSuggest.add(history);
+                    }
                 }
             }
+
             if (mListSuggest.isEmpty()) {
                 Toast.makeText(requireActivity(), "No receipt found", Toast.LENGTH_SHORT).show();
             } else {
                 historyAdapter = new HistoryAdapter(requireActivity(), mListSuggest);
+                recyclerViewHistory.setLayoutManager(new LinearLayoutManager(requireActivity()));
                 recyclerViewHistory.setAdapter(historyAdapter);
             }
         }

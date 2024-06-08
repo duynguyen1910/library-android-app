@@ -18,69 +18,134 @@ public class HistoryDAO {
         databaseHandler = new DatabaseHandler(context);
     }
 
-    public ArrayList<History> getALLHistories() {
+    public ArrayList<History> getAllHistories() {
+        ArrayList<History> listHistories = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = null;
+
+        try {
+            sqLiteDatabase = databaseHandler.getWritableDatabase();
+
+            // Step 1: Create the header part of History
+            String firstQuery = "SELECT r.receiptID, m.fullname, m.phoneNumber, m.address, r.startDay, r.endDay, r.note, r.status " +
+                    "FROM MEMBER m, RECEIPT r, RECEIPTDETAIL d " +
+                    "WHERE m.memberID = r.memberID AND r.receiptID = d.receiptID " +
+                    "GROUP BY r.receiptID";
+
+            ArrayList<Receipt> headers = new ArrayList<>();
+            try (Cursor firstCursor = sqLiteDatabase.rawQuery(firstQuery, null)) {
+                if (firstCursor.moveToFirst()) {
+                    do {
+                        headers.add(new Receipt(
+                                firstCursor.getInt(0),
+                                firstCursor.getString(1),
+                                firstCursor.getString(2),
+                                firstCursor.getString(3),
+                                firstCursor.getString(4),
+                                firstCursor.getString(5),
+                                firstCursor.getString(6),
+                                firstCursor.getInt(7)
+                        ));
+                    } while (firstCursor.moveToNext());
+                }
+            }
+
+            // Step 2: Create the body part of History
+            String secondQuery = "SELECT r.receiptID, b.bookID, b.bookImage, b.bookName, b.author, d.quantity " +
+                    "FROM BOOK b, RECEIPT r, RECEIPTDETAIL d " +
+                    "WHERE b.bookID = d.bookID AND r.receiptID = d.receiptID AND r.receiptID = ?";
+
+            for (Receipt header : headers) {
+                ArrayList<ReceiptDetail> body = new ArrayList<>();
+                try (Cursor secondCursor = sqLiteDatabase.rawQuery(secondQuery, new String[]{String.valueOf(header.getReceiptID())})) {
+                    if (secondCursor.moveToFirst()) {
+                        do {
+                            body.add(new ReceiptDetail(
+                                    secondCursor.getInt(0),
+                                    secondCursor.getInt(1),
+                                    secondCursor.getString(2),
+                                    secondCursor.getString(3),
+                                    secondCursor.getString(4),
+                                    secondCursor.getInt(5)
+                            ));
+                        } while (secondCursor.moveToNext());
+                    }
+                }
+
+                // Step 3: Combine header and body to get a complete History
+                listHistories.add(new History(
+                        header.getReceiptID(),
+                        header.getFullname(),
+                        header.getPhoneNumber(),
+                        header.getAddress(),
+                        header.getStartDay(),
+                        header.getEndDay(),
+                        header.getNote(),
+                        header.getStatus(),
+                        body
+                ));
+            }
+        } finally {
+            // Ensure the database is closed
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
+                sqLiteDatabase.close();
+            }
+        }
+
+        return listHistories;
+    }
+
+
+    public ArrayList<History> getAllBorrowingHistories() {
         ArrayList<History> listHistories = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
 
-        // Bước 1: Tạo header của History
-        // firstQuery sẽ tạo ra được phần header của History
-        String firstQuery = "SELECT  r.receiptID, m.fullname, m.phoneNumber, m.address, r.startDay, r.endDay, r.note, r.status\n" +
-                "FROM MEMBER m, RECEIPT r, RECEIPTDETAIL d\n" +
-                "WHERE  m.memberID = r.memberID AND r.receiptID = d.receiptID\n" +
-                "GROUP BY r.receiptID;";
-
+        // Step 1: Create the header part of History
+        String firstQuery = "SELECT r.receiptID, m.fullname, m.phoneNumber, m.address, r.startDay, r.endDay, r.note, r.status " +
+                "FROM MEMBER m, RECEIPT r, RECEIPTDETAIL d " +
+                "WHERE m.memberID = r.memberID AND r.receiptID = d.receiptID AND status = 0 " +
+                "GROUP BY r.receiptID";
 
         ArrayList<Receipt> headers = new ArrayList<>();
-        Cursor firstCursor = sqLiteDatabase.rawQuery(firstQuery, null);
-        if (firstCursor.getCount() > 0) {
-            firstCursor.moveToFirst();
-            do {
-                headers.add(new Receipt(
-                        firstCursor.getInt(0),
-                        firstCursor.getString(1),
-                        firstCursor.getString(2),
-                        firstCursor.getString(3),
-                        firstCursor.getString(4),
-                        firstCursor.getString(5),
-                        firstCursor.getString(6),
-                        firstCursor.getInt(7)
-                ));
-
-            } while (firstCursor.moveToNext());
+        try (Cursor firstCursor = sqLiteDatabase.rawQuery(firstQuery, null)) {
+            if (firstCursor.moveToFirst()) {
+                do {
+                    headers.add(new Receipt(
+                            firstCursor.getInt(0),
+                            firstCursor.getString(1),
+                            firstCursor.getString(2),
+                            firstCursor.getString(3),
+                            firstCursor.getString(4),
+                            firstCursor.getString(5),
+                            firstCursor.getString(6),
+                            firstCursor.getInt(7)
+                    ));
+                } while (firstCursor.moveToNext());
+            }
         }
 
-
-        firstCursor.close();
-
-        // Bước 2: Tạo body của History
-        // Second Query sẽ lấy được 1 item phần body của History
-        // Sử dụng vòng lặp for cho receiptID để lấy toàn bộ phần body
+        // Step 2: Create the body part of History
+        String secondQuery = "SELECT r.receiptID, b.bookID, b.bookImage, b.bookName, b.author, d.quantity " +
+                "FROM BOOK b, RECEIPT r, RECEIPTDETAIL d " +
+                "WHERE b.bookID = d.bookID AND r.receiptID = d.receiptID AND r.receiptID = ?";
 
         for (Receipt header : headers) {
-            String secondQuery = "SELECT r.receiptID, b.bookID, b.bookImage, b.bookName, b.author, d.quantity\n" +
-                    "FROM BOOK b, RECEIPT r, RECEIPTDETAIL d\n" +
-                    "WHERE b.bookID = d.bookID and r.receiptID = d.receiptID AND r.receiptID = ?;";
-            Cursor secondCursor = sqLiteDatabase.rawQuery(secondQuery, new String[]{String.valueOf(header.getReceiptID())});
-
             ArrayList<ReceiptDetail> body = new ArrayList<>();
-            if (secondCursor.getCount() > 0) {
-                secondCursor.moveToFirst();
-                do {
-                    body.add(new ReceiptDetail(
-                            secondCursor.getInt(0),
-                            secondCursor.getInt(1),
-                            secondCursor.getString(2),
-                            secondCursor.getString(3),
-                            secondCursor.getString(4),
-                            secondCursor.getInt(5)
-                    ));
-
-
-                } while (secondCursor.moveToNext());
+            try (Cursor secondCursor = sqLiteDatabase.rawQuery(secondQuery, new String[]{String.valueOf(header.getReceiptID())})) {
+                if (secondCursor.moveToFirst()) {
+                    do {
+                        body.add(new ReceiptDetail(
+                                secondCursor.getInt(0),
+                                secondCursor.getInt(1),
+                                secondCursor.getString(2),
+                                secondCursor.getString(3),
+                                secondCursor.getString(4),
+                                secondCursor.getInt(5)
+                        ));
+                    } while (secondCursor.moveToNext());
+                }
             }
-            secondCursor.close();
 
-            // Bước 3: Kết hợp header và body để được History hoàn chỉnh
+            // Step 3: Combine header and body to get a complete History
             listHistories.add(new History(
                     header.getReceiptID(),
                     header.getFullname(),
@@ -96,81 +161,5 @@ public class HistoryDAO {
         return listHistories;
     }
 
-    public ArrayList<History> getALLBorrowingHistories() {
-        ArrayList<History> listHistories = new ArrayList<>();
-        SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
 
-        // Bước 1: Tạo header của History
-        // firstQuery sẽ tạo ra được phần header của History
-        String firstQuery = "SELECT  r.receiptID, m.fullname, m.phoneNumber, m.address, r.startDay, r.endDay, r.note, r.status\n" +
-                "FROM MEMBER m, RECEIPT r, RECEIPTDETAIL d\n" +
-                "WHERE  m.memberID = r.memberID AND r.receiptID = d.receiptID AND r.status = 0\n" +
-                "GROUP BY r.receiptID;";
-
-
-        ArrayList<Receipt> headers = new ArrayList<>();
-        Cursor firstCursor = sqLiteDatabase.rawQuery(firstQuery, null);
-        if (firstCursor.getCount() > 0) {
-            firstCursor.moveToFirst();
-            do {
-                headers.add(new Receipt(
-                        firstCursor.getInt(0),
-                        firstCursor.getString(1),
-                        firstCursor.getString(2),
-                        firstCursor.getString(3),
-                        firstCursor.getString(4),
-                        firstCursor.getString(5),
-                        firstCursor.getString(6),
-                        firstCursor.getInt(7)
-                ));
-
-            } while (firstCursor.moveToNext());
-        }
-
-
-        firstCursor.close();
-
-        // Bước 2: Tạo body của History
-        // Second Query sẽ lấy được 1 item phần body của History
-        // Sử dụng vòng lặp for cho receiptID để lấy toàn bộ phần body
-
-        for (Receipt header : headers) {
-            String secondQuery = "SELECT r.receiptID, b.bookID, b.bookImage, b.bookName, b.author, d.quantity\n" +
-                    "FROM BOOK b, RECEIPT r, RECEIPTDETAIL d\n" +
-                    "WHERE b.bookID = d.bookID and r.receiptID = d.receiptID AND r.receiptID = ?;";
-            Cursor secondCursor = sqLiteDatabase.rawQuery(secondQuery, new String[]{String.valueOf(header.getReceiptID())});
-
-            ArrayList<ReceiptDetail> body = new ArrayList<>();
-            if (secondCursor.getCount() > 0) {
-                secondCursor.moveToFirst();
-                do {
-                    body.add(new ReceiptDetail(
-                            secondCursor.getInt(0),
-                            secondCursor.getInt(1),
-                            secondCursor.getString(2),
-                            secondCursor.getString(3),
-                            secondCursor.getString(4),
-                            secondCursor.getInt(5)
-                    ));
-
-
-                } while (secondCursor.moveToNext());
-            }
-            secondCursor.close();
-
-            // Bước 3: Kết hợp header và body để được History hoàn chỉnh
-            listHistories.add(new History(
-                    header.getReceiptID(),
-                    header.getFullname(),
-                    header.getPhoneNumber(),
-                    header.getAddress(),
-                    header.getStartDay(),
-                    header.getEndDay(),
-                    header.getNote(),
-                    header.getStatus(),
-                    body
-            ));
-        }
-        return listHistories;
-    }
 }
