@@ -28,8 +28,6 @@ public class ReceiptDAO {
 
         // Kiểm tra đã trả phiếu mượn trước đó chưa
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM RECEIPT WHERE memberID = ?", new String[]{String.valueOf(receipt.getMemberID())});
-
-//        boolean canBorrow = true;
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();  // Kiểm tra nếu có ít nhất một dòng kết quả
             // Lấy giá trị cột endDay của dòng đầu tiên
@@ -53,18 +51,11 @@ public class ReceiptDAO {
         // phương thức insert return  ID của dòng mới được insert vào database nếu thành công
         // return -1 nếu có lỗi xảy ra
         if (check != -1) {
-            Toast.makeText(context, "Receipt created successfully", Toast.LENGTH_SHORT).show();
             newReceiptID = (int) check;
-
         } else {
-            Toast.makeText(context, "Receipt created failed", Toast.LENGTH_SHORT).show();
             newReceiptID = -1;
-
         }
-
         return newReceiptID;
-
-
 
     }
 

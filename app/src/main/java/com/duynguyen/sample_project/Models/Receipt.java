@@ -1,10 +1,15 @@
 package com.duynguyen.sample_project.Models;
 
-public class Receipt {
+import java.io.Serializable;
+
+public class Receipt implements Serializable {
     private int receiptID;
     private String fullname;
+    private String phoneNumber;
+    private String address;
     private String startDay;
     private String endDay;
+
 
     private String note;
     private int memberID;
@@ -15,15 +20,16 @@ public class Receipt {
     }
 
     // Constructor này dùng để lấy header của History
-    public Receipt(int receiptID, String fullname, String startDay, String endDay, String note, int status) {
+    public Receipt(int receiptID, String fullname, String phoneNumber, String address, String startDay, String endDay, String note, int status) {
         this.receiptID = receiptID;
         this.fullname = fullname;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
         this.startDay = startDay;
         this.endDay = endDay;
         this.note = note;
         this.status = status;
     }
-
 
 
     // Constructor này dùng để lấy phiếu mượn trả về từ database qua phương thức, ReceiptDAO.getReceiptByMemberID(int memberID)
@@ -34,6 +40,14 @@ public class Receipt {
         this.note = note;
         this.memberID = memberID;
         this.status = status;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getFullname() {
@@ -62,6 +76,13 @@ public class Receipt {
     }
 
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public int getReceiptID() {
         return receiptID;

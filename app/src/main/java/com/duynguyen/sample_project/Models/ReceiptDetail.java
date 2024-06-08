@@ -1,6 +1,8 @@
 package com.duynguyen.sample_project.Models;
 
-public class ReceiptDetail {
+import java.io.Serializable;
+
+public class ReceiptDetail implements Serializable {
     private int receiptID;
     private int bookID;
     private String bookImageURI, bookName, author;

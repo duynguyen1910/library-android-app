@@ -25,10 +25,12 @@ import java.util.ArrayList;
 public class HistoryDetailsAdapter extends RecyclerView.Adapter<HistoryDetailsAdapter.ViewHolder> {
     private final Context context;
     private final ArrayList<ReceiptDetail> tempoList;
+    private boolean showOnlyFirstItem;
 
-    public HistoryDetailsAdapter(Context context, ArrayList<ReceiptDetail> tempoList) {
+    public HistoryDetailsAdapter(Context context, ArrayList<ReceiptDetail> tempoList, boolean showOnlyFirstItem) {
         this.context = context;
         this.tempoList = tempoList;
+        this.showOnlyFirstItem = showOnlyFirstItem;
     }
 
     @NonNull
@@ -56,7 +58,7 @@ public class HistoryDetailsAdapter extends RecyclerView.Adapter<HistoryDetailsAd
 
     @Override
     public int getItemCount() {
-        return tempoList.size();
+        return showOnlyFirstItem ? Math.min(tempoList.size(), 1) : tempoList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/custom_edit_text_border"
     android:orientation="vertical"
+    android:padding="20dp"
     app:cardCornerRadius="10dp">
 
     <LinearLayout
@@ -17,17 +20,49 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Họ tên: "
-                android:textStyle="bold" />
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/txtFullname"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Họ tên: "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtFullname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tấn Duy" />
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tấn Duy" />
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Status: "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chưa trả"
+                    android:textColor="@color/cate14" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
 
@@ -96,26 +131,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Status: "
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txtStatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Chưa trả"
-                android:textColor="@color/cate14" />
-        </LinearLayout>
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewDetails"
@@ -123,46 +138,37 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/txtSumOfQuantity"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginBottom="6dp"
+            android:background="#009688"
+            android:paddingHorizontal="3dp"
+            android:text="3 quyển"
+            android:textColor="@color/white" />
 
-            <TextView
-                android:id="@+id/txtSeeMore"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/custom_button_close"
-                android:padding="8dp"
-                android:text="Xem chi tiết..."
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@color/text1"
-                android:textSize="14dp"
-                app:backgroundTint="@null" />
 
-            <TextView
-                android:id="@+id/txtReturnReceipt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/custom_button_green"
-                android:padding="8dp"
-                android:text="Trả phiếu mượn"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                app:backgroundTint="@null" />
+        <TextView
+            android:id="@+id/txtSeeMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Xem chi tiết..."
+            android:textAlignment="center"
+            android:background="@drawable/custom_button_close"
+            android:layout_gravity="center"
+            android:textAllCaps="false"
+            android:textColor="#009688"
+            android:textSize="14dp"
+            app:backgroundTint="@null" />
 
-        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:background="#8BC34A"
+            android:layout_height="3dp"
             android:layout_marginTop="10dp"
-            android:layout_height="3dp" />
+            android:background="#8BC34A" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

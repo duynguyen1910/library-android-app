@@ -1,6 +1,8 @@
 package com.duynguyen.sample_project.Models;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
     private int bookID;
     private String bookName;
     private String bookImageURI;

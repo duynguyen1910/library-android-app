@@ -37,6 +37,7 @@ public class ReceiptFragment extends Fragment {
 
 
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,7 +52,6 @@ public class ReceiptFragment extends Fragment {
         historyAdapter = new HistoryAdapter(requireActivity(), historiesList);
         recyclerViewHistory.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerViewHistory.setAdapter(historyAdapter);
-        Toast.makeText(requireActivity(), "lich su co: "+ historiesList.size() + " phieu muon", Toast.LENGTH_SHORT).show();
     };
 
     @Override

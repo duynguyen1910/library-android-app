@@ -23,7 +23,7 @@
             android:src="@drawable/ic_back" />
         <TextView
             android:layout_width="wrap_content"
-            android:text="Create receipt"
+            android:text="Tạo phiếu mượn"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -38,7 +38,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/custom_edit_text_border"
         android:completionThreshold="1"
-        android:hint="Phone number"
+        android:hint="Số điện thoại"
         android:inputType="number"
         android:padding="15dp"
         android:textColor="@color/black"
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:background="@drawable/custom_edit_text_border"
-        android:hint="Fullname"
+        android:hint="Họ tên"
         android:inputType="text"
         android:padding="15dp"
         android:textColor="@color/black"
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:background="@drawable/custom_edit_text_border"
-        android:hint="Note"
+        android:hint="Ghi chú"
         android:inputType="text"
         android:padding="15dp"
         android:textColor="@color/black"
@@ -79,7 +79,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/custom_edit_text_border"
         android:focusable="false"
-        android:hint="Borrow Date"
+        android:hint="Ngày mượn"
         android:inputType="datetime"
         android:padding="15dp"
         android:textColor="@color/black"
@@ -95,7 +95,7 @@
         android:textSize="15sp"
         app:iconifiedByDefault="false"
         app:queryBackground="@android:color/transparent"
-        app:queryHint="Book name..." />
+        app:queryHint="Tìm sách ở đây..." />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -137,11 +137,9 @@
             android:layout_weight="1"
             android:background="@drawable/custom_button_close"
             android:padding="8dp"
-            android:text="Reset"
+            android:text="Xóa thông tin"
             android:textAllCaps="false"
             android:textColor="@color/text1"
-            android:textSize="14sp"
-            android:textStyle="bold"
             app:backgroundTint="@null" />
 
         <Button
@@ -151,10 +149,8 @@
             android:layout_weight="1"
             android:background="@drawable/custom_button_green"
             android:padding="8dp"
-            android:text="Submit"
+            android:text="Xác nhận"
             android:textAllCaps="false"
-            android:textSize="14sp"
-            android:textStyle="bold"
             app:backgroundTint="@null" />
     </LinearLayout>
 

@@ -24,7 +24,7 @@ public class HistoryDAO {
 
         // Bước 1: Tạo header của History
         // firstQuery sẽ tạo ra được phần header của History
-        String firstQuery = "SELECT  r.receiptID, m.fullname, r.startDay, r.endDay, r.note, r.status\n" +
+        String firstQuery = "SELECT  r.receiptID, m.fullname, m.phoneNumber, m.address, r.startDay, r.endDay, r.note, r.status\n" +
                 "FROM MEMBER m, RECEIPT r, RECEIPTDETAIL d\n" +
                 "WHERE  m.memberID = r.memberID AND r.receiptID = d.receiptID\n" +
                 "GROUP BY r.receiptID;";
@@ -41,7 +41,9 @@ public class HistoryDAO {
                         firstCursor.getString(2),
                         firstCursor.getString(3),
                         firstCursor.getString(4),
-                        firstCursor.getInt(5)
+                        firstCursor.getString(5),
+                        firstCursor.getString(6),
+                        firstCursor.getInt(7)
                 ));
 
             } while (firstCursor.moveToNext());
@@ -82,9 +84,12 @@ public class HistoryDAO {
             listHistories.add(new History(
                     header.getReceiptID(),
                     header.getFullname(),
+                    header.getPhoneNumber(),
+                    header.getAddress(),
                     header.getStartDay(),
                     header.getEndDay(),
                     header.getNote(),
+                    header.getStatus(),
                     body
             ));
         }

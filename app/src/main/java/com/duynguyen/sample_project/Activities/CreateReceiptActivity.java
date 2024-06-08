@@ -117,7 +117,6 @@ public class CreateReceiptActivity extends AppCompatActivity {
         if (member != null) {
 
             // Bước 1:  insert phiếu mượn mới vào database
-            Toast.makeText(CreateReceiptActivity.this, member.getFullname() + ", ID: " + member.getMemberID(), Toast.LENGTH_SHORT).show();
             int memeberID = member.getMemberID();
 
             Receipt receipt = new Receipt(startDay, endDay, note, memeberID, 0);
@@ -128,8 +127,6 @@ public class CreateReceiptActivity extends AppCompatActivity {
             // Nếu tạo phiếu mượn thành công thì kết quả của quá trình insert chính là receiptID
             if (check != -1) {
                 receiptID = check;
-                Toast.makeText(CreateReceiptActivity.this, "New receiptID = " + receiptID, Toast.LENGTH_SHORT).show();
-
                 // Dùng vòng lặp for trong tempoReceiptDetailsList để khởi tạo receipt detail để insert vào database,
                 ReceiptDetailDAO receiptDetailDAO = new ReceiptDetailDAO(CreateReceiptActivity.this);
 
@@ -137,31 +134,20 @@ public class CreateReceiptActivity extends AppCompatActivity {
                 for (ReceiptDetail detail : tempoReceiptDetailsList) {
                     int bookID = detail.getBookID();
                     int quantity = detail.getQuantity();
-
-
                     // Insert vào database
                     long checkDetail = receiptDetailDAO.addReceiptDetail(receiptID, bookID, quantity);
                     // Insert detail thất bại
                     if (checkDetail == -1) {
                         isSuccess = false;
-                        Toast.makeText(CreateReceiptActivity.this, "Tạo detail thất bại", Toast.LENGTH_SHORT).show();
                         break;
                     }
                     // insert detail thành công
-                    else {
-
-                        listTacGia.append(bookDAO.getBookById(bookID).getAuthor()).append(", ");
-                    }
                 }
-                Toast.makeText(CreateReceiptActivity.this, "listTacGia:  " + listTacGia, Toast.LENGTH_SHORT).show();
-
-
             }
             // Nếu có lỗi trong quá trình insert thì toast message
             else {
                 Toast.makeText(CreateReceiptActivity.this, "Gặp lỗi trong quá trình insert", Toast.LENGTH_SHORT).show();
             }
-
 
         }
         // Trường hợp không tìm thấy thì tiến hành đăng ký thành viên
