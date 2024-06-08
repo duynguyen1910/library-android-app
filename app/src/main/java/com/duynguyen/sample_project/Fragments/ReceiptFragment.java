@@ -27,7 +27,9 @@ public class ReceiptFragment extends Fragment {
     View view;
     RecyclerView recyclerViewReceiptDetails;
     FloatingActionButton fabCreateReceipt;
-    ArrayList<ReceiptDetail>  detailsList;
+
+
+
 
 
     @Nullable
@@ -41,7 +43,10 @@ public class ReceiptFragment extends Fragment {
         fabCreateReceipt.setOnClickListener(v -> startActivity(new Intent(requireActivity(), CreateReceiptActivity.class)));
         return view;
     }
-    private void initUI(){};
+    private void initUI(){
+
+
+    };
 
 
 

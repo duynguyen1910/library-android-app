@@ -15,14 +15,14 @@ public class Receipt {
     }
 
     // Constructor này dùng để lấy header của History
-//    public Receipt(int receiptID, String fullname, String startDay, String endDay, String note, int status) {
-//        this.receiptID = receiptID;
-//        this.fullname = fullname;
-//        this.startDay = startDay;
-//        this.endDay = endDay;
-//        this.note = note;
-//        this.status = status;
-//    }
+    public Receipt(int receiptID, String fullname, String startDay, String endDay, String note, int status) {
+        this.receiptID = receiptID;
+        this.fullname = fullname;
+        this.startDay = startDay;
+        this.endDay = endDay;
+        this.note = note;
+        this.status = status;
+    }
 
 
 
@@ -60,6 +60,8 @@ public class Receipt {
         this.memberID = memberID;
         this.status = status;
     }
+
+
 
     public int getReceiptID() {
         return receiptID;

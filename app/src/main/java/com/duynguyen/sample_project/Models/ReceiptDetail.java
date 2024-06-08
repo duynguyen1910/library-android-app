@@ -22,13 +22,14 @@ public class ReceiptDetail {
 
 
     // Constructor này để lấy phần body của History
-//    public ReceiptDetail(int receiptID, String bookImageURI, String bookName, String author, int quantity) {
-//        this.receiptID = receiptID;
-//        this.bookImageURI = bookImageURI;
-//        this.bookName = bookName;
-//        this.author = author;
-//        this.quantity = quantity;
-//    }
+    public ReceiptDetail(int receiptID, int bookID, String bookImageURI, String bookName, String author, int quantity) {
+        this.receiptID = receiptID;
+        this.bookID = bookID;
+        this.bookImageURI = bookImageURI;
+        this.bookName = bookName;
+        this.author = author;
+        this.quantity = quantity;
+    }
 
 
 

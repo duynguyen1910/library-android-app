@@ -12,18 +12,17 @@ public class History {
     private String endDay;
 
 
-
     // ArrayList này là Body của History, chứa tất cả ReceiptDetails
     private ArrayList<ReceiptDetail> list;
-    // ReceiptDetail(receiptID, bookImage, bookName, author, quantity)
+    // ReceiptDetail(receiptID, bookID, bookImage, bookName, author, quantity)
 
 
-    public History(int receiptID, String fullname, String note, String startDay, String endDay, ArrayList<ReceiptDetail> list) {
+    public History(int receiptID, String fullname, String startDay, String endDay, String note, ArrayList<ReceiptDetail> list) {
         this.receiptID = receiptID;
         this.fullname = fullname;
-        this.note = note;
         this.startDay = startDay;
         this.endDay = endDay;
+        this.note = note;
         this.list = list;
     }
 
