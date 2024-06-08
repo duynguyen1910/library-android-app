@@ -1,9 +1,11 @@
 package com.duynguyen.sample_project.DAOs;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
+
 import com.duynguyen.sample_project.Database.DatabaseHandler;
 import com.duynguyen.sample_project.Models.Receipt;
 import com.duynguyen.sample_project.Models.ReceiptDetail;
@@ -22,7 +24,7 @@ public class ReceiptDAO {
     public int addReceipt(Receipt receipt) {
         // Phương thức này trả về id của dòng được insert vào database nếu thành công
         // trả về -1 nếu thành viên chưa trả sách hoặc đã trả sách nhưng có lỗi xảy ra trong quá trình insert
-        int newReceiptID;
+        int newReceiptID = 0;
 
         SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
 
@@ -32,29 +34,27 @@ public class ReceiptDAO {
             cursor.moveToFirst();  // Kiểm tra nếu có ít nhất một dòng kết quả
             // Lấy giá trị cột endDay của dòng đầu tiên
             String endDay = cursor.getString(2);
+            cursor.close();
             if (endDay.length() == 0) {
                 Toast.makeText(context, "Thành viên này có phiếu chưa trả. Không thể mượn", Toast.LENGTH_SHORT).show();
                 newReceiptID = -1;
-                return newReceiptID;
             }
-        }
-        cursor.close();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("startDay", receipt.getStartDay());
-        contentValues.put("endDay", receipt.getEndDay());
-        contentValues.put("note", receipt.getNote());
-        contentValues.put("memberID", receipt.getMemberID());
-        contentValues.put("status", receipt.getStatus());
 
-
-        long check = sqLiteDatabase.insert("RECEIPT", null, contentValues);
-        // phương thức insert return  ID của dòng mới được insert vào database nếu thành công
-        // return -1 nếu có lỗi xảy ra
-        if (check != -1) {
-            newReceiptID = (int) check;
         } else {
-            newReceiptID = -1;
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("startDay", receipt.getStartDay());
+            contentValues.put("endDay", receipt.getEndDay());
+            contentValues.put("note", receipt.getNote());
+            contentValues.put("memberID", receipt.getMemberID());
+            contentValues.put("status", receipt.getStatus());
+
+            // phương thức insert return  ID của dòng mới được insert vào database nếu thành công
+            // return -1 nếu có lỗi xảy ra
+            newReceiptID = (int) sqLiteDatabase.insert("RECEIPT", null, contentValues);
         }
+
+
         return newReceiptID;
 
     }
@@ -93,7 +93,6 @@ public class ReceiptDAO {
 
         return receipt;
     }
-
 
 
     public int getReceiptDetailCount() {

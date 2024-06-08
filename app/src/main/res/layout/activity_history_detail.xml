@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Họ tên: "
-            android:textColor="@color/black"
+
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tấn Duy"
-            android:textColor="@color/black"
+
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Trạng thái: "
-            android:textColor="@color/black"
+
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -93,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Số điện thoại: "
-            android:textColor="@color/black"
+
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -102,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="123456789"
-            android:textColor="@color/black"
+
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -116,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Địa chỉ: "
-            android:textColor="@color/black"
+
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -125,7 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="quận 7, HCM"
-            android:textColor="@color/black"
+
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -139,7 +139,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Note: "
-            android:textColor="@color/black"
+
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -148,7 +148,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Giới thiệu sách cho bạn khác"
-            android:textColor="@color/black"
+
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -163,7 +163,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ngày mượn: "
-            android:textColor="@color/black"
+
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -172,7 +172,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="2024-05-01"
-            android:textColor="@color/black"
+
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -185,7 +185,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ngày trả: "
-            android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -194,7 +193,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="null"
-            android:textColor="@color/cate14"
             android:textSize="16sp" />
     </LinearLayout>
     <View

@@ -82,7 +82,6 @@ public class BookDAO {
 
     public boolean addBook(Book book) {
         SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
-
         ContentValues contentValues = new ContentValues();
         contentValues.put("bookName", book.getBookName());
         contentValues.put("bookImage", book.getBookImageURI());
@@ -92,7 +91,6 @@ public class BookDAO {
         contentValues.put("categoryID", book.getBookCategoryID());
 
         long newRowId =  sqLiteDatabase.insert("BOOK", null, contentValues);
-
         return newRowId != -1;
     }
 

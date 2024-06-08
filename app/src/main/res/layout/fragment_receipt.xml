@@ -8,12 +8,72 @@
     tools:context=".Fragments.HomeFragment">
 
 
+    <AutoCompleteTextView
+        android:id="@+id/autotxtPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/custom_edit_text_border"
+        android:completionThreshold="1"
+        android:hint="Số điện thoại"
+        android:inputType="number"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="15sp" />
 
+    <EditText
+        android:id="@+id/edtFullname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/autotxtPhoneNumber"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/custom_edit_text_border"
+        android:focusable="false"
+        android:hint="Họ tên"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="15sp" />
+
+
+    <TextView
+        android:id="@+id/btnSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edtFullname"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/custom_button_green"
+        android:padding="10dp"
+        android:text="Tìm kiếm"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:backgroundTint="@null" />
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:text="Chỉ hiện phiếu chưa trả?"
+        android:id="@+id/chkOption"
+        android:layout_below="@id/edtFullname"
+        android:layout_alignParentEnd="true"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@id/btnSearch"
+        android:layout_marginBottom="10dp"
+        android:background="#009688" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
         android:id="@+id/recyclerViewHistory"
-        android:layout_height="wrap_content"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line1" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

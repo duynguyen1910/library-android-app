@@ -87,6 +87,8 @@ public class CreateReceiptActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(v -> handleSubmitReceipt());
 
         btnBack.setOnClickListener(v -> finish());
+
+
     }
 
     private void handleSubmitReceipt() {
@@ -143,23 +145,19 @@ public class CreateReceiptActivity extends AppCompatActivity {
                     }
                     // insert detail thành công
                 }
+                if (isSuccess) {
+                    Toast.makeText(CreateReceiptActivity.this, "Tạo phiếu mượn thành công", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(CreateReceiptActivity.this, "Tạo phiếu mượn thất bại", Toast.LENGTH_SHORT).show();
+                }
             }
-            // Nếu có lỗi trong quá trình insert thì toast message
-            else {
-                Toast.makeText(CreateReceiptActivity.this, "Gặp lỗi trong quá trình insert", Toast.LENGTH_SHORT).show();
-            }
-
         }
         // Trường hợp không tìm thấy thì tiến hành đăng ký thành viên
         else {
             isSuccess = false;
             Toast.makeText(CreateReceiptActivity.this, "Phai dang ky thanh vien truoc", Toast.LENGTH_SHORT).show();
         }
-        if (isSuccess) {
-            Toast.makeText(CreateReceiptActivity.this, "Tạo phiếu mượn thành công", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(CreateReceiptActivity.this, "Tạo phiếu mượn thất bại", Toast.LENGTH_SHORT).show();
-        }
+
 
     }
 

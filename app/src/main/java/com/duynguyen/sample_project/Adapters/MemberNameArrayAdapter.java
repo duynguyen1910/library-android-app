@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,16 +53,20 @@ public class MemberNameArrayAdapter extends ArrayAdapter {
     public Filter getFilter() {
         return new Filter() {
             @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
+            protected FilterResults performFiltering(CharSequence phoneNumber) {
+                edtFullname.setText("");
                 List<Member> mListSuggest = new ArrayList<>();
 
-                if (constraint == null || constraint.length() == 0) {
+                if (phoneNumber == null || phoneNumber.length() == 0) {
                     mListSuggest.addAll(mListMembers);
                 } else {
                     for (Member member : mListMembers) {
-                        if (member.getPhoneNumber().contains(constraint)) {
+                        if (member.getPhoneNumber().startsWith((String) phoneNumber)) {
                             mListSuggest.add(member);
                         }
+                    }
+                    if (mListSuggest.isEmpty()) {
+                        Toast.makeText(getContext(), "Số điện thoại chưa đăng ký", Toast.LENGTH_SHORT).show();
                     }
                 }
                 FilterResults filterResults = new FilterResults();
