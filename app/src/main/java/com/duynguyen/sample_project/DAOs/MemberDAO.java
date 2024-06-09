@@ -99,4 +99,23 @@ public class MemberDAO {
         return check > 0;
     }
 
+    public boolean updateMemberPassword(String newPassword, int memberID) {
+        SQLiteDatabase sqLiteDatabase = null;
+        long check;
+
+        try {
+            sqLiteDatabase = databaseHandler.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("password", newPassword);
+
+            check = sqLiteDatabase.update("MEMBER", contentValues, "memberID = ?", new String[]{String.valueOf(memberID)});
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
+                sqLiteDatabase.close();
+            }
+        }
+
+        return check > 0;
+    }
+
 }

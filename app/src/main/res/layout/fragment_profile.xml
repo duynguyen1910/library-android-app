@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
+    android:background="@color/lightgray"
     tools:context=".Fragments.HomeFragment">
 
     <RelativeLayout
@@ -133,7 +134,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="12dp"
             android:src="@drawable/ic_chart" />
 
         <TextView
@@ -143,6 +144,27 @@
             android:textColor="@color/text1"
             android:textSize="16sp" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:id="@+id/layoutChangePassword"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_key" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đổi mật khẩu"
+            android:textColor="@color/text1"
+            android:textSize="16sp" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/layoutLogout"
