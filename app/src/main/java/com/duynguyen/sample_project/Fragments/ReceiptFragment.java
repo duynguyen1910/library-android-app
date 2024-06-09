@@ -128,7 +128,6 @@ public class ReceiptFragment extends Fragment {
                 Toast.makeText(requireActivity(), "No receipt found", Toast.LENGTH_SHORT).show();
             } else {
                 historyAdapter = new HistoryAdapter(requireActivity(), mListSuggest);
-                recyclerViewHistory.setLayoutManager(new LinearLayoutManager(requireActivity()));
                 recyclerViewHistory.setAdapter(historyAdapter);
             }
         }
