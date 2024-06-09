@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
                     txtRole.setBackgroundColor(Color.parseColor("#DC405C"));
                 }else if (role == 1){
                     txtRole.setText("Librarian");
-                    txtRole.setBackgroundColor(Color.parseColor("#6F57F6"));
+                    txtRole.setBackgroundColor(Color.parseColor("#009688"));
                 }
             }
         }

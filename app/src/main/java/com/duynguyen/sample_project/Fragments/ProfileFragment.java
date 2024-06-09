@@ -23,12 +23,13 @@ import com.duynguyen.sample_project.DAOs.MemberDAO;
 import com.duynguyen.sample_project.Models.Member;
 import com.duynguyen.sample_project.R;
 
+import java.text.Normalizer;
 import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
     View view;
     LinearLayout layoutLogout, layoutChangePassword;
-    TextView txtRole, txtFullname;
+    TextView txtRole, txtFullname, txtEmail;
     ImageView imvAvatar;
     Member memberData;
 
@@ -52,6 +53,7 @@ public class ProfileFragment extends Fragment {
         if (intent != null) {
             memberData = (Member) intent.getSerializableExtra("memberData");
             if (memberData != null) {
+                txtEmail.setText(setEmail(memberData.getFullname(), memberData.getMemberID()));
                 txtFullname.setText(memberData.getFullname());
                 int role = memberData.getRole();
                 if (role == 2) {
@@ -59,13 +61,17 @@ public class ProfileFragment extends Fragment {
                     txtRole.setBackgroundColor(Color.parseColor("#DC405C"));
                 } else if (role == 1) {
                     txtRole.setText("Librarian");
-                    txtRole.setBackgroundColor(Color.parseColor("#6F57F6"));
+                    txtRole.setBackgroundColor(Color.parseColor("#009688"));
                 }
             }
         }
 
 
+
+
     }
+
+
 
 
     private void handleChangePasswordRequest() {
@@ -143,12 +149,33 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    private  String setEmail(String fullname, int memberID){
+        // Xóa bỏ các dấu từ tên
+        String normalizedFullName = removeAccents(fullname);
+
+        int len = normalizedFullName.length();
+        for (int i = len - 1; i >= 0; i--){
+            if (normalizedFullName.charAt(i) == ' ') {
+                String email = normalizedFullName.substring(i + 1, len).toLowerCase() + "_" + memberID + "_minilib@fpt.edu.vn";
+                return email;
+            }
+        }
+        return fullname;
+    }
+
+    public static String removeAccents(String input) {
+        String regex = "\\p{InCombiningDiacriticalMarks}+";
+        String temp = Normalizer.normalize(input, Normalizer.Form.NFD);
+        return temp.replaceAll(regex, "").replaceAll("Đ", "D").replaceAll("đ", "d");
+    }
+
 
     private void Mapping() {
         layoutLogout = view.findViewById(R.id.layoutLogout);
         layoutChangePassword = view.findViewById(R.id.layoutChangePassword);
         txtRole = view.findViewById(R.id.txtRole);
         txtFullname = view.findViewById(R.id.txtFullname);
+        txtEmail = view.findViewById(R.id.txtEmail);
         imvAvatar = view.findViewById(R.id.imvAvatar);
     }
 }
