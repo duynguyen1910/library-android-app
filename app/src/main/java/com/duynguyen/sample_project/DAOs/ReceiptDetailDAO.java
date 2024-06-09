@@ -1,16 +1,13 @@
 package com.duynguyen.sample_project.DAOs;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.duynguyen.sample_project.Database.DatabaseHandler;
-import com.duynguyen.sample_project.Models.History;
-import com.duynguyen.sample_project.Models.Receipt;
 import com.duynguyen.sample_project.Models.ReceiptDetail;
-
-import java.util.ArrayList;
 
 public class ReceiptDetailDAO {
     private final DatabaseHandler databaseHandler;
@@ -29,6 +26,22 @@ public class ReceiptDetailDAO {
 
 
         return sqLiteDatabase.insert("RECEIPTDETAIL", null, contentValues);
+    }
+
+    @SuppressLint("Range")
+    public int getTotalBooksBorrowed(int bookID) {
+        SQLiteDatabase sqLiteDatabase = databaseHandler.getReadableDatabase();
+        int totalBooksBorrowed = 0;
+
+        String query = "SELECT SUM(quantity) AS total FROM RECEIPTDETAIL WHERE bookID = ?";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, new String[]{String.valueOf(bookID)});
+
+        if (cursor.moveToFirst()) {
+            totalBooksBorrowed = cursor.getInt(cursor.getColumnIndex("total"));
+        }
+
+        cursor.close();
+        return totalBooksBorrowed;
     }
 
 

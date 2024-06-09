@@ -26,16 +26,11 @@ import java.util.ArrayList;
 
 
 public class ReceiptFragment extends Fragment {
-
     View view;
     RecyclerView recyclerViewHistory;
     FloatingActionButton fabCreateReceipt;
     HistoryDAO historyDAO;
     HistoryAdapter historyAdapter;
-
-
-
-
 
 
     @Nullable

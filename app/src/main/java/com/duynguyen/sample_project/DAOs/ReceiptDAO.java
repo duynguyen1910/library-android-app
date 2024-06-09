@@ -56,7 +56,6 @@ public class ReceiptDAO {
             newReceiptID = -1;
         }
         return newReceiptID;
-
     }
 
     public boolean updateReceipt(int receiptID, String endDay, int status) {
@@ -93,7 +92,6 @@ public class ReceiptDAO {
 
         return receipt;
     }
-
 
 
     public int getReceiptDetailCount() {

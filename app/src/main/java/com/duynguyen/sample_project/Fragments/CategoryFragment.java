@@ -52,7 +52,7 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.OnItem
     private ImageView imageAddImv;
     private ArrayList<Book> bookList;
     private ArrayList<Category> categoryList;
-    private BookDAO bookDAO  = new BookDAO(getContext());
+    private BookDAO bookDAO;
     private CategoryDAO categoryDAO;
     private BookGridAdapter productAdapter;
     private CategoryAdapter categoryAdapter;
@@ -70,8 +70,10 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.OnItem
         categoryRecyclerView = view.findViewById(R.id.categoryRecyclerView);
         addProductFab = view.findViewById(R.id.addProductFab);
 
+        bookDAO = new BookDAO(getContext());
         categoryDAO = new CategoryDAO(getContext());
         categoryList = categoryDAO.getListCategory();
+
 
         CategoryAdapter categoryAdapter = new CategoryAdapter(getContext(), categoryList, this);
         categoryRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -146,19 +148,18 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.OnItem
                 String author = authorAddEdt.getText().toString();
                 String desc = descAddEdt.getText().toString();
 
-                if (name.length() == 0 || quantity.length() == 0 || categoryType == -1) {
+                if (name.length() < 1 || quantity.length() < 1 || categoryType == -1) {
                     Toast.makeText(getContext(), "Điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else {
                     Book newBook = new Book(name, imageFileName, desc, author, Integer.parseInt(quantity), categoryType + 1);
-                    Toast.makeText(getContext(), newBook.toString(), Toast.LENGTH_SHORT).show();
                     boolean addProductStatus = bookDAO.addBook(newBook);
 
-//                    if (addProductStatus) {
-//                        Toast.makeText(getContext(), "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
-//                        alertDialog.dismiss();
-//                    } else {
-//                        Toast.makeText(getContext(), "Thêm sản phẩm thất bại", Toast.LENGTH_SHORT).show();
-//                    }
+                    if (addProductStatus) {
+                        Toast.makeText(getContext(), "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                        alertDialog.dismiss();
+                    } else {
+                        Toast.makeText(getContext(), "Thêm sản phẩm thất bại", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
