@@ -48,10 +48,10 @@ public class HomeFragment extends Fragment {
                 int role = member.getRole();
                 if (role == 2){
                     txtRole.setText("Admin");
-                    txtRole.setBackgroundColor(Color.parseColor("#DC405C"));
+                    txtRole.setBackgroundResource(R.drawable.role_bg_2);
                 }else if (role == 1){
                     txtRole.setText("Librarian");
-                    txtRole.setBackgroundColor(Color.parseColor("#009688"));
+                    txtRole.setBackgroundResource(R.drawable.role_bg_1);
                 }
             }
         }

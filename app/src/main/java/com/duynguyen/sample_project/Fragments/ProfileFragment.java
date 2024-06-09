@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.duynguyen.sample_project.Activities.StatisticsActivity;
 import com.duynguyen.sample_project.DAOs.MemberDAO;
 import com.duynguyen.sample_project.Models.Member;
 import com.duynguyen.sample_project.R;
@@ -28,7 +29,7 @@ import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
     View view;
-    LinearLayout layoutLogout, layoutChangePassword;
+    LinearLayout layoutLogout, layoutChangePassword, layoutStatistics;
     TextView txtRole, txtFullname, txtEmail;
     ImageView imvAvatar;
     Member memberData;
@@ -42,13 +43,17 @@ public class ProfileFragment extends Fragment {
 
         initUI();
         layoutLogout.setOnClickListener(v -> requireActivity().finish());
+        layoutStatistics.setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), StatisticsActivity.class);
+            startActivity(intent);
+
+        });
 
         layoutChangePassword.setOnClickListener(v -> handleChangePasswordRequest());
         return view;
     }
 
     private void initUI() {
-
         Intent intent = requireActivity().getIntent();
         if (intent != null) {
             memberData = (Member) intent.getSerializableExtra("memberData");
@@ -58,18 +63,16 @@ public class ProfileFragment extends Fragment {
                 int role = memberData.getRole();
                 if (role == 2) {
                     txtRole.setText("Admin");
-                    txtRole.setBackgroundColor(Color.parseColor("#DC405C"));
+                    txtRole.setBackgroundResource(R.drawable.role_bg_2);
+
                 } else if (role == 1) {
                     txtRole.setText("Librarian");
-                    txtRole.setBackgroundColor(Color.parseColor("#009688"));
+                    txtRole.setBackgroundResource(R.drawable.role_bg_1);
                 }
             }
         }
-
-
-
-
     }
+
 
 
 
@@ -173,6 +176,7 @@ public class ProfileFragment extends Fragment {
     private void Mapping() {
         layoutLogout = view.findViewById(R.id.layoutLogout);
         layoutChangePassword = view.findViewById(R.id.layoutChangePassword);
+        layoutStatistics = view.findViewById(R.id.layoutStatistics);
         txtRole = view.findViewById(R.id.txtRole);
         txtFullname = view.findViewById(R.id.txtFullname);
         txtEmail = view.findViewById(R.id.txtEmail);
