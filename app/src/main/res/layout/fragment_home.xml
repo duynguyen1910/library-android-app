@@ -25,6 +25,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:scaleType="fitXY"
+                android:id="@+id/imvAvatar"
                 android:src="@mipmap/meo" />
         </androidx.cardview.widget.CardView>
 
@@ -38,11 +39,11 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/HomeTxtHello"
+                android:id="@+id/txtFullname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/ic_hello"
-                android:layout_marginBottom="8dp"
+
                 android:drawablePadding="5dp"
                 android:text="Hello, Ngọc Đại!"
                 android:textColor="#333" />
@@ -51,8 +52,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Have a nice day!"
+                android:layout_marginBottom="3dp"
                 android:textSize="14dp"
                 android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtRole"
+                android:background="@drawable/role_bg"
+                android:paddingHorizontal="5dp"
+                android:text="Admin"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
         </LinearLayout>
 
         <ImageView
@@ -76,7 +87,7 @@
         android:paddingHorizontal="16dp"
         android:paddingVertical="10dp"
         android:textColor="#fff"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/text1"
         android:textSize="14dp" />
 
     <androidx.recyclerview.widget.RecyclerView

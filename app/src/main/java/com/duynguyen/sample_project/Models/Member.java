@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Member implements Serializable {
     private int memberID;
     private String fullname, phoneNumber, address, password;
-    private int role;
+    private int role; // 2: Admin, 1: Thủ thư, 0: Khách hàng thuê sách
 
     public Member() {
     }

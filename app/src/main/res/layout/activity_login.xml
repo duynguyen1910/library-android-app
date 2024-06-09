@@ -34,35 +34,33 @@
 
 
         <EditText
-            android:id="@+id/edtUsername"
+            android:id="@+id/edtPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/autotxtPhoneNumber"
             android:layout_marginBottom="15dp"
             android:background="@drawable/custom_edit_text_border"
-            android:drawableStart="@drawable/ic_user"
+            android:drawableStart="@drawable/ic_phone"
             android:drawablePadding="10dp"
-            android:hint="Enter your username"
+            android:hint="Số điện thoại"
             android:inputType="text"
             android:padding="15dp"
             android:textColor="@color/text1"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/text1"
             android:textSize="16sp" />
 
         <EditText
             android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/autotxtPhoneNumber"
             android:layout_marginBottom="10dp"
             android:background="@drawable/custom_edit_text_border"
             android:drawableStart="@drawable/ic_key"
             android:drawablePadding="10dp"
-            android:hint="Enter your password"
+            android:hint="Mật khẩu"
             android:inputType="textPassword"
             android:padding="15dp"
             android:textColor="@color/text1"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/text1"
             android:textSize="16sp" />
 
 
@@ -70,9 +68,10 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginBottom="40dp"
-            android:text="Remember me?"
+            android:text="Ghi nhớ đăng nhập?"
+            android:id="@+id/chkRemember"
             android:textColor="@color/primary_color"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
 
         <Button

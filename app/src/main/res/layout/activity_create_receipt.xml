@@ -42,7 +42,7 @@
         android:inputType="number"
         android:padding="15dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/text1"
         android:textSize="15sp" />
 
 
@@ -56,7 +56,7 @@
         android:inputType="text"
         android:padding="15dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/text1"
         android:textSize="15sp" />
 
     <EditText
@@ -69,7 +69,7 @@
         android:inputType="text"
         android:padding="15dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/text1"
         android:textSize="15sp" />
 
     <EditText
@@ -83,7 +83,7 @@
         android:inputType="datetime"
         android:padding="15dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/text1"
         android:textSize="15sp" />
 
 
@@ -94,6 +94,7 @@
         android:background="@drawable/custom_edit_text_border"
         android:textSize="15sp"
         app:iconifiedByDefault="false"
+        android:textColorHint="@color/text1"
         app:queryBackground="@android:color/transparent"
         app:queryHint="Tìm sách ở đây..." />
 

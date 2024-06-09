@@ -20,7 +20,7 @@
         android:inputType="number"
         android:padding="15dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/text1"
         android:textSize="15sp" />
 
     <EditText
@@ -35,7 +35,7 @@
         android:inputType="text"
         android:padding="15dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/text1"
         android:textSize="15sp" />
 
 
@@ -52,13 +52,14 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:backgroundTint="@null" />
+
     <CheckBox
-        android:layout_width="wrap_content"
-        android:text="Chỉ hiện phiếu chưa trả?"
         android:id="@+id/chkOption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/edtFullname"
         android:layout_alignParentEnd="true"
-        android:layout_height="wrap_content"/>
+        android:text="Chỉ hiện phiếu chưa trả?" />
 
     <View
         android:id="@+id/line1"
@@ -87,10 +88,10 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="80dp"
-            app:backgroundTint="@color/primary_color"
             android:elevation="10dp"
-            app:background="@null"
             android:src="@drawable/baseline_add_24"
+            app:background="@null"
+            app:backgroundTint="@color/primary_color"
             app:tint="#fff" />
     </LinearLayout>
 
