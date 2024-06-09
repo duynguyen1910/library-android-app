@@ -46,6 +46,64 @@ public class MemberDAO {
         return list;
     }
 
+    public ArrayList<Member> getListMembersByRole(int role) {
+        SQLiteDatabase sqLiteDatabase = null;
+        ArrayList<Member> list = new ArrayList<>();
+
+        try {
+            sqLiteDatabase = databaseHandler.getReadableDatabase();
+            try (Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM MEMBER WHERE role = ?;", new String[]{String.valueOf(role)})) {
+                if (cursor.moveToFirst()) {
+                    do {
+                        list.add(new Member(
+                                cursor.getInt(0),
+                                cursor.getString(1),
+                                cursor.getString(2),
+                                cursor.getString(3),
+                                cursor.getString(4),
+                                cursor.getInt(5)
+                        ));
+                    } while (cursor.moveToNext());
+                }
+            }
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
+                sqLiteDatabase.close();
+            }
+        }
+
+        return list;
+    }
+
+    public ArrayList<Member> getListMembersByRolesArray(int role1, int role2) {
+        SQLiteDatabase sqLiteDatabase = null;
+        ArrayList<Member> list = new ArrayList<>();
+
+        try {
+            sqLiteDatabase = databaseHandler.getReadableDatabase();
+            try (Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM MEMBER WHERE role IN (?,?);", new String[]{String.valueOf(role1), String.valueOf(role2)})) {
+                if (cursor.moveToFirst()) {
+                    do {
+                        list.add(new Member(
+                                cursor.getInt(0),
+                                cursor.getString(1),
+                                cursor.getString(2),
+                                cursor.getString(3),
+                                cursor.getString(4),
+                                cursor.getInt(5)
+                        ));
+                    } while (cursor.moveToNext());
+                }
+            }
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
+                sqLiteDatabase.close();
+            }
+        }
+
+        return list;
+    }
+
 
     public Member getMemberByPhoneNumber(String phoneNumber) {
         SQLiteDatabase sqLiteDatabase = null;
