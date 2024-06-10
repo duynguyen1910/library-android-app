@@ -125,10 +125,11 @@ public class HistoryDetailActivity extends AppCompatActivity {
 
     private void updateStatus1() {
         txtStatus.setText("Đã trả");
+        txtEndDay.setText(getDateToday());
         txtEndDay.setTextColor(Color.parseColor("#009688"));
         txtStatus.setTextColor(Color.parseColor("#009688"));
         txtReturnReceipt.setVisibility(View.GONE);
-        txtEndDay.setText(history.getEndDay());
+
     }
 
     private String getDateToday() {

@@ -6,7 +6,7 @@
     android:layout_marginBottom="8dp"
     android:background="@drawable/custom_edit_text_border"
     android:orientation="vertical"
-    android:padding="20dp"
+    android:paddingHorizontal="20dp"
     app:cardCornerRadius="10dp">
 
     <LinearLayout
@@ -18,7 +18,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="8dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="8dp"
             android:orientation="horizontal">
 
             <TextView
@@ -89,7 +89,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -107,7 +107,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="8dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -156,7 +156,7 @@
             android:id="@+id/recyclerViewDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="8dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -194,7 +194,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:layout_marginTop="10dp"
             android:background="#8BC34A" />
     </LinearLayout>
 

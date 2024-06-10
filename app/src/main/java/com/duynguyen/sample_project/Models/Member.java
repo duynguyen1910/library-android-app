@@ -5,7 +5,9 @@ import java.io.Serializable;
 public class Member implements Serializable {
     private int memberID;
     private String fullname, phoneNumber, address, password;
-    private int role;
+    private int memberImageURI;
+    private int role; // 2: Admin, 1: Thủ thư, 0: Khách hàng thuê sách
+    private int totalMemberBorrowed;
 
     public Member() {
     }
@@ -24,9 +26,10 @@ public class Member implements Serializable {
         this.role = role;
     }
 
-    public Member(int memberID, String fullname, String phoneNumber, String address, String password, int role) {
+    public Member(int memberID, String fullname, int memberImageURI, String phoneNumber, String address, String password, int role) {
         this.memberID = memberID;
         this.fullname = fullname;
+        this.memberImageURI = memberImageURI;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.password = password;
@@ -73,11 +76,27 @@ public class Member implements Serializable {
         this.password = password;
     }
 
+    public int getMemberImageURI() {
+        return memberImageURI;
+    }
+
+    public void setMemberImageURI(int memberImageURI) {
+        this.memberImageURI = memberImageURI;
+    }
+
     public int getRole() {
         return role;
     }
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    public int getTotalMemberBorrowed() {
+        return totalMemberBorrowed;
+    }
+
+    public void setTotalMemberBorrowed(int totalMemberBorrowed) {
+        this.totalMemberBorrowed = totalMemberBorrowed;
     }
 }
