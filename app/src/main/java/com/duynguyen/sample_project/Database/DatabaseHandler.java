@@ -85,7 +85,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "('Tấn Bảo', '987654321', 'Gò Vấp, HCM', '12345678', 0)," +
                 "('Chí Thành', '555666777', 'quận Bình Thạnh, HCM', '12345678', 0)";
         db.execSQL(insertMember);
-
+//25447896324
 
 
 

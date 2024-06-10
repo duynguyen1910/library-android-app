@@ -206,5 +206,5 @@ public class MemberDAO {
 
         return check > 0;
     }
-
+    
 }

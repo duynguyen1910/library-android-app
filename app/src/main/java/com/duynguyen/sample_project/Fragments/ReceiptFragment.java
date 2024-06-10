@@ -111,14 +111,14 @@ public class ReceiptFragment extends Fragment {
         } else {
             if (chkOption.isChecked()){
                 for (History history : borrowingList) {
-                    if (history.getPhoneNumber().startsWith(phoneNumber)) {
+                    if (history.getPhoneNumber().equals(phoneNumber)) {
                         mListSuggest.add(history);
 
                     }
                 }
             }else {
                 for (History history : historiesList) {
-                    if (history.getPhoneNumber().startsWith(phoneNumber)) {
+                    if (history.getPhoneNumber().equals(phoneNumber)) {
                         mListSuggest.add(history);
                     }
                 }
