@@ -1,6 +1,8 @@
 package com.duynguyen.sample_project.Models;
 
-public class Category {
+import java.io.Serializable;
+
+public class Category implements Serializable {
     private int categoryID;
     private String categoryName;
     private int categoryImage;

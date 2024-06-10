@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/lightgray"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="72dp"
+            android:layout_height="90dp"
+            android:layout_marginEnd="20dp"
+            app:cardCornerRadius="6dp">
+
+            <ImageView
+                android:id="@+id/bookImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/product1" />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtBookName"
+                android:layout_width="wrap_content"
+
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Đừng Để Nỗi Sợ Cản Đường Bạn"
+                android:textColor="#333"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Helen Odessky" />
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:background="@drawable/custom_edit_text_border"
+                        android:layout_width="24dp"
+                        android:id="@+id/btnMinus"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_minus"
+                        android:inputType="text"
+                        android:padding="15dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/txtQuantity"
+                        android:layout_width="30dp"
+                        android:layout_height="24dp"
+                        android:text="1"
+                        android:gravity="center"
+                        android:textColor="#333" />
+
+                    <ImageButton
+                        android:background="@drawable/custom_edit_text_border"
+                        android:layout_width="24dp"
+                        android:id="@+id/btnPlus"
+                        android:layout_height="24dp"
+                        android:src="@drawable/baseline_add_24"
+                        android:inputType="text"
+                        android:padding="15dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="15sp" />
+
+
+                </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
+
+
+
+

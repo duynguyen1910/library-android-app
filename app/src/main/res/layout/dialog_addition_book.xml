@@ -1,136 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="16dp"
     android:layout_margin="10dp"
-    >
+    app:cardCornerRadius="16dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="410dp"
         android:layout_marginHorizontal="10dp"
         android:orientation="vertical"
         android:padding="10dp">
+
         <RelativeLayout
-            android:paddingBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="10dp">
+
             <ImageView
                 android:id="@+id/imageAddImv"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:src="@drawable/baseline_cloud_upload_24"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/custom_edit_text_border"/>
+                android:background="@drawable/custom_edit_text_border"
+                android:src="@drawable/baseline_cloud_upload_24" />
+
             <EditText
-                android:layout_below="@+id/imageAddImv"
                 android:id="@+id/nameAddEdt"
-                android:textSize="15sp"
-                android:padding="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Tên sách"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:background="@drawable/custom_edit_text_border"
+                android:layout_below="@+id/imageAddImv"
                 android:layout_marginBottom="10dp"
-                />
+                android:background="@drawable/custom_edit_text_border"
+                android:hint="Tên sách"
+                android:padding="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text1"
+                android:textSize="15sp" />
+
             <LinearLayout
                 android:id="@+id/quantityLn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_below="@+id/nameAddEdt"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
                 <EditText
                     android:id="@+id/quantityAddEdt"
-                    android:layout_below="@+id/nameAddEdt"
-                    android:layout_weight="1"
-                    android:textSize="15sp"
-                    android:padding="15dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Số lượng"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:background="@drawable/custom_edit_text_border"
+                    android:layout_below="@+id/nameAddEdt"
                     android:layout_marginEnd="10dp"
-                    />
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_edit_text_border"
+                    android:hint="Số lượng"
+                    android:padding="15dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text1"
+                    android:textSize="15sp" />
+
                 <EditText
                     android:id="@+id/authorAddEdt"
-                    android:layout_below="@+id/nameAddEdt"
-                    android:layout_weight="1"
-                    android:textSize="15sp"
-                    android:padding="15dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Tác giả"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
+                    android:layout_below="@+id/nameAddEdt"
+                    android:layout_weight="1"
                     android:background="@drawable/custom_edit_text_border"
-                    />
+                    android:hint="Tác giả"
+                    android:padding="15dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/text1"
+                    android:textSize="15sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/categoryLn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/quantityLn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp">
-              <Spinner
-                  android:padding="7dp"
-                  android:background="@drawable/custom_edit_text_border"
-                  android:id="@+id/categoryTypeSpn"
-                  android:layout_width="match_parent"
-                  android:layout_height="50dp"
-                  android:spinnerMode="dropdown"
-                  android:pointerIcon="arrow"/>
+
+                <Spinner
+                    android:id="@+id/categoryTypeSpn"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/custom_edit_text_border"
+                    android:padding="7dp"
+                    android:textColorHint="@color/text1"
+                    android:pointerIcon="arrow"
+                    android:spinnerMode="dropdown" />
             </LinearLayout>
+
             <EditText
-                android:layout_below="@+id/categoryLn"
                 android:id="@+id/descAddEdt"
-                android:textSize="15sp"
-                android:padding="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Mô tả"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:background="@drawable/custom_edit_text_border"
+                android:layout_below="@+id/categoryLn"
                 android:layout_marginBottom="10dp"
-                />
+                android:background="@drawable/custom_edit_text_border"
+                android:hint="Mô tả"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/text1"
+                android:textSize="15sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_alignParentBottom="true">
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/closeDialogBtn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Đóng"
-                    android:textStyle="bold"
-                    android:padding="8dp"
                     android:layout_marginEnd="10dp"
-                    android:textColor="@color/text1"
+                    android:layout_weight="1"
                     android:background="@drawable/custom_button_close"
-                    app:backgroundTint="@null"
+                    android:padding="8dp"
+                    android:text="Đóng"
                     android:textAllCaps="false"
-                    android:textSize="14dp"/>
+                    android:textColor="@color/text1"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@null" />
+
                 <Button
                     android:id="@+id/addDialogBtn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="8dp"
-                    android:textStyle="bold"
                     android:background="@drawable/custom_button_primary"
-                    app:backgroundTint="@null"
-                    android:textAllCaps="false"
+                    android:padding="8dp"
                     android:text="Thêm"
-                    android:textSize="14dp"/>
+                    android:textAllCaps="false"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@null" />
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>

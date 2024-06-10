@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        android:layout_weight="4"
+        android:src="@mipmap/black_logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:background="@drawable/signin_bg"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Hi, Welcome"
+            android:textColor="@color/primary_color"
+            android:textSize="28dp"
+            android:textStyle="bold" />
+
+
+        <EditText
+            android:id="@+id/edtPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/custom_edit_text_border"
+            android:drawableStart="@drawable/ic_phone"
+            android:drawablePadding="10dp"
+            android:hint="Số điện thoại"
+            android:inputType="text"
+            android:padding="15dp"
+            android:textColor="@color/text1"
+            android:textColorHint="@color/text1"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/custom_edit_text_border"
+            android:drawableStart="@drawable/ic_key"
+            android:drawablePadding="10dp"
+            android:hint="Mật khẩu"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:textColor="@color/text1"
+            android:textColorHint="@color/text1"
+            android:textSize="16sp" />
+
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginBottom="40dp"
+            android:text="Ghi nhớ đăng nhập?"
+            android:id="@+id/chkRemember"
+            android:textColor="@color/primary_color"
+            android:textSize="14dp" />
+
+
+        <Button
+            android:id="@+id/btnSignin"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="start"
+            android:background="@drawable/signin_button"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:text="Sign in"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:backgroundTint="@null" />
+    </LinearLayout>
+
+</LinearLayout>

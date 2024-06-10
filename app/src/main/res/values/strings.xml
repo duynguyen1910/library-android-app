@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">Minimum</string>
+    <string name="book_desc">Lớn lên trên đảo vắng”
+        được viết bởi nhà văn Johann David Wyss –
+        người đã được truyền cảm hứng từ tác phẩm Robinson Crusoe của Daniel Defoe.
+        Nhưng Wyss muốn viết một câu chuyện chứa đựng những bài học thú vị,
+        bổ ích về cuộc sống thiên nhiên hoang dã dành riêng cho trẻ em,
+        nên đã cho ra đời tiểu thuyết Lớn lên trên đảo vắng.
+        Tác phẩm được xuất bản lần đầu tiên bằng tiếng Đức năm 1812
+        và đã trở thành một trong những tác phẩm được yêu thích nhất của trẻ em trên toàn thế giới."</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -16,10 +19,32 @@
         android:theme="@style/Theme.Sample_Project"
         tools:targetApi="31">
         <activity
-            android:name=".Activities.BookDetailActivity"
+            android:name=".Activities.UpdateLibrarianActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.CreateLibrarianActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.StatisticsActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"
+            android:exported="false" >
+        </activity>
+        <activity
+            android:name=".Activities.HistoryDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.CreateReceiptActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.BookDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.LoadingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
