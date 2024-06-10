@@ -1,5 +1,6 @@
 package com.duynguyen.sample_project.Fragments;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.duynguyen.sample_project.Adapters.ViewPager2Adapter;
+import com.duynguyen.sample_project.Models.Member;
 import com.duynguyen.sample_project.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -27,6 +29,7 @@ public class MemberFragment extends Fragment {
     ViewPager2 viewPager2;
     ViewPager2Adapter viewPager2Adapter;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,6 +40,8 @@ public class MemberFragment extends Fragment {
 
         return view;
     }
+
+
 
     private void initUI() {
         viewPager2Adapter = new ViewPager2Adapter(requireActivity());
@@ -95,6 +100,5 @@ public class MemberFragment extends Fragment {
     private void Mapping() {
         viewPager2 = view.findViewById(R.id.viewPager2);
         tabLayout = view.findViewById(R.id.tabLayout);
-
     }
 }

@@ -22,9 +22,6 @@
             android:name=".Activities.UpdateLibrarianActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.CreateCustomerActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activities.CreateLibrarianActivity"
             android:exported="false" />
         <activity
@@ -34,7 +31,7 @@
             android:name=".Activities.StatisticsActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.LoadingActivity"
+            android:name=".Activities.MainActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.HistoryDetailActivity"
@@ -46,7 +43,7 @@
             android:name=".Activities.BookDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".Activities.LoadingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

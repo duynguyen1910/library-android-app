@@ -22,11 +22,13 @@ import java.util.ArrayList;
 public class LibrarianAdapter extends RecyclerView.Adapter<LibrarianAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Member> list;
+    int role;
 
 
-    public LibrarianAdapter(Context context, ArrayList<Member> list) {
+    public LibrarianAdapter(Context context, ArrayList<Member> list, int role) {
         this.context = context;
         this.list = list;
+        this.role = role;
     }
 
     @NonNull
@@ -45,15 +47,20 @@ public class LibrarianAdapter extends RecyclerView.Adapter<LibrarianAdapter.View
         holder.txtFullname.setText(member.getFullname());
         holder.txtPhoneNumber.setText(member.getPhoneNumber());
         holder.txtAddress.setText(member.getAddress());
+        if (role == 1){
+            holder.btnEdit.setVisibility(View.GONE);
+        }
 
         if (member.getRole() == 2) {
             holder.txtRole.setText("Admin");
             holder.txtRole.setBackgroundResource(R.drawable.role_bg_2);
 
         } else if (member.getRole() == 1) {
+
             holder.txtRole.setText("Librarian");
             holder.txtRole.setBackgroundResource(R.drawable.role_bg_1);
         }
+
         holder.btnEdit.setOnClickListener(v -> {
             Intent intent = new Intent(context, UpdateLibrarianActivity.class);
             intent.putExtra("memberData", member);

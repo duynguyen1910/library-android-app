@@ -46,6 +46,7 @@ public class LibrarianFragment extends Fragment {
     ArrayList<Member> mListSuggest;
     FloatingActionButton fabCreateLibrarian;
     MemberDAO memberDAO;
+    Member memberData;
     View view;
 
     @Nullable
@@ -98,15 +99,29 @@ public class LibrarianFragment extends Fragment {
             Toast.makeText(requireActivity(), "No member found", Toast.LENGTH_SHORT).show();
         } else {
             // Nếu có thành viên trong danh sách gợi ý, cập nhật adapter với danh sách này
-            librarianAdapter = new LibrarianAdapter(requireActivity(), mListSuggest);
+            librarianAdapter = new LibrarianAdapter(requireActivity(), mListSuggest, memberData.getRole());
             recyclerViewLibrarian.setAdapter(librarianAdapter);
+        }
+    }
+
+    private void setUpUIByRole(){
+        Intent intent = requireActivity().getIntent();
+        if (intent != null) {
+            memberData = (Member) intent.getSerializableExtra("memberData");
+            if (memberData != null) {
+                int role = memberData.getRole();
+                if (role == 1){
+                    fabCreateLibrarian.setVisibility(View.GONE);
+                }
+            }
         }
     }
 
 
     private void initUI() {
+        setUpUIByRole();
         librariansList = memberDAO.getListMembersByRolesArray(1, 2);
-        librarianAdapter = new LibrarianAdapter(requireActivity(), librariansList);
+        librarianAdapter = new LibrarianAdapter(requireActivity(), librariansList, memberData.getRole());
         recyclerViewLibrarian.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerViewLibrarian.setAdapter(librarianAdapter);
 

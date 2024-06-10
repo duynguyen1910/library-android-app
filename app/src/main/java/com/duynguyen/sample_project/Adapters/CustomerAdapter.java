@@ -97,6 +97,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
         holder.txtFullname.setText(member.getFullname());
         holder.txtPhoneNumber.setText(member.getPhoneNumber());
         holder.btnEdit.setOnClickListener(v -> handleCreateCustomer(member));
+        
     }
 
     @Override
