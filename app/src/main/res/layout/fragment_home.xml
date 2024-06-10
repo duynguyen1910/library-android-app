@@ -26,12 +26,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:scaleType="fitXY"
-<<<<<<< HEAD
-                android:src="@mipmap/meo" />
-=======
-                android:id="@+id/imvAvatar"
                 android:src="@mipmap/member_avatar2" />
->>>>>>> 1be3325d369c4a0b9ac4644a6f0d2fd2aaf2d459
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
@@ -62,10 +57,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/role_bg_2"
-                android:paddingHorizontal="5dp"
+                android:paddingHorizontal="7dp"
+                android:paddingVertical="3dp"
+                android:textStyle="bold"
                 android:text="Admin"
                 android:textColor="@color/white"
-                android:textSize="14dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
         <ImageView
@@ -113,7 +110,7 @@
                         android:layout_weight="1"
                         android:text="Hội viên ưu tú"
                         android:textStyle="bold"
-                        android:textSize="22dp"
+                        android:textSize="18dp"
                         android:textColor="@color/primary_color"
                         android:layout_marginBottom="20dp"/>
                 </LinearLayout>
@@ -137,7 +134,7 @@
                         android:layout_weight="1"
                         android:text="Đọc nhiều nhất"
                         android:textStyle="bold"
-                        android:textSize="22dp"
+                        android:textSize="18dp"
                         android:textColor="@color/primary_color"
                         android:layout_marginBottom="20dp"/>
                     <TextView
@@ -146,7 +143,7 @@
                         android:text="Xem thêm"
                         android:textSize="12dp"
                         android:textStyle="bold"
-                        android:textColor="@color/gray3"
+                        android:textColor="@color/text_success"
                         android:layout_marginBottom="10dp"/>
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView

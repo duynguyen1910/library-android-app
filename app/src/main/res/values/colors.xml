@@ -11,6 +11,7 @@
     <color name="primary_alpha2">#ffe5ef</color>
 
     <color name="primary_color">#f04d7f</color>
+    <color name="secondary_color">#0c0</color>
     <color name="gray1" >#686868</color>
     <color name="gray2" >#5f6368</color>
     <color name="gray3" >#A2A3A3</color>
@@ -23,6 +24,11 @@
     <color name="border2">#e3e6ef</color>
     <color name="border3">#f1f2f6</color>
     <color name="icon1">#272b41</color>
+
+    <color name="text_success">#0c0</color>
+    <color name="text_error">#ff343b</color>
+    <color name="text_warning">#ff8100</color>
+    <color name="text_info">#226dff</color>
 
     <color name="background_blur">#66000000</color>
 

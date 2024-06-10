@@ -6,23 +6,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Fragments.HomeFragment">
-
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:tabIconTint="@color/tablayout_icon"
-        app:tabIndicatorColor="@color/pink"
-        app:tabSelectedTextColor="@color/pink"
-        app:tabTextColor="@color/lightpink" />
+        app:tabIconTint="@color/custom_color_bottom_nav"
+        app:tabIndicatorColor="@color/primary_color"
+        app:tabSelectedTextColor="@color/primary_color"
+        app:tabTextColor="@color/gray1" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
-
-
 </LinearLayout>

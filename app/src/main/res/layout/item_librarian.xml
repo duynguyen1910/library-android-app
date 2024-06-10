@@ -24,7 +24,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginBottom="4dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@mipmap/member_avatar2" />
         </androidx.cardview.widget.CardView>
 
@@ -57,11 +57,10 @@
             android:layout_marginBottom="6dp">
 
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:text="Address:"
+                android:text="Địa chỉ:"
                 android:textColor="@color/text1"
                 android:textStyle="bold" />
 
@@ -78,14 +77,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp">
-
-
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:text="Phone:"
+                android:text="Điện thoại:"
                 android:textColor="@color/text1"
                 android:textStyle="bold" />
 
@@ -103,8 +99,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/role_bg_2"
-            android:paddingHorizontal="5dp"
             android:text="Admin"
+            android:paddingHorizontal="7dp"
+            android:paddingVertical="3dp"
+            android:textStyle="bold"
             android:textSize="14sp"
             android:textColor="@color/white"
           />

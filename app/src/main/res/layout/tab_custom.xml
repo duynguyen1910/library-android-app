@@ -10,14 +10,14 @@
     <ImageView
         android:id="@+id/tabIcon"
         android:layout_width="24dp"
-        android:src="@drawable/ic_employee"
+        android:src="@drawable/ic_account_box"
         android:layout_height="24dp"
-        app:tint="@color/tablayout_icon" />
+        app:tint="@color/custom_color_bottom_nav" />
 
     <TextView
         android:id="@+id/tabLabel"
         android:text="Thủ thư"
-        android:textColor="@color/lightpink"
+        android:textColor="@color/gray1"
         android:fontFamily="sans-serif"
         android:textStyle="bold"
         android:layout_width="wrap_content"

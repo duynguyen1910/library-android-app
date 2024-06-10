@@ -9,7 +9,7 @@
         android:layout_width="160dp"
         android:layout_height="220dp"
         app:cardCornerRadius="8dp"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="8dp"
       >
         <ImageView
             android:id="@+id/bookImageImv"
@@ -51,8 +51,9 @@
         android:layout_below="@id/productImageImv"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="17sp"
-        android:textStyle="bold" />
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="2dp"/>
     <TextView
         android:id="@+id/authorBookTv"
         android:layout_width="160dp"
@@ -61,5 +62,5 @@
         android:layout_below="@id/bookNameTv"
         android:textAlignment="textStart"
         android:textColor="@color/gray1"
-        android:textSize="13sp" />
+        android:textSize="12sp" />
 </RelativeLayout>

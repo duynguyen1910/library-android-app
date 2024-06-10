@@ -11,9 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp">
-
-
+        android:layout_marginBottom="30dp">
         <ImageButton
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
@@ -60,13 +58,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Trạng thái: "
-
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -75,8 +73,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Chưa trả"
-            android:paddingHorizontal="3dp"
-            android:background="#EDEBEB"
+            android:layout_marginVertical="5dp"
+            android:paddingHorizontal="10dp"
             android:textColor="#E91E63"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -197,10 +195,10 @@
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="2dp"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:background="#8BC34A" />
+        android:background="@color/text_success" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -222,9 +220,6 @@
 
         </LinearLayout>
     </ScrollView>
-
-
-
 
 
     <TextView
