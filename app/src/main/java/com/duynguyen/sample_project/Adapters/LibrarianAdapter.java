@@ -3,6 +3,7 @@ package com.duynguyen.sample_project.Adapters;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.duynguyen.sample_project.Activities.UpdateLibrarianActivity;
 import com.duynguyen.sample_project.Models.Member;
 import com.duynguyen.sample_project.R;
 
@@ -53,7 +55,9 @@ public class LibrarianAdapter extends RecyclerView.Adapter<LibrarianAdapter.View
             holder.txtRole.setBackgroundResource(R.drawable.role_bg_1);
         }
         holder.btnEdit.setOnClickListener(v -> {
-
+            Intent intent = new Intent(context, UpdateLibrarianActivity.class);
+            intent.putExtra("memberData", member);
+            context.startActivity(intent);
         });
 
 

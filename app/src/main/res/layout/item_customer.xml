@@ -3,17 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/custom_button_close"
     android:orientation="horizontal"
-    android:layout_marginBottom="5dp"
     android:padding="20dp">
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/profile_cardView"
         android:layout_width="wrap_content"
-        android:layout_gravity="center_vertical"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         app:cardCornerRadius="50dp">
 
         <ImageView
@@ -21,7 +19,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:scaleType="fitXY"
-            android:src="@mipmap/member_avatar2" />
+            android:src="@mipmap/avatar_customer" />
     </androidx.cardview.widget.CardView>
 
 
@@ -29,6 +27,7 @@
         android:id="@+id/layoutInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_marginStart="10dp"
         android:layout_weight="1"
         android:orientation="vertical">
@@ -44,33 +43,10 @@
             android:textSize="16dp"
             android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:text="Address:"
-                android:textColor="@color/text1"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txtAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Quận Bình Thạnh, HCM"
-                android:textColor="@color/text1"
-                />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp">
+            android:layout_height="wrap_content">
 
             <TextView
 
@@ -86,17 +62,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="123456789"
-                android:textColor="@color/text1"
-                />
+                android:textColor="@color/text1" />
         </LinearLayout>
 
     </LinearLayout>
 
 
     <ImageView
+        android:id="@+id/btnEdit"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:id="@+id/btnEdit"
         android:layout_gravity="center_vertical"
         android:src="@drawable/ic_edit" />
 

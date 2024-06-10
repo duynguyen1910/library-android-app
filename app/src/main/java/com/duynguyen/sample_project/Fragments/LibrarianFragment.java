@@ -1,26 +1,41 @@
 package com.duynguyen.sample_project.Fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.duynguyen.sample_project.Activities.CreateLibrarianActivity;
 import com.duynguyen.sample_project.Adapters.CustomerAdapter;
 import com.duynguyen.sample_project.Adapters.LibrarianAdapter;
 import com.duynguyen.sample_project.DAOs.MemberDAO;
+import com.duynguyen.sample_project.Models.Category;
 import com.duynguyen.sample_project.Models.Member;
 import com.duynguyen.sample_project.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class LibrarianFragment extends Fragment {
 
@@ -29,6 +44,8 @@ public class LibrarianFragment extends Fragment {
     LibrarianAdapter librarianAdapter;
     ArrayList<Member> librariansList;
     ArrayList<Member> mListSuggest;
+    FloatingActionButton fabCreateLibrarian;
+    MemberDAO memberDAO;
     View view;
 
     @Nullable
@@ -37,6 +54,13 @@ public class LibrarianFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_librarian, container, false);
 
         Mapping();
+        fabCreateLibrarian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireActivity(), CreateLibrarianActivity.class);
+                startActivity(intent);
+            }
+        });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -81,7 +105,6 @@ public class LibrarianFragment extends Fragment {
 
 
     private void initUI() {
-        MemberDAO memberDAO = new MemberDAO(requireActivity());
         librariansList = memberDAO.getListMembersByRolesArray(1, 2);
         librarianAdapter = new LibrarianAdapter(requireActivity(), librariansList);
         recyclerViewLibrarian.setLayoutManager(new LinearLayoutManager(requireActivity()));
@@ -90,6 +113,7 @@ public class LibrarianFragment extends Fragment {
 
     }
 
+
     @Override
     public void onResume() {
         initUI();
@@ -97,10 +121,11 @@ public class LibrarianFragment extends Fragment {
     }
 
     private void Mapping() {
-
+        fabCreateLibrarian = view.findViewById(R.id.fabCreateLibrarian);
         searchView = view.findViewById(R.id.searchView);
         recyclerViewLibrarian = view.findViewById(R.id.recyclerViewLibrarian);
         mListSuggest = new ArrayList<>();
+        memberDAO = new MemberDAO(requireActivity());
 
     }
 }

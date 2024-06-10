@@ -21,22 +21,15 @@
 
             <ImageView
                 android:id="@+id/imvAvatar"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginBottom="4dp"
                 android:scaleType="fitXY"
                 android:src="@mipmap/member_avatar2" />
         </androidx.cardview.widget.CardView>
 
 
-        <TextView
-            android:id="@+id/txtFullname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ngọc Đại"
-            android:textColor="#333"
-            android:textSize="16dp"
-            android:textStyle="bold" />
+
     </LinearLayout>
 
 
@@ -48,6 +41,15 @@
         android:layout_weight="1"
         android:padding="15dp"
         android:orientation="vertical">
+        <TextView
+            android:id="@+id/txtFullname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:text="Ngọc Đại"
+            android:textColor="#333"
+            android:textSize="16dp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -76,6 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp">
+
 
             <TextView
 

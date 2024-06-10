@@ -46,6 +46,37 @@ public class MemberDAO {
         return list;
     }
 
+    public int register(Member member) {
+        SQLiteDatabase sqLiteDatabase = null;
+        ArrayList<Member> list = new ArrayList<>();
+
+        try {
+            sqLiteDatabase = databaseHandler.getReadableDatabase();
+
+            // Check if phoneNumber already exists
+            try (Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM MEMBER WHERE phoneNumber = ?", new String[]{member.getPhoneNumber()})) {
+                if (cursor.getCount() > 0) {
+                    return 0;
+                } else {
+                    // phoneNumber not found, insert new member
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put("fullname", member.getFullname());
+                    contentValues.put("phoneNumber", member.getPhoneNumber());
+                    contentValues.put("address", member.getAddress());
+                    contentValues.put("password", member.getPassword());
+                    contentValues.put("role", member.getRole());
+
+                    return (int) sqLiteDatabase.insert("MEMBER", null, contentValues);
+                }
+            }
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
+                sqLiteDatabase.close();
+            }
+        }
+    }
+
+
     public ArrayList<Member> getListMembersByRole(int role) {
         SQLiteDatabase sqLiteDatabase = null;
         ArrayList<Member> list = new ArrayList<>();
@@ -147,7 +178,7 @@ public class MemberDAO {
             contentValues.put("password", member.getPassword());
             contentValues.put("role", member.getRole());
 
-            check = sqLiteDatabase.update("MEMBER", contentValues, "memberID = ?", new String[]{String.valueOf(member.getMemberID())});
+            check = sqLiteDatabase.update("MEMBER", contentValues, "phoneNumber = ?", new String[]{member.getPhoneNumber()});
         } finally {
             if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
                 sqLiteDatabase.close();

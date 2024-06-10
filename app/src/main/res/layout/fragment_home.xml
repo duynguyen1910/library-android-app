@@ -26,7 +26,7 @@
                 android:layout_height="70dp"
                 android:scaleType="fitXY"
                 android:id="@+id/imvAvatar"
-                android:src="@mipmap/meo" />
+                android:src="@mipmap/member_avatar2" />
         </androidx.cardview.widget.CardView>
 
 
