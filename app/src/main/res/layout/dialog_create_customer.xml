@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-
     app:cardCornerRadius="16dp">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@color/primary_alpha2"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
         android:padding="10dp">
 
         <TextView
@@ -20,61 +20,66 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Đổi mật khẩu"
-            android:textStyle="bold"
+            android:text="Thêm khách hàng"
+
             android:textColor="#333"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Nhập mật khẩu hiện tại"
-            android:textColor="#333"
-           />
+            android:text="Họ tên"
+            android:textColor="#333" />
 
         <EditText
-            android:id="@+id/edtCurrentPassword"
+            android:id="@+id/edtFullname"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
+            android:paddingHorizontal="10dp"
             android:background="@drawable/custom_edit_text_border"
-            android:inputType="textPassword"
+            android:inputType="text"
             android:textColor="@color/black"
             android:textColorHint="@color/text1"
             android:textSize="15sp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Nhập mật khẩu mới"
-            android:textColor="#333"
-            />
+            android:text="Số điện thoại"
+            android:textColor="#333" />
 
         <EditText
-            android:id="@+id/edtNewPassword"
+            android:id="@+id/edtPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
+            android:paddingHorizontal="10dp"
             android:background="@drawable/custom_edit_text_border"
-            android:inputType="textPassword"
+            android:inputType="number"
             android:textColor="@color/black"
             android:textColorHint="@color/text1"
             android:textSize="15sp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Nhập lại mật khẩu mới"
-            android:textColor="#333"
-            />
+            android:text="Địa chỉ (Optional)"
+            android:textColor="#333" />
+
         <EditText
-            android:id="@+id/edtValidateNewPassword"
+            android:id="@+id/edtAddress"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/custom_edit_text_border"
-            android:inputType="textPassword"
+            android:inputType="text"
             android:textColor="@color/black"
+            android:paddingHorizontal="10dp"
             android:textColorHint="@color/text1"
             android:textSize="15sp" />
 

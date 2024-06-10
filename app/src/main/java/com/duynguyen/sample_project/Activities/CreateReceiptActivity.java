@@ -146,7 +146,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
                     // insert detail thành công
                 }
 
-            }else {
+            } else {
                 isSuccess = false;
             }
         }
@@ -185,13 +185,10 @@ public class CreateReceiptActivity extends AppCompatActivity {
             for (Book book : listBook) {
                 if (book.getBookName().toLowerCase().contains(filter)) {
                     mListSuggest.add(book);
-                    bookForSearchAdapter.notifyDataSetChanged();
                 }
             }
-            if (mListSuggest.isEmpty()) {
-                Toast.makeText(CreateReceiptActivity.this, "No book found", Toast.LENGTH_SHORT).show();
-            }
         }
+        bookForSearchAdapter.notifyDataSetChanged();
     }
 
     private void initUI() {

@@ -47,6 +47,95 @@ public class MemberDAO {
         return list;
     }
 
+    public int register(Member member) {
+        SQLiteDatabase sqLiteDatabase = null;
+        ArrayList<Member> list = new ArrayList<>();
+
+        try {
+            sqLiteDatabase = databaseHandler.getReadableDatabase();
+
+            // Check if phoneNumber already exists
+            try (Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM MEMBER WHERE phoneNumber = ?", new String[]{member.getPhoneNumber()})) {
+                if (cursor.getCount() > 0) {
+                    return 0;
+                } else {
+                    // phoneNumber not found, insert new member
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put("fullname", member.getFullname());
+                    contentValues.put("phoneNumber", member.getPhoneNumber());
+                    contentValues.put("address", member.getAddress());
+                    contentValues.put("password", member.getPassword());
+                    contentValues.put("role", member.getRole());
+
+                    return (int) sqLiteDatabase.insert("MEMBER", null, contentValues);
+                }
+            }
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
+                sqLiteDatabase.close();
+            }
+        }
+    }
+
+
+    public ArrayList<Member> getListMembersByRole(int role) {
+        SQLiteDatabase sqLiteDatabase = null;
+        ArrayList<Member> list = new ArrayList<>();
+
+        try {
+            sqLiteDatabase = databaseHandler.getReadableDatabase();
+            try (Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM MEMBER WHERE role = ?;", new String[]{String.valueOf(role)})) {
+                if (cursor.moveToFirst()) {
+                    do {
+                        list.add(new Member(
+                                cursor.getInt(0),
+                                cursor.getString(1),
+                                cursor.getString(2),
+                                cursor.getString(3),
+                                cursor.getString(4),
+                                cursor.getInt(5)
+                        ));
+                    } while (cursor.moveToNext());
+                }
+            }
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
+                sqLiteDatabase.close();
+            }
+        }
+
+        return list;
+    }
+
+    public ArrayList<Member> getListMembersByRolesArray(int role1, int role2) {
+        SQLiteDatabase sqLiteDatabase = null;
+        ArrayList<Member> list = new ArrayList<>();
+
+        try {
+            sqLiteDatabase = databaseHandler.getReadableDatabase();
+            try (Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM MEMBER WHERE role IN (?,?);", new String[]{String.valueOf(role1), String.valueOf(role2)})) {
+                if (cursor.moveToFirst()) {
+                    do {
+                        list.add(new Member(
+                                cursor.getInt(0),
+                                cursor.getString(1),
+                                cursor.getString(2),
+                                cursor.getString(3),
+                                cursor.getString(4),
+                                cursor.getInt(5)
+                        ));
+                    } while (cursor.moveToNext());
+                }
+            }
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
+                sqLiteDatabase.close();
+            }
+        }
+
+        return list;
+    }
+
 
     public Member getMemberByPhoneNumber(String phoneNumber) {
         SQLiteDatabase sqLiteDatabase = null;
@@ -91,7 +180,7 @@ public class MemberDAO {
             contentValues.put("password", member.getPassword());
             contentValues.put("role", member.getRole());
 
-            check = sqLiteDatabase.update("MEMBER", contentValues, "memberID = ?", new String[]{String.valueOf(member.getMemberID())});
+            check = sqLiteDatabase.update("MEMBER", contentValues, "phoneNumber = ?", new String[]{member.getPhoneNumber()});
         } finally {
             if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
                 sqLiteDatabase.close();
@@ -119,5 +208,5 @@ public class MemberDAO {
 
         return check > 0;
     }
-
+    
 }

@@ -75,8 +75,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         "fullname TEXT NOT NULL," +
                         "memberImage INTEGER NOT NULL," +
                         " phoneNumber TEXT NOT NULL," +
-                        " address TEXT NOT NULL," +
-                        " password TEXT NOT NULL," +
+                        " address TEXT," +
+                        " password TEXT," +
                         " role INTEGER NOT NULL)"; // 2: Admin, 1: Thủ thư, 0: Khách hàng thuê sách
         db.execSQL(createMember);
 
@@ -90,7 +90,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "('Anh Tuấn', " + R.mipmap.user1 + ", '0011223344', 'quận 12', '12345678', 0)," +
                 "('Thu Thảo', " + R.mipmap.user1 + ", '0011223344', 'quận 12', '12345678', 0)";
         db.execSQL(insertMember);
-
+//25447896324
 
         // RECEIPT RECEIPT
         String createReceipt =

@@ -19,6 +19,12 @@
         android:theme="@style/Theme.Sample_Project"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.UpdateLibrarianActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.CreateLibrarianActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.LoginActivity"
             android:exported="false" />
         <activity

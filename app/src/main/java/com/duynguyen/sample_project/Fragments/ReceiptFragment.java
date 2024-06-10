@@ -110,14 +110,14 @@ public class ReceiptFragment extends Fragment {
         } else {
             if (chkOption.isChecked()){
                 for (History history : borrowingList) {
-                    if (history.getPhoneNumber().startsWith(phoneNumber)) {
+                    if (history.getPhoneNumber().equals(phoneNumber)) {
                         mListSuggest.add(history);
 
                     }
                 }
             }else {
                 for (History history : historiesList) {
-                    if (history.getPhoneNumber().startsWith(phoneNumber)) {
+                    if (history.getPhoneNumber().equals(phoneNumber)) {
                         mListSuggest.add(history);
                     }
                 }
@@ -127,7 +127,6 @@ public class ReceiptFragment extends Fragment {
                 Toast.makeText(requireActivity(), "No receipt found", Toast.LENGTH_SHORT).show();
             } else {
                 historyAdapter = new HistoryAdapter(requireActivity(), mListSuggest);
-                recyclerViewHistory.setLayoutManager(new LinearLayoutManager(requireActivity()));
                 recyclerViewHistory.setAdapter(historyAdapter);
             }
         }
