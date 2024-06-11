@@ -53,7 +53,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
     private void initUI() {
         ArrayList<PieEntry> entries = new ArrayList<>();
-        booksList = statisticsDAO.getListBooksWithHighestQuantities(5);
+        booksList = statisticsDAO.getListBooksWithHighestQuantities(3);
         int bookListLength = booksList.size();
         for (int i = 0; i < bookListLength; i++) {
             entries.add(new PieEntry(booksList.get(i).getSumQuantity(), booksList.get(i).getBookName()));
