@@ -2,6 +2,7 @@ package com.duynguyen.sample_project.Activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -117,8 +118,8 @@ public class HistoryDetailActivity extends AppCompatActivity {
 
     private void updateStatus0() {
         txtStatus.setText("Chưa trả");
-        txtEndDay.setTextColor(Color.parseColor("#E91E63"));
-        txtStatus.setTextColor(Color.parseColor("#E91E63"));
+        txtEndDay.setTextColor(ContextCompat.getColor(this, R.color.text_error));
+        txtStatus.setTextColor(ContextCompat.getColor(this, R.color.text_error));
         txtReturnReceipt.setVisibility(View.VISIBLE);
         txtEndDay.setText("null");
     }
@@ -126,8 +127,8 @@ public class HistoryDetailActivity extends AppCompatActivity {
     private void updateStatus1() {
         txtStatus.setText("Đã trả");
         txtEndDay.setText(getDateToday());
-        txtEndDay.setTextColor(Color.parseColor("#009688"));
-        txtStatus.setTextColor(Color.parseColor("#009688"));
+        txtEndDay.setTextColor(ContextCompat.getColor(this, R.color.text_success));
+        txtStatus.setTextColor(ContextCompat.getColor(this, R.color.text_success));
         txtReturnReceipt.setVisibility(View.GONE);
 
     }

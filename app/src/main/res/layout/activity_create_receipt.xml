@@ -8,11 +8,11 @@
     android:padding="20dp"
     tools:context=".Activities.CreateReceiptActivity">
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:paddingVertical="20dp"
+        >
 
         <ImageButton
             android:id="@+id/btnBack"
@@ -138,7 +138,7 @@
             android:layout_weight="1"
             android:background="@drawable/custom_button_close"
             android:padding="8dp"
-            android:text="Xóa thông tin"
+            android:text="Làm mới"
             android:textAllCaps="false"
             android:textColor="@color/text1"
             app:backgroundTint="@null" />

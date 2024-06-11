@@ -38,7 +38,6 @@ import java.util.List;
 
 
 public class ReceiptFragment extends Fragment {
-
     View view;
     RecyclerView recyclerViewHistory;
     FloatingActionButton fabCreateReceipt;

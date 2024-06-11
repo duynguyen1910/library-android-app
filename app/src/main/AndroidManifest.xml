@@ -32,7 +32,8 @@
             android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"
-            android:exported="false" />
+            android:exported="false" >
+        </activity>
         <activity
             android:name=".Activities.HistoryDetailActivity"
             android:exported="false" />

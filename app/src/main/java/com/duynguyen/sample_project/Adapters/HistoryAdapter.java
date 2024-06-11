@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -69,13 +70,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         if (history.getStatus() == 0) {
             holder.txtStatus.setText("Chưa trả");
             holder.txtEndDay.setText("null");
-            holder.txtEndDay.setTextColor(Color.parseColor("#E91E63"));
-            holder.txtStatus.setTextColor(Color.parseColor("#E91E63"));
+            holder.txtEndDay.setTextColor(ContextCompat.getColor(context, R.color.text_error));
+            holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.text_error));
         } else {
             holder.txtEndDay.setText(history.getEndDay());
             holder.txtStatus.setText("Đã trả");
-            holder.txtEndDay.setTextColor(Color.parseColor("#009688"));
-            holder.txtStatus.setTextColor(Color.parseColor("#009688"));
+            holder.txtEndDay.setTextColor(ContextCompat.getColor(context, R.color.text_success));
+            holder.txtStatus.setTextColor(ContextCompat.getColor(context, R.color.text_success));
         }
 
         int sum = 0;

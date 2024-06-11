@@ -11,6 +11,7 @@ public class Book implements Serializable {
     private int vote;
     private int quantity;
     private int bookCategoryID;
+    private int totalBooksBorrowed;
 
 
     public Book(int bookID, String bookName, String bookImageURI, String desc, int vote, int quantity, int bookCategoryID) {
@@ -109,5 +110,13 @@ public class Book implements Serializable {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public int getTotalBooksBorrowed() {
+        return totalBooksBorrowed;
+    }
+
+    public void setTotalBooksBorrowed(int totalBooksBorrowed) {
+        this.totalBooksBorrowed = totalBooksBorrowed;
     }
 }

@@ -2,6 +2,7 @@ package com.duynguyen.sample_project.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements
     private BottomNavigationView bottomNavigation;
     private ViewPager mViewPager;
     private TextView toolbarTitleTv;
+    private Toolbar toolbar;
     private ImageView backImv;
     private ViewPagerAdapter viewPagerAdapter;
 
@@ -111,24 +113,19 @@ public class MainActivity extends AppCompatActivity implements
 
                     switch (position) {
                         case 0:
-                            bottomNavigation.getMenu().findItem(R.id.homeMenu).setChecked(true);
-                            toolbarTitleTv.setText("Trang chủ");
+                            onSetPageSelected(R.id.homeMenu, "Trang chủ");
                             break;
                         case 1:
-                            bottomNavigation.getMenu().findItem(R.id.categoryMenu).setChecked(true);
-                            toolbarTitleTv.setText("Danh mục");
+                            onSetPageSelected(R.id.categoryMenu, "Danh mục");
                             break;
                         case 2:
-                            bottomNavigation.getMenu().findItem(R.id.receiptMenu).setChecked(true);
-                            toolbarTitleTv.setText("Phiếu mượn");
+                            onSetPageSelected(R.id.receiptMenu, "Phiếu mượn");
                             break;
                         case 3:
-                            bottomNavigation.getMenu().findItem(R.id.memberMenu).setChecked(true);
-                            toolbarTitleTv.setText("Thành viên");
+                            onSetPageSelected(R.id.memberMenu, "Thành viên");
                             break;
                         case 4:
-                            bottomNavigation.getMenu().findItem(R.id.profileMenu).setChecked(true);
-                            toolbarTitleTv.setText("Hồ sơ");
+                            onSetPageSelected(R.id.profileMenu, "Hồ sơ");
                             break;
                         default:
                             throw new IllegalArgumentException("Invalid position: " + position);
@@ -142,10 +139,17 @@ public class MainActivity extends AppCompatActivity implements
             });
         }
 
+        private void onSetPageSelected (int iconName, String fragmentName) {
+            bottomNavigation.getMenu().findItem(iconName).setChecked(true);
+            toolbarTitleTv.setText(fragmentName);
+            toolbar.setVisibility(View.VISIBLE);
+        }
 
         @Override
         public void onCategorySelected (Category category){
             try {
+                toolbar.setVisibility(View.GONE);
+
                 BookFragment bookFragment = BookFragment.newInstance(category);
                 viewPagerAdapter.addFragment(bookFragment, "Book");
                 Toast.makeText(this, viewPagerAdapter.getCount() + "", Toast.LENGTH_SHORT).show();
@@ -153,7 +157,6 @@ public class MainActivity extends AppCompatActivity implements
             } catch (Exception e) {
                 Log.e("MainActivity", "Error adding fragment", e);
             }
-
         }
 
         @Override
@@ -174,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements
             toolbarTitleTv = findViewById(R.id.toolbarTitleTv);
             backImv = findViewById(R.id.backImv);
             mViewPager = findViewById(R.id.viewPager);
-
+            toolbar = findViewById(R.id.toolbar);
         }
     }
 

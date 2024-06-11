@@ -141,7 +141,7 @@
             android:layout_weight="1"
             android:background="@drawable/custom_button_close"
             android:padding="8dp"
-            android:text="Reset"
+            android:text="Làm mới"
             android:textAllCaps="false"
             android:textColor="@color/text1"
             android:textSize="14dp"

@@ -16,14 +16,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.duynguyen.sample_project.Activities.BookDetailActivity;
+import com.duynguyen.sample_project.DAOs.ReceiptDetailDAO;
 import com.duynguyen.sample_project.Models.Book;
 import com.duynguyen.sample_project.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class BookGridAdapter extends RecyclerView.Adapter<BookGridAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Book> bookList;
+
+    private ReceiptDetailDAO receiptDetailDAO;
 
     public BookGridAdapter(Context context, ArrayList<Book> bookList) {
         this.context = context;
@@ -35,6 +40,22 @@ public class BookGridAdapter extends RecyclerView.Adapter<BookGridAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = ((Activity)context).getLayoutInflater();
         View view = inflater.inflate(R.layout.item_product_grid, parent, false);
+
+        receiptDetailDAO = new ReceiptDetailDAO(context);
+
+        // set total books borrowed
+        for (Book book : bookList) {
+            int totalBorrowed = receiptDetailDAO.getTotalBooksBorrowed(book.getBookID());
+            book.setTotalBooksBorrowed(totalBorrowed);
+        }
+
+        // sort by total books borrowed
+        Collections.sort(bookList, new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return Integer.compare(o2.getTotalBooksBorrowed(), o1.getTotalBooksBorrowed());
+            }
+        });
 
         return new ViewHolder(view);
     }

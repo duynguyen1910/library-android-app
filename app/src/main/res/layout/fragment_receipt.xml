@@ -4,76 +4,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingHorizontal="20dp"
+    android:padding="20dp"
     tools:context=".Fragments.HomeFragment">
 
-
-    <AutoCompleteTextView
-        android:id="@+id/autotxtPhoneNumber"
+    <RelativeLayout
+        android:id="@+id/wrapperInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/custom_edit_text_border"
-        android:completionThreshold="1"
-        android:hint="Số điện thoại"
-        android:inputType="number"
-        android:padding="15dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/text1"
-        android:textSize="15sp" />
+        android:layout_marginBottom="30dp">
 
-    <EditText
-        android:id="@+id/edtFullname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/autotxtPhoneNumber"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/custom_edit_text_border"
-        android:focusable="false"
-        android:hint="Họ tên"
-        android:inputType="text"
-        android:padding="15dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/text1"
-        android:textSize="15sp" />
+        <AutoCompleteTextView
+            android:id="@+id/autotxtPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/custom_edit_text_border"
+            android:completionThreshold="1"
+            android:hint="Số điện thoại"
+            android:inputType="number"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/text1"
+            android:textSize="15sp" />
 
+        <EditText
+            android:id="@+id/edtFullname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/autotxtPhoneNumber"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/custom_edit_text_border"
+            android:focusable="false"
+            android:hint="Họ tên"
+            android:inputType="text"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/text1"
+            android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/btnSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edtFullname"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="1"
-        android:background="@drawable/custom_button_green"
-        android:padding="10dp"
-        android:text="Tìm kiếm"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:backgroundTint="@null" />
+        <TextView
+            android:id="@+id/btnSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edtFullname"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button_green"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="16dp"
+            android:textStyle="bold"
+            android:text="Tìm kiếm"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:backgroundTint="@null" />
 
-    <CheckBox
-        android:id="@+id/chkOption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edtFullname"
-        android:layout_alignParentEnd="true"
-        android:text="Chỉ hiện phiếu chưa trả?" />
+        <CheckBox
+            android:backgroundTint="@color/text_success"
+            android:id="@+id/chkOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edtFullname"
+            android:layout_alignParentEnd="true"
+            android:text="Chỉ hiện phiếu chưa trả?" />
+    </RelativeLayout>
 
-    <View
-        android:id="@+id/line1"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_below="@id/btnSearch"
-        android:layout_marginBottom="10dp"
-        android:background="#009688" />
+<!--    <View-->
+<!--        android:id="@+id/line1"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="3dp"-->
+<!--        android:layout_below="@id/btnSearch"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:background="#009688" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewHistory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/line1" />
+        android:layout_below="@id/wrapperInput" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -86,8 +94,8 @@
             style="@style/FloatingActionButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="30dp"
             android:elevation="10dp"
             android:src="@drawable/baseline_add_24"
             app:background="@null"

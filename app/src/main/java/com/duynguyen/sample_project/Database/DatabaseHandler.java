@@ -8,7 +8,7 @@ import com.duynguyen.sample_project.R;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Library";
-    private static  int DATABASE_VERSION = 322;
+    private static final int DATABASE_VERSION = 37;
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -73,21 +73,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 "CREATE TABLE MEMBER(" +
                         "memberID INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "fullname TEXT NOT NULL," +
+                        "memberImage INTEGER NOT NULL," +
                         " phoneNumber TEXT NOT NULL," +
                         " address TEXT," +
                         " password TEXT," +
                         " role INTEGER NOT NULL)"; // 2: Admin, 1: Thủ thư, 0: Khách hàng thuê sách
         db.execSQL(createMember);
 
-        String insertMember = "INSERT INTO MEMBER (fullname, phoneNumber, address, password, role) VALUES" +
-                "('Ngọc Đại', '0868441273', 'quận Bình Thạnh, HCM', '12345678', 2)," +
-                "('Tấn Duy', '123456789', 'quận 7, HCM', '12345678', 1)," +
-                "('Tấn Bảo', '987654321', 'Gò Vấp, HCM', '12345678', 0)," +
-                "('Chí Thành', '555666777', 'quận Bình Thạnh, HCM', '12345678', 0)";
+        String insertMember = "INSERT INTO MEMBER (fullname, memberImage, phoneNumber, address, password, role) VALUES" +
+                "('Administrator', " + R.mipmap.admin + ", 'admin','tp. Hồ Chí Minh', '12345678', 2)," +
+                "('Ngọc Đại', " + R.mipmap.meo  + ", '0868441273',  'quận Bình Thạnh, HCM', '12345678', 1)," +
+                "('Tấn Duy', " + R.mipmap.tanduy + ", '123456789', 'quận 7, HCM', '12345678', 0)," +
+                "('Trung Hiếu', " + R.mipmap.trunghieu + ", '987654321', 'quận 6, HCM', '12345678', 0)," +
+                "('Tùng Dương', " + R.mipmap.user1 + ", '555666777', 'quận 12, HCM', '12345678', 0)," +
+                "('Bồ Hiếu', " + R.mipmap.botrunghieu + ", '0011223344', 'quận Bến Lức, Long An', '12345678', 0)," +
+                "('Anh Tuấn', " + R.mipmap.user1 + ", '0011223344', 'quận 12', '12345678', 0)," +
+                "('Thu Thảo', " + R.mipmap.user1 + ", '0011223344', 'quận 12', '12345678', 0)";
         db.execSQL(insertMember);
 //25447896324
-
-
 
         // RECEIPT RECEIPT
         String createReceipt =

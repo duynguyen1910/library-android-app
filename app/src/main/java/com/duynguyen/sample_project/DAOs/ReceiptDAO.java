@@ -1,5 +1,6 @@
 package com.duynguyen.sample_project.DAOs;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -65,7 +66,6 @@ public class ReceiptDAO {
                 sqLiteDatabase.close();
             }
         }
-
         return newReceiptID;
     }
 
@@ -79,8 +79,32 @@ public class ReceiptDAO {
         sqLiteDatabase.update("RECEIPT", contentValues, "receiptID = ?", new String[]{String.valueOf(receiptID)});
     }
 
+    public int getReceiptDetailCount() {
+        SQLiteDatabase sqLiteDatabase = databaseHandler.getWritableDatabase();
+        String query = " SELECT b.bookID, b.bookName, b.author, m.memberID, m.fullname, r.startDay, r.endDay, r.note, r.receiptID,  d.quantity, d.status\n" +
+                "   FROM BOOK b, MEMBER m, RECEIPT r, RECEIPTDETAIL d\n" +
+                "   WHERE b.bookID = d.bookID and m.memberID = r.memberID \n" +
+                "   and r.receiptID = d.receiptID";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count;
+    }
 
+    @SuppressLint("Range")
+    public int getReceiptTotalByMemberID(int memberID) {
+        SQLiteDatabase sqLiteDatabase = databaseHandler.getReadableDatabase();
+        int totalReceipt = 0;
 
+        String query = "SELECT COUNT(*) AS total FROM RECEIPT WHERE memberID = ?";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, new String[]{String.valueOf(memberID)});
 
+        if (cursor.moveToFirst()) {
+            totalReceipt = cursor.getInt(cursor.getColumnIndex("total"));
+        }
+
+        cursor.close();
+        return totalReceipt;
+    }
 
 }

@@ -1,6 +1,9 @@
 package com.duynguyen.sample_project.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -55,7 +58,7 @@ public class MemberFragment extends Fragment {
 
                 if (position == 0) {
                     tabLabel.setText("Librarian");
-                    tabIcon.setImageResource(R.drawable.ic_employee);
+                    tabIcon.setImageResource(R.drawable.ic_account_box);
                 } else if (position == 1) {
                     tabLabel.setText("Customer");
                     tabIcon.setImageResource(R.drawable.ic_customer);
@@ -66,12 +69,16 @@ public class MemberFragment extends Fragment {
         }).attach();
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 View customView = tab.getCustomView();
                 if (customView != null) {
                     TextView tabLabel = customView.findViewById(R.id.tabLabel);
-                    tabLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.pink));
+                    tabLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.primary_color));
+
+                    ImageView tabIcon = customView.findViewById(R.id.tabIcon);
+                    tabIcon.setColorFilter(new PorterDuffColorFilter(R.color.primary_color, PorterDuff.Mode.SRC_IN));
                 }
             }
 
@@ -80,7 +87,7 @@ public class MemberFragment extends Fragment {
                 View customView = tab.getCustomView();
                 if (customView != null) {
                     TextView tabLabel = customView.findViewById(R.id.tabLabel);
-                    tabLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.lightpink));
+                    tabLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.gray1));
                 }
             }
 

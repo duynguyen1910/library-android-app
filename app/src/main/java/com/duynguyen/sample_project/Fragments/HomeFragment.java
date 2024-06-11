@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +19,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.duynguyen.sample_project.Adapters.BookGridAdapter;
+import com.duynguyen.sample_project.Adapters.MostBorrowedMemberAdapter;
 import com.duynguyen.sample_project.DAOs.BookDAO;
+import com.duynguyen.sample_project.DAOs.MemberDAO;
 import com.duynguyen.sample_project.Models.Member;
 import com.duynguyen.sample_project.R;
 
 public class HomeFragment extends Fragment {
     TextView txtFullname, txtRole;
-    private RecyclerView productRecyclerview, tagFilterRecyclerView;
+    private RecyclerView mostBorrowedRecyclerView, mostReadsRecyclerview;
     View view;
 
     @Nullable
@@ -56,25 +59,28 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        LinearLayoutManager layoutManager
+        LinearLayoutManager memberLayoutManager
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        tagFilterRecyclerView.setLayoutManager(layoutManager);
+        LinearLayoutManager bookGridLayoutManager
+                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
+        MemberDAO memberDAO = new MemberDAO(getContext());
+        MostBorrowedMemberAdapter mostBorrowedMemberAdapter = new MostBorrowedMemberAdapter(getContext(), memberDAO.getListMembers());
+        mostBorrowedRecyclerView.setLayoutManager(memberLayoutManager);
+        mostBorrowedRecyclerView.setAdapter(mostBorrowedMemberAdapter);
 
         BookDAO bookDAO = new BookDAO(getContext());
         BookGridAdapter bookGridAdapter = new BookGridAdapter(getContext(), bookDAO.getListProduct());
-        productRecyclerview.setLayoutManager(new GridLayoutManager(getContext(), 2));
-
-        productRecyclerview.setAdapter(bookGridAdapter);
-
+        mostReadsRecyclerview.setLayoutManager(bookGridLayoutManager);
+        mostReadsRecyclerview.setAdapter(bookGridAdapter);
 
     }
 
     private void Mapping() {
         txtFullname = view.findViewById(R.id.txtFullname);
         txtRole = view.findViewById(R.id.txtRole);
-        productRecyclerview = view.findViewById(R.id.productRecyclerview);
-        tagFilterRecyclerView = view.findViewById(R.id.tagFilterRecyclerView);
+        mostBorrowedRecyclerView  = view.findViewById(R.id.mostBorrowedRecyclerView);
+        mostReadsRecyclerview = view.findViewById(R.id.mostReadsRecyclerview);
 
     }
 }

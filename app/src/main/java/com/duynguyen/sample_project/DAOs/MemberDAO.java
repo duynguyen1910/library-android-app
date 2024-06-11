@@ -29,10 +29,11 @@ public class MemberDAO {
                         list.add(new Member(
                                 cursor.getInt(0),
                                 cursor.getString(1),
-                                cursor.getString(2),
+                                cursor.getInt(2),
                                 cursor.getString(3),
                                 cursor.getString(4),
-                                cursor.getInt(5)
+                                cursor.getString(5),
+                                cursor.getInt(6)
                         ));
                     } while (cursor.moveToNext());
                 }
@@ -89,10 +90,11 @@ public class MemberDAO {
                         list.add(new Member(
                                 cursor.getInt(0),
                                 cursor.getString(1),
-                                cursor.getString(2),
+                                cursor.getInt(2),
                                 cursor.getString(3),
                                 cursor.getString(4),
-                                cursor.getInt(5)
+                                cursor.getString(5),
+                                cursor.getInt(6)
                         ));
                     } while (cursor.moveToNext());
                 }
@@ -118,10 +120,11 @@ public class MemberDAO {
                         list.add(new Member(
                                 cursor.getInt(0),
                                 cursor.getString(1),
-                                cursor.getString(2),
+                                cursor.getInt(2),
                                 cursor.getString(3),
                                 cursor.getString(4),
-                                cursor.getInt(5)
+                                cursor.getString(5),
+                                cursor.getInt(6)
                         ));
                     } while (cursor.moveToNext());
                 }
@@ -147,10 +150,11 @@ public class MemberDAO {
                     member = new Member(
                             cursor.getInt(0),
                             cursor.getString(1),
-                            cursor.getString(2),
+                            cursor.getInt(2),
                             cursor.getString(3),
                             cursor.getString(4),
-                            cursor.getInt(5)
+                            cursor.getString(5),
+                            cursor.getInt(6)
                     );
                 }
             }

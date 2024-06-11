@@ -92,12 +92,12 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-
         Member member = list.get(holder.getBindingAdapterPosition());
+
+        holder.imvAvatar.setImageResource(member.getMemberImageURI());
         holder.txtFullname.setText(member.getFullname());
         holder.txtPhoneNumber.setText(member.getPhoneNumber());
         holder.btnEdit.setOnClickListener(v -> handleCreateCustomer(member));
-        
     }
 
     @Override
@@ -107,11 +107,12 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtFullname, txtPhoneNumber;
-        ImageView btnEdit;
+        ImageView imvAvatar, btnEdit;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            imvAvatar = itemView.findViewById(R.id.imvAvatar);
             txtFullname = itemView.findViewById(R.id.txtFullname);
             txtPhoneNumber = itemView.findViewById(R.id.txtPhoneNumber);
             btnEdit = itemView.findViewById(R.id.btnEdit);
