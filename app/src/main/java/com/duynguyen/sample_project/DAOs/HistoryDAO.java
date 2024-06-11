@@ -26,10 +26,10 @@ public class HistoryDAO {
             sqLiteDatabase = databaseHandler.getWritableDatabase();
 
             // Step 1: Create the header part of History
-            String firstQuery = "SELECT r.receiptID, m.fullname, m.phoneNumber, m.address, r.startDay, r.endDay, r.note, r.status " +
+            String firstQuery = "SELECT r.receiptID, r.creator, m.fullname, m.phoneNumber, m.address, r.startDay, r.endDay, r.note, r.status " +
                     "FROM MEMBER m, RECEIPT r, RECEIPTDETAIL d " +
-                    "WHERE m.memberID = r.memberID AND r.receiptID = d.receiptID " +
-                    "GROUP BY r.receiptID";
+                    "WHERE m.memberID = r.memberID AND r.receiptID = d.receiptID AND m.role = 0 " +
+                    "GROUP BY r.receiptID ORDER BY r.receiptID DESC";
 
             ArrayList<Receipt> headers = new ArrayList<>();
             try (Cursor firstCursor = sqLiteDatabase.rawQuery(firstQuery, null)) {
@@ -43,7 +43,8 @@ public class HistoryDAO {
                                 firstCursor.getString(4),
                                 firstCursor.getString(5),
                                 firstCursor.getString(6),
-                                firstCursor.getInt(7)
+                                firstCursor.getString(7),
+                                firstCursor.getInt(8)
                         ));
                     } while (firstCursor.moveToNext());
                 }
@@ -74,6 +75,7 @@ public class HistoryDAO {
                 // Step 3: Combine header and body to get a complete History
                 listHistories.add(new History(
                         header.getReceiptID(),
+                        header.getCreator(),
                         header.getFullname(),
                         header.getPhoneNumber(),
                         header.getAddress(),
@@ -103,7 +105,7 @@ public class HistoryDAO {
             sqLiteDatabase = databaseHandler.getWritableDatabase();
 
             // Step 1: Create the header part of History
-            String firstQuery = "SELECT r.receiptID, m.fullname, m.phoneNumber, m.address, r.startDay, r.endDay, r.note, r.status " +
+            String firstQuery = "SELECT r.receiptID, r.creator,m.fullname, m.phoneNumber, m.address, r.startDay, r.endDay, r.note, r.status " +
                     "FROM MEMBER m, RECEIPT r, RECEIPTDETAIL d " +
                     "WHERE m.memberID = r.memberID AND r.receiptID = d.receiptID AND r.status = 0 " +
                     "GROUP BY r.receiptID";
@@ -120,7 +122,8 @@ public class HistoryDAO {
                                 firstCursor.getString(4),
                                 firstCursor.getString(5),
                                 firstCursor.getString(6),
-                                firstCursor.getInt(7)
+                                firstCursor.getString(7),
+                                firstCursor.getInt(8)
                         ));
                     } while (firstCursor.moveToNext());
                 }
@@ -151,6 +154,7 @@ public class HistoryDAO {
                 // Step 3: Combine header and body to get a complete History
                 listHistories.add(new History(
                         header.getReceiptID(),
+                        header.getCreator(),
                         header.getFullname(),
                         header.getPhoneNumber(),
                         header.getAddress(),

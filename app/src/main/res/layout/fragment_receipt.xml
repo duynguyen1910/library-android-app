@@ -21,23 +21,8 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/custom_edit_text_border"
             android:completionThreshold="1"
-            android:hint="Số điện thoại"
+            android:hint="Tìm kiếm số điện thoại..."
             android:inputType="number"
-            android:padding="15dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/text1"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/edtFullname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/autotxtPhoneNumber"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/custom_edit_text_border"
-            android:focusable="false"
-            android:hint="Họ tên"
-            android:inputType="text"
             android:padding="15dp"
             android:textColor="@color/black"
             android:textColorHint="@color/text1"
@@ -47,7 +32,7 @@
             android:id="@+id/btnSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/edtFullname"
+            android:layout_below="@id/autotxtPhoneNumber"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:background="@drawable/custom_button_green"
@@ -64,7 +49,7 @@
             android:id="@+id/chkOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/edtFullname"
+            android:layout_below="@id/autotxtPhoneNumber"
             android:layout_alignParentEnd="true"
             android:text="Chỉ hiện phiếu chưa trả?" />
     </RelativeLayout>

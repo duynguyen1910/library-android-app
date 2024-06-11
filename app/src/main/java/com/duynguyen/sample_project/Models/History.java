@@ -8,6 +8,7 @@ public class History implements Serializable {
     // 5 thuộc tính này là Header của History
     private int receiptID;
     private String fullname;
+    private String creator;
     private String phoneNumber;
     private String address;
     private String note;
@@ -21,8 +22,9 @@ public class History implements Serializable {
     // ReceiptDetail(receiptID, bookID, bookImage, bookName, author, quantity)
 
 
-    public History(int receiptID, String fullname, String phoneNumber, String address, String startDay, String endDay, String note, int status, ArrayList<ReceiptDetail> detailsList) {
+    public History(int receiptID, String creator, String fullname, String phoneNumber, String address, String startDay, String endDay, String note, int status, ArrayList<ReceiptDetail> detailsList) {
         this.receiptID = receiptID;
+        this.creator = creator;
         this.fullname = fullname;
         this.phoneNumber = phoneNumber;
         this.address = address;
@@ -31,6 +33,14 @@ public class History implements Serializable {
         this.note = note;
         this.status = status;
         this.detailsList = detailsList;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
     public int getReceiptID() {

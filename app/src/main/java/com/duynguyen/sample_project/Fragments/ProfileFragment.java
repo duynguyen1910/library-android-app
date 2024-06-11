@@ -19,7 +19,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import com.duynguyen.sample_project.Activities.StatisticsActivity;
 import com.duynguyen.sample_project.DAOs.MemberDAO;
 import com.duynguyen.sample_project.Models.Member;
 import com.duynguyen.sample_project.R;
@@ -29,7 +28,7 @@ import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
     View view;
-    LinearLayout layoutLogout, layoutChangePassword, layoutStatistics;
+    LinearLayout layoutLogout, layoutChangePassword;
     TextView txtRole, txtFullname, txtEmail;
     ImageView imvAvatar;
     Member memberData;
@@ -43,11 +42,7 @@ public class ProfileFragment extends Fragment {
 
         initUI();
         layoutLogout.setOnClickListener(v -> requireActivity().finish());
-        layoutStatistics.setOnClickListener(v -> {
-            Intent intent = new Intent(requireActivity(), StatisticsActivity.class);
-            startActivity(intent);
 
-        });
 
         layoutChangePassword.setOnClickListener(v -> handleChangePasswordRequest());
         return view;
@@ -176,7 +171,6 @@ public class ProfileFragment extends Fragment {
     private void Mapping() {
         layoutLogout = view.findViewById(R.id.layoutLogout);
         layoutChangePassword = view.findViewById(R.id.layoutChangePassword);
-        layoutStatistics = view.findViewById(R.id.layoutStatistics);
         txtRole = view.findViewById(R.id.txtRole);
         txtFullname = view.findViewById(R.id.txtFullname);
         txtEmail = view.findViewById(R.id.txtEmail);

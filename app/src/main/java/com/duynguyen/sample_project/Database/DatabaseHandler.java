@@ -8,7 +8,7 @@ import com.duynguyen.sample_project.R;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Library";
-    private static final int DATABASE_VERSION = 37;
+    private static final int DATABASE_VERSION = 325;
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -96,6 +96,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String createReceipt =
                 "CREATE TABLE RECEIPT(" +
                         "receiptID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "creator TEXT NOT NULL," +
                         " startDay TEXT NOT NULL," +
                         " endDay TEXT NOT NULL," +
                         " note TEXT," +
@@ -104,10 +105,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         " FOREIGN KEY (memberID) REFERENCES MEMBER(memberID))";
         db.execSQL(createReceipt);
 
-        String insertReceipt = "INSERT INTO RECEIPT (startDay, endDay, note, memberID, status) VALUES" +
-                "('2024-05-01', '2024-05-10', 'Giới thiệu sách cho bạn khác', 1, 1)," +
-                "('2024-06-15', '2024-06-25', 'Cân nhắc mua luôn', 2, 1)," +
-                "('2024-07-20', '2024-07-30', '', 3, 1)";
+        String insertReceipt = "INSERT INTO RECEIPT (startDay, creator, endDay, note, memberID, status) VALUES" +
+                "('2024-05-01', 'Ngọc Đại',  '2024-05-10', 'Giới thiệu sách cho bạn khác', 1, 1)," +
+                "('2024-06-15', 'Ngọc Đại', '2024-06-25', 'Cân nhắc mua luôn', 2, 1)," +
+                "('2024-07-20','Ngọc Đại', '2024-07-30', '', 3, 1)";
         db.execSQL(insertReceipt);
 
 

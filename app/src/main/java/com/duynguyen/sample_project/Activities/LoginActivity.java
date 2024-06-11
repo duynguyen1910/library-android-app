@@ -62,11 +62,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 // Nếu là thủ thư thì xét SDT và password
                 else {
-
                     // Nếu đúng mật khẩu
                     if (existedMember.getPassword().equals(password)){
-
                         SharedPreferences.Editor editorRemember = sharedPreferences.edit();
+                        editorRemember.putInt("currentMemberID", existedMember.getMemberID());
+                        editorRemember.putString("currentMemberFullname", existedMember.getFullname());
+                        editorRemember.putInt("currentMemberRole", existedMember.getRole());
+                        editorRemember.putString("currentMemberPhoneNumber", existedMember.getPhoneNumber());
+
+
                         if(chkRemember.isChecked()){
                             editorRemember.putBoolean("checked", true);
                             editorRemember.putString("phoneNumber", phoneNumber);
@@ -76,6 +80,9 @@ public class LoginActivity extends AppCompatActivity {
                             editorRemember.remove("phoneNumber");
                             editorRemember.remove("password");
                         }
+
+
+
                         editorRemember.apply();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("memberData", existedMember);
@@ -85,6 +92,8 @@ public class LoginActivity extends AppCompatActivity {
                     else {
                         Toast.makeText(this, "Mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
                     }
+
+
 
                 }
             }

@@ -75,10 +75,7 @@ public class MemberFragment extends Fragment {
                 View customView = tab.getCustomView();
                 if (customView != null) {
                     TextView tabLabel = customView.findViewById(R.id.tabLabel);
-                    tabLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.primary_color));
-
-                    ImageView tabIcon = customView.findViewById(R.id.tabIcon);
-                    tabIcon.setColorFilter(new PorterDuffColorFilter(R.color.primary_color, PorterDuff.Mode.SRC_IN));
+                    tabLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.pink));
                 }
             }
 
@@ -87,13 +84,15 @@ public class MemberFragment extends Fragment {
                 View customView = tab.getCustomView();
                 if (customView != null) {
                     TextView tabLabel = customView.findViewById(R.id.tabLabel);
-                    tabLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.gray1));
+                    tabLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.lightpink));
                 }
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                // Optional: Handle tab reselection if needed
+                View customView = tab.getCustomView();
+                TextView tabLabel = customView.findViewById(R.id.tabLabel);
+                tabLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.pink));
             }
         });
 

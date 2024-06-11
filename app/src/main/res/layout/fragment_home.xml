@@ -59,10 +59,10 @@
                 android:background="@drawable/role_bg_2"
                 android:paddingHorizontal="7dp"
                 android:paddingVertical="3dp"
-                android:textStyle="bold"
                 android:text="Admin"
                 android:textColor="@color/white"
-                android:textSize="12dp" />
+                android:textSize="12dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <ImageView
@@ -91,66 +91,75 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:fillViewport="true">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="30dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Hội viên ưu tú"
-                        android:textStyle="bold"
-                        android:textSize="18dp"
-                        android:textColor="@color/primary_color"
-                        android:layout_marginBottom="20dp"/>
-                </LinearLayout>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/mostBorrowedRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+                android:layout_marginBottom="30dp"
+                android:text="Hội viên ưu tú"
+                android:textColor="@color/primary_color"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mostBorrowedRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="30dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/chartTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Top sách được mượn nhiều nhất"
+                android:textSize="14sp"
+                android:layout_marginBottom="30dp"
+                android:textStyle="bold"
+                android:textColor="@color/primary_color" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
+                android:layout_width="match_parent"
+                android:layout_height="600dp" />
+
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="30dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Đọc nhiều nhất"
-                        android:textStyle="bold"
-                        android:textSize="18dp"
-                        android:textColor="@color/primary_color"
-                        android:layout_marginBottom="20dp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Xem thêm"
-                        android:textSize="12dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_success"
-                        android:layout_marginBottom="10dp"/>
-                </LinearLayout>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/mostReadsRecyclerview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="1"
+                    android:text="Đọc nhiều nhất"
+                    android:textColor="@color/primary_color"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Xem thêm"
+                    android:textColor="@color/text_success"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mostReadsRecyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
+
     </ScrollView>
 </LinearLayout>

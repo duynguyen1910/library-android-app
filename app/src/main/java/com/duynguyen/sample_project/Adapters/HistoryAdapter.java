@@ -26,6 +26,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     private ArrayList<History> historiesList;
 
 
+
     public HistoryAdapter(Context context, ArrayList<History> historiesList) {
         this.context = context;
         this.historiesList = historiesList;
@@ -34,7 +35,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtFullname, txtNote, txtStartDay, txtEndDay;
         TextView txtStatus, txtSumOfQuantity, txtPhoneNumber;
-        TextView txtSeeMore, txtReturnReceipt;
+        TextView txtSeeMore, txtReturnReceipt, txtCreator;
         RecyclerView recyclerViewDetails;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -48,6 +49,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             recyclerViewDetails = itemView.findViewById(R.id.recyclerViewDetails);
             txtSumOfQuantity = itemView.findViewById(R.id.txtSumOfQuantity);
             txtPhoneNumber = itemView.findViewById(R.id.txtPhoneNumber);
+            txtCreator = itemView.findViewById(R.id.txtCreator);
 
         }
     }
@@ -67,6 +69,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.txtStartDay.setText(history.getStartDay());
         holder.txtEndDay.setText(history.getEndDay());
         holder.txtNote.setText(history.getNote());
+        holder.txtCreator.setText(history.getCreator());
         if (history.getStatus() == 0) {
             holder.txtStatus.setText("Chưa trả");
             holder.txtEndDay.setText("null");

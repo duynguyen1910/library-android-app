@@ -89,7 +89,7 @@ public class ReceiptFragment extends Fragment {
 
     private void initUI() {
         chkOption.setChecked(false);
-        memberNameAdapter = new MemberNameArrayAdapter(requireActivity(), edtFullname, R.layout.item_member_name, getListMembers());
+        memberNameAdapter = new MemberNameArrayAdapter(requireActivity(), null, R.layout.item_member_name, getListCustomer());
         autotxtPhoneNumber.setAdapter(memberNameAdapter);
         historyDAO = new HistoryDAO(requireActivity());
         historiesList = historyDAO.getAllHistories();
@@ -151,9 +151,9 @@ public class ReceiptFragment extends Fragment {
 
     }
 
-    private List<Member> getListMembers() {
+    private List<Member> getListCustomer() {
         MemberDAO memberDAO = new MemberDAO(requireActivity());
-        return memberDAO.getListMembers();
+        return memberDAO.getListCustomers();
     }
 
 

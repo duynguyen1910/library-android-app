@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -54,9 +56,11 @@ public class CreateReceiptActivity extends AppCompatActivity {
     ReceiptDetailsAdapter receiptDetailsAdapter;
     BookDAO bookDAO;
     ArrayList<Book> mListSuggest;
+    SharedPreferences sharedPreferences;
     Button btnSubmit, btnReset;
     ImageButton btnBack;
     ArrayList<ReceiptDetail> tempoReceiptDetailsList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,37 +125,36 @@ public class CreateReceiptActivity extends AppCompatActivity {
             // Bước 1:  insert phiếu mượn mới vào database
             int memeberID = member.getMemberID();
 
-            Receipt receipt = new Receipt(startDay, endDay, note, memeberID, 0);
+            sharedPreferences = getSharedPreferences("dataRememberLogin", MODE_PRIVATE);
+            String currentMemberFullname = sharedPreferences.getString("currentMemberFullname", null);
+//            public Receipt(int receiptID, String creator, String startDay, String endDay, String note, int memberID, int status)
+            Receipt receipt = new Receipt(currentMemberFullname, startDay, endDay, note, memeberID, 0);
             ReceiptDAO receiptDAO = new ReceiptDAO(CreateReceiptActivity.this);
             int check = receiptDAO.addReceipt(receipt);
 
-            // Bước 2:  tạo các receipt detail liên kết với phiếu mượn vừa tạo
-            // Nếu tạo phiếu mượn thành công thì kết quả của quá trình insert chính là receiptID
+
             if (check != -1) {
                 receiptID = check;
-                // Dùng vòng lặp for trong tempoReceiptDetailsList để khởi tạo receipt detail để insert vào database,
                 ReceiptDetailDAO receiptDetailDAO = new ReceiptDetailDAO(CreateReceiptActivity.this);
 
-                StringBuilder listTacGia = new StringBuilder();
+
                 for (ReceiptDetail detail : tempoReceiptDetailsList) {
                     int bookID = detail.getBookID();
                     int quantity = detail.getQuantity();
-                    // Insert vào database
+
                     long checkDetail = receiptDetailDAO.addReceiptDetail(receiptID, bookID, quantity);
-                    // Insert detail thất bại
+
                     if (checkDetail == -1) {
                         isSuccess = false;
                         break;
                     }
-                    // insert detail thành công
+
                 }
 
             } else {
                 isSuccess = false;
             }
-        }
-        // Trường hợp không tìm thấy thì tiến hành đăng ký thành viên
-        else {
+        } else {
             isSuccess = false;
             Toast.makeText(CreateReceiptActivity.this, "Phai dang ky thanh vien truoc", Toast.LENGTH_SHORT).show();
         }
@@ -176,23 +179,25 @@ public class CreateReceiptActivity extends AppCompatActivity {
     }
 
     private void handleQueryInSearchView(String newText) {
-        recyclerViewBook.setVisibility(View.VISIBLE);
-        mListSuggest.clear();
-        if (newText == null || newText.length() == 0) {
-            bookForSearchAdapter.notifyDataSetChanged();
-        } else {
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            recyclerViewBook.setVisibility(View.VISIBLE);
+            mListSuggest.clear();
+
             String filter = newText.toLowerCase().trim();
             for (Book book : listBook) {
-                if (book.getBookName().toLowerCase().contains(filter)) {
+                if (book.getBookName().toLowerCase().startsWith(filter)) {
                     mListSuggest.add(book);
                 }
             }
-        }
-        bookForSearchAdapter.notifyDataSetChanged();
+
+            bookForSearchAdapter.notifyDataSetChanged();
+        }, 300);
+
     }
 
     private void initUI() {
-        memberNameAdapter = new MemberNameArrayAdapter(this, edtFullname, R.layout.item_member_name, getListMembers());
+        memberNameAdapter = new MemberNameArrayAdapter(this, edtFullname, R.layout.item_member_name, getListCustomers());
         autotxtPhoneNumber.setAdapter(memberNameAdapter);
 
         bookDAO = new BookDAO(this);
@@ -267,8 +272,8 @@ public class CreateReceiptActivity extends AppCompatActivity {
         tempoReceiptDetailsList = new ArrayList<>();
     }
 
-    private List<Member> getListMembers() {
+    private List<Member> getListCustomers() {
         MemberDAO memberDAO = new MemberDAO(CreateReceiptActivity.this);
-        return memberDAO.getListMembers();
+        return memberDAO.getListCustomers();
     }
 }

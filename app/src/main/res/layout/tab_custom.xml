@@ -12,12 +12,12 @@
         android:layout_width="24dp"
         android:src="@drawable/ic_account_box"
         android:layout_height="24dp"
-        app:tint="@color/custom_color_bottom_nav" />
+        app:tint="@color/tablayout_icon" />
 
     <TextView
         android:id="@+id/tabLabel"
         android:text="Thủ thư"
-        android:textColor="@color/gray1"
+        android:textColor="@color/lightpink"
         android:fontFamily="sans-serif"
         android:textStyle="bold"
         android:layout_width="wrap_content"

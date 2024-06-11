@@ -11,10 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:tabIconTint="@color/custom_color_bottom_nav"
-        app:tabIndicatorColor="@color/primary_color"
-        app:tabSelectedTextColor="@color/primary_color"
-        app:tabTextColor="@color/gray1" />
+        app:tabIconTint="@color/tablayout_icon"
+        app:tabIndicatorColor="@color/pink"
+        app:tabSelectedTextColor="@color/pink"
+        app:tabTextColor="@color/lightpink" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager2"

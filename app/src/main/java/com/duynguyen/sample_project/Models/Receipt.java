@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Receipt implements Serializable {
     private int receiptID;
+    private String creator;
     private String fullname;
     private String phoneNumber;
     private String address;
@@ -20,8 +21,9 @@ public class Receipt implements Serializable {
     }
 
     // Constructor này dùng để lấy header của History
-    public Receipt(int receiptID, String fullname, String phoneNumber, String address, String startDay, String endDay, String note, int status) {
+    public Receipt(int receiptID, String creator, String fullname, String phoneNumber, String address, String startDay, String endDay, String note, int status) {
         this.receiptID = receiptID;
+        this.creator = creator;
         this.fullname = fullname;
         this.phoneNumber = phoneNumber;
         this.address = address;
@@ -31,6 +33,13 @@ public class Receipt implements Serializable {
         this.status = status;
     }
 
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
 
     // Constructor này dùng để lấy phiếu mượn trả về từ database qua phương thức, ReceiptDAO.getReceiptByMemberID(int memberID)
     public Receipt(int receiptID, String startDay, String endDay, String note, int memberID, int status) {
@@ -75,6 +84,14 @@ public class Receipt implements Serializable {
         this.status = status;
     }
 
+    public Receipt(String creator, String startDay, String endDay, String note, int memberID, int status) {
+        this.creator = creator;
+        this.startDay = startDay;
+        this.endDay = endDay;
+        this.note = note;
+        this.memberID = memberID;
+        this.status = status;
+    }
 
     public String getPhoneNumber() {
         return phoneNumber;

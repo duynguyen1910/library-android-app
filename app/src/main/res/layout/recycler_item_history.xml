@@ -152,6 +152,26 @@
         </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:gravity="start"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Người tạo phiếu: "
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtCreator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tấn Duy" />
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewDetails"
             android:layout_width="match_parent"

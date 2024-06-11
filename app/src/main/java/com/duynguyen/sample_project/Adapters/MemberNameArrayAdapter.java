@@ -54,21 +54,13 @@ public class MemberNameArrayAdapter extends ArrayAdapter {
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence phoneNumber) {
-                edtFullname.setText("");
                 List<Member> mListSuggest = new ArrayList<>();
-
-                if (phoneNumber == null || phoneNumber.length() == 0) {
-                    mListSuggest.addAll(mListMembers);
-                } else {
-                    for (Member member : mListMembers) {
-                        if (member.getPhoneNumber().startsWith((String) phoneNumber)) {
-                            mListSuggest.add(member);
-                        }
-                    }
-                    if (mListSuggest.isEmpty()) {
-                        Toast.makeText(getContext(), "Số điện thoại chưa đăng ký", Toast.LENGTH_SHORT).show();
+                for (Member member : mListMembers) {
+                    if (member.getPhoneNumber().equals(phoneNumber)) {
+                        mListSuggest.add(member);
                     }
                 }
+
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = mListSuggest;
                 filterResults.count = mListSuggest.size();
@@ -77,16 +69,22 @@ public class MemberNameArrayAdapter extends ArrayAdapter {
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                clear();
-                addAll((List<Member>) results.values);
-                notifyDataSetChanged();
+                if (results.values != null) {
+                    List<Member> filteredList = (List<Member>) results.values;
+                    clear();
+                    addAll(filteredList);
+                    notifyDataSetChanged();
+                }
 
             }
 
             @Override
             public CharSequence convertResultToString(Object resultValue) {
 
-                edtFullname.setText(((Member) resultValue).getFullname());
+                if (edtFullname != null) {
+                    edtFullname.setText(((Member) resultValue).getFullname());
+                }
+
                 return ((Member) resultValue).getPhoneNumber();
             }
 

@@ -46,6 +46,35 @@ public class MemberDAO {
 
         return list;
     }
+    public ArrayList<Member> getListCustomers() {
+        SQLiteDatabase sqLiteDatabase = null;
+        ArrayList<Member> list = new ArrayList<>();
+
+        try {
+            sqLiteDatabase = databaseHandler.getReadableDatabase();
+            try (Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM MEMBER where role = 0", null)) {
+                if (cursor.moveToFirst()) {
+                    do {
+                        list.add(new Member(
+                                cursor.getInt(0),
+                                cursor.getString(1),
+                                cursor.getInt(2),
+                                cursor.getString(3),
+                                cursor.getString(4),
+                                cursor.getString(5),
+                                cursor.getInt(6)
+                        ));
+                    } while (cursor.moveToNext());
+                }
+            }
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
+                sqLiteDatabase.close();
+            }
+        }
+
+        return list;
+    }
 
     public int register(Member member) {
         SQLiteDatabase sqLiteDatabase = null;

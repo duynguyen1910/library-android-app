@@ -40,6 +40,7 @@ public class ReceiptDAO {
             }
 
             ContentValues contentValues = new ContentValues();
+            contentValues.put("creator", receipt.getCreator());
             contentValues.put("startDay", receipt.getStartDay());
             contentValues.put("endDay", receipt.getEndDay());
             contentValues.put("note", receipt.getNote());
