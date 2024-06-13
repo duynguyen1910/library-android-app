@@ -1,7 +1,10 @@
 package com.duynguyen.sample_project.Fragments;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +61,8 @@ public class ReceiptFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_receipt, container, false);
         Mapping();
+
+        setUpUIByRole();
         fabCreateReceipt.setOnClickListener(v -> startActivity(new Intent(requireActivity(), CreateReceiptActivity.class)));
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -156,5 +161,13 @@ public class ReceiptFragment extends Fragment {
         return memberDAO.getListCustomers();
     }
 
+
+    private void setUpUIByRole() {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("dataRememberLogin", MODE_PRIVATE);
+        int currentMemberRole = sharedPreferences.getInt("currentMemberRole", -1);
+        if (currentMemberRole == 2) {
+            fabCreateReceipt.setVisibility(View.GONE);
+        }
+    }
 
 }

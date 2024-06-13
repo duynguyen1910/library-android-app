@@ -21,7 +21,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/custom_edit_text_border"
             android:completionThreshold="1"
-            android:hint="Tìm kiếm số điện thoại..."
+            android:hint="Tìm phiếu mượn ..."
             android:inputType="number"
             android:padding="15dp"
             android:textColor="@color/black"

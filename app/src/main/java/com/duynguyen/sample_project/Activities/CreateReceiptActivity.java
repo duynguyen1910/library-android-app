@@ -119,15 +119,12 @@ public class CreateReceiptActivity extends AppCompatActivity {
         Member member = memberDAO.getMemberByPhoneNumber(phoneNumber);
         boolean isSuccess = true;
 
-        //  tìm thấy member đã đăng ký trong database thì tiếp tục tạo phiếu mượn
         if (member != null) {
 
-            // Bước 1:  insert phiếu mượn mới vào database
             int memeberID = member.getMemberID();
 
             sharedPreferences = getSharedPreferences("dataRememberLogin", MODE_PRIVATE);
             String currentMemberFullname = sharedPreferences.getString("currentMemberFullname", null);
-//            public Receipt(int receiptID, String creator, String startDay, String endDay, String note, int memberID, int status)
             Receipt receipt = new Receipt(currentMemberFullname, startDay, endDay, note, memeberID, 0);
             ReceiptDAO receiptDAO = new ReceiptDAO(CreateReceiptActivity.this);
             int check = receiptDAO.addReceipt(receipt);
@@ -162,6 +159,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
 
         if (isSuccess) {
             Toast.makeText(CreateReceiptActivity.this, "Tạo phiếu mượn thành công", Toast.LENGTH_SHORT).show();
+            finish();
         } else {
             Toast.makeText(CreateReceiptActivity.this, "Tạo phiếu mượn thất bại", Toast.LENGTH_SHORT).show();
         }

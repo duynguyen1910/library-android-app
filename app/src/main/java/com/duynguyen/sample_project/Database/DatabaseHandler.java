@@ -8,7 +8,7 @@ import com.duynguyen.sample_project.R;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Library";
-    private static final int DATABASE_VERSION = 325;
+    private static final int DATABASE_VERSION = 328;
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -82,7 +82,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         String insertMember = "INSERT INTO MEMBER (fullname, memberImage, phoneNumber, address, password, role) VALUES" +
                 "('Administrator', " + R.mipmap.admin + ", 'admin','tp. Hồ Chí Minh', '12345678', 2)," +
-                "('Ngọc Đại', " + R.mipmap.meo  + ", '0868441273',  'quận Bình Thạnh, HCM', '12345678', 1)," +
+                "('Ngọc Đại', " + R.mipmap.meo  + ", '0987654321',  'quận Bình Thạnh, HCM', '12345678', 1)," +
                 "('Tấn Duy', " + R.mipmap.tanduy + ", '123456789', 'quận 7, HCM', '12345678', 0)," +
                 "('Trung Hiếu', " + R.mipmap.trunghieu + ", '987654321', 'quận 6, HCM', '12345678', 0)," +
                 "('Tùng Dương', " + R.mipmap.user1 + ", '555666777', 'quận 12, HCM', '12345678', 0)," +
@@ -105,11 +105,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         " FOREIGN KEY (memberID) REFERENCES MEMBER(memberID))";
         db.execSQL(createReceipt);
 
-        String insertReceipt = "INSERT INTO RECEIPT (startDay, creator, endDay, note, memberID, status) VALUES" +
-                "('2024-05-01', 'Ngọc Đại',  '2024-05-10', 'Giới thiệu sách cho bạn khác', 1, 1)," +
-                "('2024-06-15', 'Ngọc Đại', '2024-06-25', 'Cân nhắc mua luôn', 2, 1)," +
-                "('2024-07-20','Ngọc Đại', '2024-07-30', '', 3, 1)";
-        db.execSQL(insertReceipt);
+//        String insertReceipt = "INSERT INTO RECEIPT (startDay, creator, endDay, note, memberID, status) VALUES" +
+//                "('2024-05-01', 'Ngọc Đại',  '2024-05-10', 'Giới thiệu sách cho bạn khác', 1, 1)," +
+//                "('2024-06-15', 'Ngọc Đại', '2024-06-25', 'Cân nhắc mua luôn', 2, 1)," +
+//                "('2024-07-20','Ngọc Đại', '2024-07-30', '', 3, 1)";
+//        db.execSQL(insertReceipt);
 
 
 
@@ -124,12 +124,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         " FOREIGN KEY (bookID) REFERENCES BOOK(bookID))";
         db.execSQL(createReceiptDetail);
 
-        String insertReceiptDetail = "INSERT INTO RECEIPTDETAIL (receiptID, bookID, quantity) VALUES" +
-                "(1, 1, 1)," +
-                "(1, 2, 1)," +
-                "(2, 3, 1)," +
-                "(3, 1, 2)";
-        db.execSQL(insertReceiptDetail);
+//        String insertReceiptDetail = "INSERT INTO RECEIPTDETAIL (receiptID, bookID, quantity) VALUES" +
+//                "(1, 1, 1)," +
+//                "(1, 2, 1)," +
+//                "(2, 3, 1)," +
+//                "(3, 1, 2)";
+//        db.execSQL(insertReceiptDetail);
     }
 
     @Override

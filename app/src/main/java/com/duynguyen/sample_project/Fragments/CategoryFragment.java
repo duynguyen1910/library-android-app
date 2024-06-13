@@ -76,8 +76,6 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.OnItem
     }
 
     private void initUI() {
-        setUpUIByRole();
-
         categoryList = categoryDAO.getListCategory();
         CategoryAdapter categoryAdapter = new CategoryAdapter(getContext(), categoryList, this);
         categoryRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));

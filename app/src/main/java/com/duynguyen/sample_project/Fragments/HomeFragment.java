@@ -95,6 +95,12 @@ public class HomeFragment extends Fragment {
         ArrayList<PieEntry> entries = new ArrayList<>();
         booksList = statisticsDAO.getListBooksWithHighestQuantities(3);
         int bookListLength = booksList.size();
+
+        if(bookListLength == 0) {
+            pieChart.setVisibility(View.GONE);
+            return;
+        }
+
         for (int i = 0; i < bookListLength; i++) {
             entries.add(new PieEntry(booksList.get(i).getSumQuantity(), booksList.get(i).getBookName()));
         }
