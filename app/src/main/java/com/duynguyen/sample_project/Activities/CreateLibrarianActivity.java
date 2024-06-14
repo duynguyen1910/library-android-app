@@ -85,6 +85,7 @@ public class CreateLibrarianActivity extends AppCompatActivity {
                     Toast.makeText(CreateLibrarianActivity.this, "Lỗi đăng ký, vui lòng thử lại", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(CreateLibrarianActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
         });

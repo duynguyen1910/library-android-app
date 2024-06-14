@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/lightgray"
     android:layout_marginBottom="10dp"
+    android:background="@color/lightgray"
     app:cardCornerRadius="10dp">
 
     <LinearLayout
@@ -38,67 +38,88 @@
                 android:id="@+id/txtBookName"
                 android:layout_width="wrap_content"
 
-                android:ellipsize="end"
-                android:singleLine="true"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:text="Đừng Để Nỗi Sợ Cản Đường Bạn"
                 android:textColor="#333"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/txtAuthor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="Helen Odessky" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/txtAuthor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:textColor="@color/text1"
+                    android:layout_marginBottom="8dp"
+                    android:text="Helen Odessky" />
 
-                    <ImageButton
-                        android:background="@drawable/custom_edit_text_border"
-                        android:layout_width="24dp"
-                        android:id="@+id/btnMinus"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_minus"
-                        android:inputType="text"
-                        android:padding="15dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/black"
-                        android:textSize="15sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="Tồn kho: "
+                    android:textSize="13dp"
+                    android:textColor="@color/pink"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/txtQuantity"
-                        android:layout_width="30dp"
-                        android:layout_height="24dp"
-                        android:text="1"
-                        android:gravity="center"
-                        android:textColor="#333" />
-
-                    <ImageButton
-                        android:background="@drawable/custom_edit_text_border"
-                        android:layout_width="24dp"
-                        android:id="@+id/btnPlus"
-                        android:layout_height="24dp"
-                        android:src="@drawable/baseline_add_24"
-                        android:inputType="text"
-                        android:padding="15dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/black"
-                        android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/txtInStock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textStyle="bold"
+                    android:textColor="@color/pink"
+                    android:textSize="13dp" />
+            </LinearLayout>
 
 
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnMinus"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/custom_edit_text_border"
+                    android:inputType="text"
+                    android:padding="15dp"
+                    android:src="@drawable/ic_minus"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/txtQuantity"
+                    android:layout_width="30dp"
+                    android:layout_height="24dp"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="#333" />
+
+                <ImageButton
+                    android:id="@+id/btnPlus"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/custom_edit_text_border"
+                    android:inputType="text"
+                    android:padding="15dp"
+                    android:src="@drawable/baseline_add_24"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
 
 
-
+            </LinearLayout>
 
 
         </LinearLayout>

@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp">
+
         <ImageButton
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
@@ -40,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Họ tên: "
+            android:textColor="#333"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -48,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tấn Duy"
-
+            android:textColor="@color/text1"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -57,13 +59,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Trạng thái: "
+            android:textColor="#333"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -71,9 +74,9 @@
             android:id="@+id/txtStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chưa trả"
             android:layout_marginVertical="5dp"
             android:paddingHorizontal="10dp"
+            android:text="Chưa trả"
             android:textColor="#E91E63"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -90,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Số điện thoại: "
-
+            android:textColor="#333"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -99,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="123456789"
-
+            android:textColor="@color/text1"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -113,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Địa chỉ: "
-
+            android:textColor="#333"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -122,7 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="quận 7, HCM"
-
+            android:textColor="@color/text1"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -136,7 +139,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Note: "
-
+            android:textColor="#333"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -145,7 +148,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Giới thiệu sách cho bạn khác"
-
+            android:textColor="@color/text1"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -160,7 +163,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ngày mượn: "
-
+            android:textColor="#333"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -169,7 +172,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="2024-05-01"
-
+            android:textColor="@color/text1"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -182,6 +185,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ngày trả: "
+            android:textColor="#333"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -190,13 +194,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="null"
+            android:textColor="@color/text1"
             android:textSize="16sp" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:gravity="start"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Người tạo phiếu: "
+            android:textColor="#333"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtCreator"
+            android:layout_width="wrap_content"
+            android:textSize="16sp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text1"
+            android:text="Tấn Duy" />
+    </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@color/text_success" />
 
     <ScrollView

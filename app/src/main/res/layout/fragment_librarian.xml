@@ -20,30 +20,22 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewLibrarian"
         android:layout_width="match_parent"
-        android:layout_below="@id/searchView"
         android:layout_height="wrap_content"
+        android:layout_below="@id/searchView"
         android:layout_weight="1" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabCreateLibrarian"
-            style="@style/FloatingActionButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="30dp"
-            android:elevation="10dp"
-            android:src="@drawable/baseline_add_24"
-            app:background="@null"
-            app:backgroundTint="@color/primary_color"
-            app:tint="#fff" />
-    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabCreateLibrarian"
+        style="@style/FloatingActionButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/primary_color"
+        android:elevation="10dp"
+        android:src="@drawable/baseline_add_24"
+        app:tint="#fff" />
 
 
 </RelativeLayout>

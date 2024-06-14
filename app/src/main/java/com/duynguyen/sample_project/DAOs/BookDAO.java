@@ -1,8 +1,10 @@
 package com.duynguyen.sample_project.DAOs;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.duynguyen.sample_project.Database.DatabaseHandler;
 import com.duynguyen.sample_project.Models.Book;
 
@@ -24,13 +26,24 @@ public class BookDAO {
             try (Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM BOOK", null)) {
                 if (cursor.moveToFirst()) {
                     do {
+
+//                        "CREATE TABLE BOOK(" +
+//                                "bookID INTEGER PRIMARY KEY AUTOINCREMENT," +
+//                                " bookName TEXT NOT NULL," +
+//                                " bookImage TEXT NOT NULL," +
+//                                " description TEXT NOT NULL," +
+//                                " author TEXT NOT NULL," +
+//                                " inStock INTEGER NOT NULL," +
+//                                "categoryID INTEGER NOT NULL," +
+//                                "FOREIGN KEY (categoryID) REFERENCES CATEGORY(categoryID))";
                         list.add(new Book(
                                 cursor.getInt(0),
                                 cursor.getString(1),
                                 cursor.getString(2),
                                 cursor.getString(3),
                                 cursor.getString(4),
-                                cursor.getInt(5)
+                                cursor.getInt(5),
+                                cursor.getInt(6)
                         ));
                     } while (cursor.moveToNext());
                 }
@@ -101,6 +114,27 @@ public class BookDAO {
     }
 
 
+    public int getInStock(int bookId) {
+        SQLiteDatabase sqLiteDatabase = null;
+        try {
+            sqLiteDatabase = databaseHandler.getReadableDatabase();
+            try (Cursor cursor = sqLiteDatabase.rawQuery("SELECT inStock FROM BOOK" +
+                    " WHERE bookID = ?", new String[]{String.valueOf(bookId)})) {
+
+                if (cursor.moveToFirst()) {
+                    return cursor.getInt(0);
+                }
+            }
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
+                sqLiteDatabase.close();
+            }
+        }
+        return -1;
+
+    }
+
+
     public boolean addBook(Book book) {
         SQLiteDatabase sqLiteDatabase = null;
         try {
@@ -148,9 +182,21 @@ public class BookDAO {
         }
     }
 
+    public void updateInStock(int bookID, int newInStock) {
+        SQLiteDatabase sqLiteDatabase = null;
+        try {
+            sqLiteDatabase = databaseHandler.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
 
+            contentValues.put("inStock", newInStock);
 
-
+            sqLiteDatabase.update("BOOK", contentValues, "bookID = ?", new String[]{String.valueOf(bookID)});
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
+                sqLiteDatabase.close();
+            }
+        }
+    }
 
 
 }

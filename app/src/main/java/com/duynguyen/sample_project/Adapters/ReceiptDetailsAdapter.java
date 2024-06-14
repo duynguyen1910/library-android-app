@@ -39,33 +39,43 @@ public class ReceiptDetailsAdapter extends RecyclerView.Adapter<ReceiptDetailsAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        String stringFilePath = Environment.getExternalStorageDirectory().getPath() + "/Download/" + tempoList.get(position).getBookImageURI();
+        ReceiptDetail detail = tempoList.get(holder.getBindingAdapterPosition());
+        String stringFilePath = Environment.getExternalStorageDirectory().getPath() + "/Download/" + detail.getBookImageURI();
         Bitmap bitmap = BitmapFactory.decodeFile(stringFilePath);
         holder.bookImage.setImageBitmap(bitmap);
         holder.bookImage.setImageBitmap(bitmap);
-        holder.txtBookName.setText(tempoList.get(holder.getBindingAdapterPosition()).getBookName());
-        holder.txtAuthor.setText(tempoList.get(holder.getBindingAdapterPosition()).getAuthor());
-        holder.txtQuantity.setText(String.valueOf(tempoList.get(holder.getBindingAdapterPosition()).getQuantity()));
+        holder.txtBookName.setText(detail.getBookName());
+        holder.txtAuthor.setText(detail.getAuthor());
+        holder.txtQuantity.setText(String.valueOf(detail.getQuantity()));
+        holder.txtInStock.setText(String.valueOf(detail.getInStock()));
         holder.itemView.setOnClickListener(v -> {
 
 
         });
 
         holder.btnPlus.setOnClickListener(v -> {
-            int quantity = tempoList.get(holder.getBindingAdapterPosition()).getQuantity();
-            tempoList.get(holder.getBindingAdapterPosition()).setQuantity(quantity + 1);
-            holder.txtQuantity.setText(String.valueOf(tempoList.get(holder.getBindingAdapterPosition()).getQuantity()));
+            int inStock = detail.getInStock();
+            int quantity = detail.getQuantity();
+            if (inStock > quantity){
+                detail.setQuantity(quantity + 1);
+                holder.txtQuantity.setText(String.valueOf(detail.getQuantity()));
+            }
+
         });
 
         holder.btnMinus.setOnClickListener(v -> {
-            int quantity = tempoList.get(holder.getBindingAdapterPosition()).getQuantity();
-            if (quantity == 1){
-                tempoList.remove(tempoList.get(holder.getBindingAdapterPosition()));
-                notifyDataSetChanged();
-            }else {
-                tempoList.get(holder.getBindingAdapterPosition()).setQuantity(quantity - 1);
-                holder.txtQuantity.setText(String.valueOf(tempoList.get(holder.getBindingAdapterPosition()).getQuantity()));
+            int inStock = detail.getInStock();
+            int quantity = detail.getQuantity();
+            if (inStock >= quantity){
+                if (quantity == 1){
+                    tempoList.remove(detail);
+                    notifyDataSetChanged();
+                }else {
+                    detail.setQuantity(quantity - 1);
+                    holder.txtQuantity.setText(String.valueOf(detail.getQuantity()));
+                }
             }
+
         });
     }
 
@@ -76,7 +86,7 @@ public class ReceiptDetailsAdapter extends RecyclerView.Adapter<ReceiptDetailsAd
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView bookImage;
-        TextView txtBookName, txtQuantity, txtAuthor;
+        TextView txtBookName, txtQuantity, txtAuthor, txtInStock;
         ImageButton btnPlus, btnMinus;
 
         public ViewHolder(@NonNull View itemView) {
@@ -87,6 +97,7 @@ public class ReceiptDetailsAdapter extends RecyclerView.Adapter<ReceiptDetailsAd
             txtQuantity = itemView.findViewById(R.id.txtQuantity);
             btnMinus = itemView.findViewById(R.id.btnMinus);
             btnPlus = itemView.findViewById(R.id.btnPlus);
+            txtInStock = itemView.findViewById(R.id.txtInStock);
         }
     }
 }

@@ -10,12 +10,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.duynguyen.sample_project.Adapters.HistoryDetailsAdapter;
+import com.duynguyen.sample_project.DAOs.BookDAO;
 import com.duynguyen.sample_project.DAOs.ReceiptDAO;
 import com.duynguyen.sample_project.Models.History;
 import com.duynguyen.sample_project.Models.ReceiptDetail;
@@ -31,9 +33,11 @@ public class HistoryDetailActivity extends AppCompatActivity {
     ImageButton btnBack;
     HistoryDetailsAdapter historyDetailsAdapter;
     RecyclerView recyclerViewDetails;
-    TextView txtFullname, txtNote, txtStartDay, txtEndDay;
+    TextView txtFullname, txtNote, txtStartDay, txtEndDay, txtCreator;
     TextView txtStatus, txtPhoneNumber, txtAddress, txtReturnReceipt;
     ArrayList<ReceiptDetail> detailsList;
+    ReceiptDAO receiptDAO;
+    BookDAO bookDAO;
     History history;
 
 
@@ -67,6 +71,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
                 txtPhoneNumber.setText(history.getPhoneNumber());
                 txtAddress.setText(history.getAddress());
                 txtNote.setText(history.getNote());
+                txtCreator.setText(history.getCreator());
                 if (history.getStatus() == 0) {
                     updateStatus0();
                 } else {
@@ -100,9 +105,21 @@ public class HistoryDetailActivity extends AppCompatActivity {
         builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ReceiptDAO receiptDAO = new ReceiptDAO(HistoryDetailActivity.this);
+
                 receiptDAO.updateReceipt(history.getReceiptID(), getDateToday(), 1);
+                ArrayList<ReceiptDetail> listDetails = history.getDetailsList();
+                for (ReceiptDetail detail : listDetails){
+                    int currentInstock = bookDAO.getInStock(detail.getBookID());
+                    bookDAO.updateInStock(detail.getBookID(), currentInstock + detail.getQuantity());
+                }
                 updateStatus1();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 1000);
             }
         });
         builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
@@ -150,7 +167,10 @@ public class HistoryDetailActivity extends AppCompatActivity {
         txtAddress = findViewById(R.id.txtAddress);
         txtPhoneNumber = findViewById(R.id.txtPhoneNumber);
         txtReturnReceipt = findViewById(R.id.txtReturnReceipt);
+        txtCreator = findViewById(R.id.txtCreator);
         detailsList = new ArrayList<>();
+        receiptDAO = new ReceiptDAO(HistoryDetailActivity.this);
+        bookDAO = new BookDAO(HistoryDetailActivity.this);
         history = null;
     }
 }

@@ -78,8 +78,6 @@ public class MemberDAO {
 
     public int register(Member member) {
         SQLiteDatabase sqLiteDatabase = null;
-        ArrayList<Member> list = new ArrayList<>();
-
         try {
             sqLiteDatabase = databaseHandler.getReadableDatabase();
 
@@ -91,6 +89,7 @@ public class MemberDAO {
                     // phoneNumber not found, insert new member
                     ContentValues contentValues = new ContentValues();
                     contentValues.put("fullname", member.getFullname());
+                    contentValues.put("memberImage", member.getMemberImageURI());
                     contentValues.put("phoneNumber", member.getPhoneNumber());
                     contentValues.put("address", member.getAddress());
                     contentValues.put("password", member.getPassword());
@@ -113,7 +112,9 @@ public class MemberDAO {
 
         try {
             sqLiteDatabase = databaseHandler.getReadableDatabase();
-            try (Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM MEMBER WHERE role = ?;", new String[]{String.valueOf(role)})) {
+            String query = "SELECT * FROM MEMBER WHERE role = ?\n" +
+                    "ORDER by memberID DESC";
+            try (Cursor cursor = sqLiteDatabase.rawQuery(query, new String[]{String.valueOf(role)})) {
                 if (cursor.moveToFirst()) {
                     do {
                         list.add(new Member(
@@ -143,7 +144,9 @@ public class MemberDAO {
 
         try {
             sqLiteDatabase = databaseHandler.getReadableDatabase();
-            try (Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM MEMBER WHERE role IN (?,?);", new String[]{String.valueOf(role1), String.valueOf(role2)})) {
+            String query = "SELECT * FROM MEMBER WHERE role IN (?,?)\n" +
+                    "ORDER by memberid DESC;";
+            try (Cursor cursor = sqLiteDatabase.rawQuery(query, new String[]{String.valueOf(role1), String.valueOf(role2)})) {
                 if (cursor.moveToFirst()) {
                     do {
                         list.add(new Member(

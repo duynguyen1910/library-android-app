@@ -8,18 +8,20 @@ public class ReceiptDetail implements Serializable {
     private String bookImageURI, bookName, author;
     private int memberID;
     private String fullname, startDay, endDay, note;
+    private int inStock;
     private int quantity;
 
 
 
     // Constructor này để tạo UI hiển thị cartItem khi tạo phiếu mượn (Không insert vào database)
 
-    public ReceiptDetail(int bookID, String bookImageURI, String bookName, String author, int quantity) {
+    public ReceiptDetail(int bookID, String bookImageURI, String bookName, String author, int quantity, int inStock) {
         this.bookID = bookID;
         this.bookImageURI = bookImageURI;
         this.bookName = bookName;
         this.author = author;
         this.quantity = quantity;
+        this.inStock = inStock;
     }
 
 
@@ -33,7 +35,13 @@ public class ReceiptDetail implements Serializable {
         this.quantity = quantity;
     }
 
+    public int getInStock() {
+        return inStock;
+    }
 
+    public void setInStock(int inStock) {
+        this.inStock = inStock;
+    }
 
     public String getBookImageURI() {
         return bookImageURI;

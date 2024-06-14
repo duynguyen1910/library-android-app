@@ -27,6 +27,7 @@ import com.duynguyen.sample_project.Models.Category;
 import com.duynguyen.sample_project.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class BookFragment extends Fragment {
     private static final String CATEGORY_ID = "categoryID";
@@ -38,6 +39,7 @@ public class BookFragment extends Fragment {
     private String categoryName;
     private int categoryImage;
     private RecyclerView bookListRecyclerView;
+
     private ArrayList<Book> listBook = new ArrayList<>();
 
     @Nullable
@@ -45,11 +47,23 @@ public class BookFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_book, container, false);
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
-        getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.background_blur));
+        getActivity().getWindow().setStatusBarColor(Color.parseColor("#F04D7F"));
+
+
 
         ImageView categoryImgImv = view.findViewById(R.id.categoryImgImv);
         TextView textCategoryTv = view.findViewById(R.id.textCategoryTv);
         bookListRecyclerView = view.findViewById(R.id.bookListRecyclerView);
+        ImageView redirectBackImv = view.findViewById(R.id.redirectBackImv);
+
+        redirectBackImv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OnBackButtonClickListener onBackButtonClickListener = (OnBackButtonClickListener) requireActivity();
+                onBackButtonClickListener.onBackButtonClicked();
+
+            }
+        });
 
         categoryImgImv.setImageResource(categoryImage);
         textCategoryTv.setText(categoryName);

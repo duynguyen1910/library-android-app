@@ -32,11 +32,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Họ tên: "
+                    android:textColor="#333"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtFullname"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/text1"
                     android:layout_height="wrap_content"
                     android:text="Tấn Duy" />
             </LinearLayout>
@@ -52,6 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Status: "
+                    android:textColor="#333"
                     android:textStyle="bold" />
 
                 <TextView
@@ -76,12 +79,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Số điện thoại: "
+                android:textColor="#333"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtPhoneNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text1"
                 android:text="123456789" />
         </LinearLayout>
 
@@ -95,11 +100,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Note: "
+                android:textColor="#333"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtNote"
                 android:layout_width="wrap_content"
+                android:textColor="@color/text1"
                 android:layout_height="wrap_content"
                 android:text="Giới thiệu sách cho bạn khác" />
         </LinearLayout>
@@ -119,10 +126,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ngày mượn: "
+                    android:textColor="#333"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtStartDay"
+                    android:textColor="@color/text1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2024-05-01" />
@@ -138,6 +147,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Ngày trả: "
+                    android:textColor="#333"
                     android:textStyle="bold" />
 
                 <TextView
@@ -163,12 +173,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Người tạo phiếu: "
+                android:textColor="#333"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtCreator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text1"
                 android:text="Tấn Duy" />
         </LinearLayout>
 
@@ -188,7 +200,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:background="#88898A"
+                android:background="@color/cate12"
                 android:paddingVertical="2dp"
                 android:paddingHorizontal="5dp"
                 android:text="3 quyển"

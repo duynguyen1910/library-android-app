@@ -10,8 +10,10 @@ public class Book implements Serializable {
     private String author;
     private int vote;
     private int quantity;
+    private int inStock;
     private int bookCategoryID;
     private int totalBooksBorrowed;
+
 
 
     public Book(int bookID, String bookName, String bookImageURI, String desc, int vote, int quantity, int bookCategoryID) {
@@ -24,6 +26,34 @@ public class Book implements Serializable {
         this.bookCategoryID = bookCategoryID;
     }
 
+
+    public int getInStock() {
+        return inStock;
+    }
+
+    public void setInStock(int inStock) {
+        this.inStock = inStock;
+    }
+
+    public Book(int bookID, String bookName, String bookImageURI, String desc, String author, int inStock, int bookCategoryID) {
+        this.bookID = bookID;
+        this.bookName = bookName;
+        this.bookImageURI = bookImageURI;
+        this.desc = desc;
+        this.author = author;
+        this.inStock = inStock;
+        this.bookCategoryID = bookCategoryID;
+    }
+
+    //"CREATE TABLE BOOK(" +
+//        "bookID INTEGER PRIMARY KEY AUTOINCREMENT," +
+//        " bookName TEXT NOT NULL," +
+//        " bookImage TEXT NOT NULL," +
+//        " description TEXT NOT NULL," +
+//        " author TEXT NOT NULL," +
+//        " inStock INTEGER NOT NULL," +
+//        "categoryID INTEGER NOT NULL," +
+//        "FOREIGN KEY (categoryID) REFERENCES CATEGORY(categoryID))";
     public Book(int bookID, String bookName, String bookImageURI, String desc, String author, int quantity) {
         this.bookID = bookID;
         this.bookName = bookName;

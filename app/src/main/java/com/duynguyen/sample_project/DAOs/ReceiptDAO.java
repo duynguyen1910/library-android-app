@@ -6,8 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
-
 import com.duynguyen.sample_project.Database.DatabaseHandler;
+import com.duynguyen.sample_project.Models.Member;
 import com.duynguyen.sample_project.Models.Receipt;
 
 public class ReceiptDAO {
@@ -19,24 +19,42 @@ public class ReceiptDAO {
         databaseHandler = new DatabaseHandler(context);
     }
 
+    public boolean checkBorrowAbility(Member member) {
+        SQLiteDatabase sqLiteDatabase = null;
+        try {
+            sqLiteDatabase = databaseHandler.getReadableDatabase();
+            String query = "SELECT * FROM RECEIPT\n" +
+                    "WHERE memberID = ? and status = 0";
+            try (Cursor cursor = sqLiteDatabase.rawQuery(query, new String[]{String.valueOf(member.getMemberID())})) {
+                if (cursor.getCount() > 0) {
+                    return false;
+                }
+            }
+        } finally {
+            if (sqLiteDatabase != null && sqLiteDatabase.isOpen()) {
+                sqLiteDatabase.close();
+            }
+        }
+        return true;
+    }
+
+
+
+
     public int addReceipt(Receipt receipt) {
-        // This method returns the ID of the inserted row if successful
-        // Returns -1 if the member hasn't returned previous books or if an error occurs during insertion
-        int newReceiptID = 0;
+
+        int newReceiptID;
         SQLiteDatabase sqLiteDatabase = null;
         Cursor cursor = null;
 
         try {
             sqLiteDatabase = databaseHandler.getWritableDatabase();
+            String query = "SELECT * FROM RECEIPT WHERE memberID = ? and status = 0";
 
-            // Check if there are any unreturned receipts for the member
-            cursor = sqLiteDatabase.rawQuery("SELECT * FROM RECEIPT WHERE memberID = ?", new String[]{String.valueOf(receipt.getMemberID())});
-            if (cursor.moveToFirst()) {  // Check if there is at least one result row
-                String endDay = cursor.getString(cursor.getColumnIndexOrThrow("endDay"));
-                if (endDay == null || endDay.isEmpty()) {
-                    Toast.makeText(context, "This member has an unreturned receipt. Cannot borrow.", Toast.LENGTH_SHORT).show();
-                    return -1;
-                }
+            cursor = sqLiteDatabase.rawQuery(query, new String[]{String.valueOf(receipt.getMemberID())});
+            if (cursor.getCount() > 0) {
+                Toast.makeText(context, "Thành viên này có phiếu mượn chưa trả. Không thể tạo phiếu!", Toast.LENGTH_SHORT).show();
+                return -1;
             }
 
             ContentValues contentValues = new ContentValues();

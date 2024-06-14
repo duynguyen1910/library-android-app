@@ -93,7 +93,7 @@ public class HomeFragment extends Fragment {
 
     private void setUpPieChart() {
         ArrayList<PieEntry> entries = new ArrayList<>();
-        booksList = statisticsDAO.getListBooksWithHighestQuantities(3);
+        booksList = statisticsDAO.getListBooksWithHighestQuantities(4);
         int bookListLength = booksList.size();
         for (int i = 0; i < bookListLength; i++) {
             entries.add(new PieEntry(booksList.get(i).getSumQuantity(), booksList.get(i).getBookName()));
@@ -115,7 +115,7 @@ public class HomeFragment extends Fragment {
 
         Legend legend = pieChart.getLegend();
         legend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         legend.setOrientation(Legend.LegendOrientation.VERTICAL);
         legend.setXEntrySpace(0f);
         legend.setForm(Legend.LegendForm.SQUARE);

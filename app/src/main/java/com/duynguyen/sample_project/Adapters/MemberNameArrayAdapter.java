@@ -5,11 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -22,13 +19,9 @@ import java.util.Objects;
 
 public class MemberNameArrayAdapter extends ArrayAdapter {
     private final ArrayList<Member> mListMembers;
-    private final EditText edtFullname;
-
-
-    public MemberNameArrayAdapter(@NonNull Context context, EditText edtFullname, int resource, @NonNull List<Member> objects) {
+    public MemberNameArrayAdapter(@NonNull Context context, int resource, @NonNull List<Member> objects) {
         super(context, resource, objects);
         mListMembers = new ArrayList<>(Objects.requireNonNull(objects));
-        this.edtFullname = edtFullname;
     }
 
     @NonNull
@@ -37,15 +30,20 @@ public class MemberNameArrayAdapter extends ArrayAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_member_name, parent, false);
         }
-        TextView txtBookName = convertView.findViewById(R.id.txtFullname);
+        TextView txtFullname = convertView.findViewById(R.id.txtFullname);
         TextView txtPhonenumber = convertView.findViewById(R.id.txtPhonenumber);
 
         Member member = (Member) getItem(position);
         assert member != null;
         txtPhonenumber.setText(member.getPhoneNumber());
-        txtBookName.setText(member.getFullname());
+        txtFullname.setText(member.getFullname());
 
         return convertView;
+    }
+    public void updateList(List<Member> newList) {
+        mListMembers.clear();
+        mListMembers.addAll(newList);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -54,9 +52,11 @@ public class MemberNameArrayAdapter extends ArrayAdapter {
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence phoneNumber) {
+
+
                 List<Member> mListSuggest = new ArrayList<>();
                 for (Member member : mListMembers) {
-                    if (member.getPhoneNumber().equals(phoneNumber)) {
+                    if (member.getPhoneNumber().contentEquals(phoneNumber)) {
                         mListSuggest.add(member);
                     }
                 }
@@ -64,6 +64,7 @@ public class MemberNameArrayAdapter extends ArrayAdapter {
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = mListSuggest;
                 filterResults.count = mListSuggest.size();
+
                 return filterResults;
             }
 
@@ -80,11 +81,6 @@ public class MemberNameArrayAdapter extends ArrayAdapter {
 
             @Override
             public CharSequence convertResultToString(Object resultValue) {
-
-                if (edtFullname != null) {
-                    edtFullname.setText(((Member) resultValue).getFullname());
-                }
-
                 return ((Member) resultValue).getPhoneNumber();
             }
 

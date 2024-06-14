@@ -55,6 +55,7 @@ public class BookForSearchAdapter extends RecyclerView.Adapter<BookForSearchAdap
         holder.bookImage.setImageBitmap(bitmap);
         holder.bookName.setText(bookList.get(position).getBookName());
         holder.bookAuthor.setText(bookList.get(holder.getBindingAdapterPosition()).getAuthor());
+        holder.bookInStock.setText(String.valueOf(bookList.get(holder.getBindingAdapterPosition()).getInStock()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +66,8 @@ public class BookForSearchAdapter extends RecyclerView.Adapter<BookForSearchAdap
                         bookList.get(holder.getBindingAdapterPosition()).getBookID(),
                         bookList.get(holder.getBindingAdapterPosition()).getBookImageURI(),
                         bookList.get(holder.getBindingAdapterPosition()).getBookName(),
-                        bookList.get(holder.getBindingAdapterPosition()).getAuthor(), 1
+                        bookList.get(holder.getBindingAdapterPosition()).getAuthor(), 1,
+                        bookList.get(holder.getBindingAdapterPosition()).getInStock()
                 );
                 boolean existed = false;
                 for (ReceiptDetail detail : tempoList) {
@@ -92,13 +94,14 @@ public class BookForSearchAdapter extends RecyclerView.Adapter<BookForSearchAdap
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView bookImage;
-        TextView bookName, bookAuthor;
+        TextView bookName, bookAuthor, bookInStock;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             bookImage = itemView.findViewById(R.id.bookImage);
             bookName = itemView.findViewById(R.id.bookName);
             bookAuthor = itemView.findViewById(R.id.bookAuthor);
+            bookInStock = itemView.findViewById(R.id.bookInStock);
         }
     }
 

@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".Activities.CreateReceiptActivity">
-
+    tools:context=".Activities.CreateCustomerActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,109 +21,78 @@
             android:src="@drawable/ic_back" />
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tạo phiếu mượn"
-            android:textColor="@color/black"
+            android:layout_marginBottom="10dp"
+            android:text="Thêm khách hàng"
+            android:textColor="#333"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <TextView
-        android:id="@+id/txtFullname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/role_bg_1"
-        android:focusable="false"
-        android:layout_marginStart="15dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/text1"
-        android:textSize="15sp" />
-
-    <AutoCompleteTextView
-        android:id="@+id/autotxtPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:text="Số điện thoại"
+        android:textColor="#333" />
+
+    <EditText
+        android:id="@+id/edtPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:paddingHorizontal="10dp"
         android:background="@drawable/custom_edit_text_border"
-        android:completionThreshold="1"
-        android:hint="Số điện thoại"
         android:inputType="number"
-        android:padding="15dp"
         android:textColor="@color/black"
         android:textColorHint="@color/text1"
         android:textSize="15sp" />
 
-
-    <EditText
-        android:id="@+id/edtNote"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:text="Họ tên"
+        android:textColor="#333" />
+
+    <EditText
+        android:id="@+id/edtFullname"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:paddingHorizontal="10dp"
         android:background="@drawable/custom_edit_text_border"
-        android:hint="Ghi chú"
         android:inputType="text"
-        android:padding="15dp"
         android:textColor="@color/black"
         android:textColorHint="@color/text1"
         android:textSize="15sp" />
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Địa chỉ (Optional)"
+        android:textColor="#333" />
 
     <EditText
-        android:id="@+id/edtStartDate"
+        android:id="@+id/edtAddress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/custom_edit_text_border"
-        android:focusable="false"
-        android:hint="Ngày mượn"
-        android:inputType="datetime"
-        android:padding="15dp"
+        android:inputType="text"
         android:textColor="@color/black"
+        android:paddingHorizontal="10dp"
         android:textColorHint="@color/text1"
         android:textSize="15sp" />
-
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/custom_edit_text_border"
-        android:textColorHint="@color/text1"
-        android:textSize="15sp"
-        app:iconifiedByDefault="false"
-        app:queryBackground="@android:color/transparent"
-        app:queryHint="Tìm sách ở đây..." />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewBook"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewReceipt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <Button
@@ -135,9 +103,11 @@
             android:layout_weight="1"
             android:background="@drawable/custom_button_close"
             android:padding="8dp"
-            android:text="Làm mới"
+            android:text="Xóa thông tin"
             android:textAllCaps="false"
             android:textColor="@color/text1"
+            android:textSize="14sp"
+            android:textStyle="bold"
             app:backgroundTint="@null" />
 
         <Button
@@ -149,7 +119,8 @@
             android:padding="8dp"
             android:text="Xác nhận"
             android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="bold"
             app:backgroundTint="@null" />
     </LinearLayout>
-
 </LinearLayout>

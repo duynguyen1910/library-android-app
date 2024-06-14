@@ -1,41 +1,24 @@
 package com.duynguyen.sample_project.Fragments;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.duynguyen.sample_project.Activities.CreateLibrarianActivity;
-import com.duynguyen.sample_project.Adapters.CustomerAdapter;
 import com.duynguyen.sample_project.Adapters.LibrarianAdapter;
 import com.duynguyen.sample_project.DAOs.MemberDAO;
-import com.duynguyen.sample_project.Models.Category;
 import com.duynguyen.sample_project.Models.Member;
 import com.duynguyen.sample_project.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class LibrarianFragment extends Fragment {
 
@@ -55,12 +38,9 @@ public class LibrarianFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_librarian, container, false);
 
         Mapping();
-        fabCreateLibrarian.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(requireActivity(), CreateLibrarianActivity.class);
-                startActivity(intent);
-            }
+        fabCreateLibrarian.setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), CreateLibrarianActivity.class);
+            startActivity(intent);
         });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -80,25 +60,25 @@ public class LibrarianFragment extends Fragment {
     }
 
     private void handleQueryInSearchView(String newText) {
-        mListSuggest.clear(); // Xóa danh sách gợi ý cũ trước khi thêm mới
+        mListSuggest.clear();
 
         if (newText == null || newText.isEmpty()) {
-            // Nếu không có văn bản hoặc văn bản trống, hiển thị tất cả các thư viện viên
+
             mListSuggest.addAll(librariansList);
         } else {
-            // Nếu có văn bản tìm kiếm, thực hiện tìm kiếm và thêm vào danh sách gợi ý
+
             for (Member member : librariansList) {
-                if (member.getPhoneNumber().startsWith(newText)) {
+                if (newText.length() > 5 && member.getPhoneNumber().startsWith(newText)) {
                     mListSuggest.add(member);
                 }
             }
         }
 
-        // Kiểm tra xem danh sách gợi ý có rỗng hay không
+
         if (mListSuggest.isEmpty()) {
             Toast.makeText(requireActivity(), "No member found", Toast.LENGTH_SHORT).show();
         } else {
-            // Nếu có thành viên trong danh sách gợi ý, cập nhật adapter với danh sách này
+
             librarianAdapter = new LibrarianAdapter(requireActivity(), mListSuggest, memberData.getRole());
             recyclerViewLibrarian.setAdapter(librarianAdapter);
         }
@@ -124,8 +104,6 @@ public class LibrarianFragment extends Fragment {
         librarianAdapter = new LibrarianAdapter(requireActivity(), librariansList, memberData.getRole());
         recyclerViewLibrarian.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerViewLibrarian.setAdapter(librarianAdapter);
-
-
     }
 
 

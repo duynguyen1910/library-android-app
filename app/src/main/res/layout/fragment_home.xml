@@ -42,6 +42,7 @@
                 android:drawableEnd="@drawable/ic_hello"
                 android:drawablePadding="5dp"
                 android:text="Hello, Ngọc Đại!"
+                android:textStyle="bold"
                 android:textColor="#333" />
 
             <TextView
@@ -50,7 +51,8 @@
                 android:layout_marginBottom="3dp"
                 android:text="Have a nice day!"
                 android:textSize="14dp"
-                android:textStyle="bold" />
+                android:textColor="@color/text1"
+                />
 
             <TextView
                 android:id="@+id/txtRole"

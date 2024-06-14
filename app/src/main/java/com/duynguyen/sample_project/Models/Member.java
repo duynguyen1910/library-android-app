@@ -35,6 +35,14 @@ public class Member implements Serializable {
         this.password = password;
         this.role = role;
     }
+    public Member(String fullname, int memberImageURI, String phoneNumber, String address, String password, int role) {
+        this.fullname = fullname;
+        this.memberImageURI = memberImageURI;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.password = password;
+        this.role = role;
+    }
 
     public int getMemberID() {
         return memberID;

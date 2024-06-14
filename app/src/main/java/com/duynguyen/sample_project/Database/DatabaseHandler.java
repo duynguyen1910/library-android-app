@@ -8,7 +8,7 @@ import com.duynguyen.sample_project.R;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Library";
-    private static final int DATABASE_VERSION = 325;
+    private static final int DATABASE_VERSION = 329;
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -79,6 +79,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         " password TEXT," +
                         " role INTEGER NOT NULL)"; // 2: Admin, 1: Thủ thư, 0: Khách hàng thuê sách
         db.execSQL(createMember);
+
+
 
         String insertMember = "INSERT INTO MEMBER (fullname, memberImage, phoneNumber, address, password, role) VALUES" +
                 "('Administrator', " + R.mipmap.admin + ", 'admin','tp. Hồ Chí Minh', '12345678', 2)," +

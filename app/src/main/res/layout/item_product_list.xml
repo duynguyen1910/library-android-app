@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:text="14,052,775"
                 android:textSize="14sp"
-                android:textColor="@color/gray2"
+                android:textColor="@color/cate1"
                 android:textStyle="bold"
                 android:layout_marginEnd="4dp"/>
             <TextView
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:text="14,052,775"
                 android:textSize="14sp"
-                android:textColor="@color/gray2"
+                android:textColor="@color/cate2"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>

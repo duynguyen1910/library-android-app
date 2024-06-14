@@ -2,25 +2,29 @@ package com.duynguyen.sample_project.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.duynguyen.sample_project.Adapters.BookForSearchAdapter;
@@ -39,7 +43,6 @@ import com.duynguyen.sample_project.R;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -47,7 +50,8 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 public class CreateReceiptActivity extends AppCompatActivity {
     RecyclerView recyclerViewBook, recyclerViewReceipt;
-    EditText edtFullname, edtStartDate, edtNote;
+    EditText edtStartDate, edtNote;
+    TextView txtFullname;
     ArrayList<Book> listBook;
     SearchView searchView;
     AutoCompleteTextView autotxtPhoneNumber;
@@ -55,11 +59,14 @@ public class CreateReceiptActivity extends AppCompatActivity {
     BookForSearchAdapter bookForSearchAdapter;
     ReceiptDetailsAdapter receiptDetailsAdapter;
     BookDAO bookDAO;
+    MemberDAO memberDAO;
+    ArrayList<Member> listCustomer;
     ArrayList<Book> mListSuggest;
     SharedPreferences sharedPreferences;
     Button btnSubmit, btnReset;
     ImageButton btnBack;
     ArrayList<ReceiptDetail> tempoReceiptDetailsList;
+    ReceiptDAO receiptDAO;
 
 
     @Override
@@ -69,7 +76,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(Color.parseColor("#F04D7F"));
         Objects.requireNonNull(getSupportActionBar()).hide();
         Mapping();
-        initUI();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -92,23 +99,103 @@ public class CreateReceiptActivity extends AppCompatActivity {
 
         btnBack.setOnClickListener(v -> finish());
 
+        autotxtPhoneNumber.setOnItemClickListener((parent, view, position, id) -> {
+            Member selectedMember = (Member) parent.getItemAtPosition(position);
+            txtFullname.setText(selectedMember.getFullname());
+
+        });
+
+        autotxtPhoneNumber.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                validatePhoneNumber();
+
+
+            }
+
+        });
+
+        autotxtPhoneNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() < 9 || s.length() > 11) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(() -> txtFullname.setText(""), 300);
+                }
+
+
+            }
+        });
+
 
     }
+
+    private boolean validatePhoneNumber() {
+        String phoneNumber = autotxtPhoneNumber.getText().toString().trim();
+        if (phoneNumber.isEmpty()) {
+            Toast.makeText(CreateReceiptActivity.this, "Hãy điền số điện thoại", Toast.LENGTH_SHORT).show();
+            autotxtPhoneNumber.setError("Vui lòng nhập trường này");
+            return false;
+        }
+        if (phoneNumber.length() < 9) {
+            autotxtPhoneNumber.setError("Số điện thoại phải nhiều hơn 8 ký tự");
+            return false;
+        }
+        Member member = memberDAO.getMemberByPhoneNumber(phoneNumber);
+        if (member == null) {
+            txtFullname.setText("");
+            showConfirmationRegisterDialog();
+            return false;
+        } else {
+            txtFullname.setText(member.getFullname());
+
+            if (!receiptDAO.checkBorrowAbility(member)) {
+                Toast.makeText(CreateReceiptActivity.this, "Thành viên này có phiếu mượn chưa trả. Không thể tạo phiếu!", Toast.LENGTH_SHORT).show();
+                autotxtPhoneNumber.setError("Thành viên này có phiếu mượn chưa trả. Không thể tạo phiếu!");
+                return false;
+            }
+        }
+
+
+        return true;
+    }
+
+    private void showConfirmationRegisterDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(CreateReceiptActivity.this);
+        builder.setCancelable(false);
+        builder.setMessage("Số điện thoại không tồn tại trong database, ấn đăng ký để tiếp tục?");
+        builder.setTitle("Warning!");
+        builder.setPositiveButton("Đồng ý", (dialog, which) -> {
+            Intent intent = new Intent(CreateReceiptActivity.this, CreateCustomerActivity.class);
+            intent.putExtra("newPhoneNumber", autotxtPhoneNumber.getText().toString().trim());
+            startActivity(intent);
+        });
+        builder.setNegativeButton("Hủy", (dialog, which) -> dialog.dismiss());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 
     private void handleSubmitReceipt() {
         String phoneNumber = autotxtPhoneNumber.getText().toString().trim();
         String startDay = edtStartDate.getText().toString();
         String endDay = "";
-        String fullname = edtFullname.getText().toString().trim();
         String note = edtNote.getText().toString().trim();
-        if (phoneNumber.isEmpty()) {
-            autotxtPhoneNumber.setError("Vui lòng nhập trường này");
+        if (!validatePhoneNumber()) {
             return;
         }
-        if (fullname.isEmpty()) {
-            edtFullname.setError("Vui lòng nhập trường này");
-            return;
-        }
+
 
         if (tempoReceiptDetailsList.isEmpty()) {
             Toast.makeText(CreateReceiptActivity.this, "Hãy chọn sách để mượn đi nào", Toast.LENGTH_SHORT).show();
@@ -129,7 +216,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
             String currentMemberFullname = sharedPreferences.getString("currentMemberFullname", null);
 //            public Receipt(int receiptID, String creator, String startDay, String endDay, String note, int memberID, int status)
             Receipt receipt = new Receipt(currentMemberFullname, startDay, endDay, note, memeberID, 0);
-            ReceiptDAO receiptDAO = new ReceiptDAO(CreateReceiptActivity.this);
+
             int check = receiptDAO.addReceipt(receipt);
 
 
@@ -141,14 +228,18 @@ public class CreateReceiptActivity extends AppCompatActivity {
                 for (ReceiptDetail detail : tempoReceiptDetailsList) {
                     int bookID = detail.getBookID();
                     int quantity = detail.getQuantity();
+                    int inStock = bookDAO.getInStock(bookID);
 
-                    long checkDetail = receiptDetailDAO.addReceiptDetail(receiptID, bookID, quantity);
+                    if (inStock >= quantity) {
+                        long checkDetail = receiptDetailDAO.addReceiptDetail(receiptID, bookID, quantity);
 
-                    if (checkDetail == -1) {
-                        isSuccess = false;
-                        break;
+                        if (checkDetail == -1) {
+                            isSuccess = false;
+                            break;
+                        } else {
+                            bookDAO.updateInStock(bookID, inStock - quantity);
+                        }
                     }
-
                 }
 
             } else {
@@ -162,6 +253,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
 
         if (isSuccess) {
             Toast.makeText(CreateReceiptActivity.this, "Tạo phiếu mượn thành công", Toast.LENGTH_SHORT).show();
+            finish();
         } else {
             Toast.makeText(CreateReceiptActivity.this, "Tạo phiếu mượn thất bại", Toast.LENGTH_SHORT).show();
         }
@@ -171,7 +263,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
 
     private void resetForm() {
         autotxtPhoneNumber.setText("");
-        edtFullname.setText("");
+        txtFullname.setText("");
         edtNote.setText("");
         searchView.setQuery("", true);
         tempoReceiptDetailsList.clear();
@@ -190,14 +282,27 @@ public class CreateReceiptActivity extends AppCompatActivity {
                     mListSuggest.add(book);
                 }
             }
-
             bookForSearchAdapter.notifyDataSetChanged();
+
         }, 300);
+
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initUI();
+
+        String phone = autotxtPhoneNumber.getText().toString().trim();
+        Member member = memberDAO.getMemberByPhoneNumber(phone);
+        if (member != null) {
+            txtFullname.setText(member.getFullname());
+        }
+    }
+
     private void initUI() {
-        memberNameAdapter = new MemberNameArrayAdapter(this, edtFullname, R.layout.item_member_name, getListCustomers());
+        memberNameAdapter = new MemberNameArrayAdapter(this, R.layout.item_member_name, listCustomer);
         autotxtPhoneNumber.setAdapter(memberNameAdapter);
 
         bookDAO = new BookDAO(this);
@@ -223,7 +328,6 @@ public class CreateReceiptActivity extends AppCompatActivity {
                 int position = viewHolder.getLayoutPosition();
                 tempoReceiptDetailsList.remove(position);
                 receiptDetailsAdapter.notifyItemRemoved(position);
-
             }
 
             @Override
@@ -262,7 +366,7 @@ public class CreateReceiptActivity extends AppCompatActivity {
         recyclerViewReceipt = findViewById(R.id.recyclerViewReceipt);
         searchView = findViewById(R.id.searchView);
         autotxtPhoneNumber = findViewById(R.id.autotxtPhoneNumber);
-        edtFullname = findViewById(R.id.edtFullname);
+        txtFullname = findViewById(R.id.txtFullname);
         btnSubmit = findViewById(R.id.btnSubmit);
         btnReset = findViewById(R.id.btnReset);
         btnBack = findViewById(R.id.btnBack);
@@ -270,10 +374,12 @@ public class CreateReceiptActivity extends AppCompatActivity {
         edtNote = findViewById(R.id.edtNote);
         mListSuggest = new ArrayList<>();
         tempoReceiptDetailsList = new ArrayList<>();
+        memberDAO = new MemberDAO(CreateReceiptActivity.this);
+        receiptDAO = new ReceiptDAO(CreateReceiptActivity.this);
+        listCustomer = getListCustomers();
     }
 
-    private List<Member> getListCustomers() {
-        MemberDAO memberDAO = new MemberDAO(CreateReceiptActivity.this);
+    private ArrayList<Member> getListCustomers() {
         return memberDAO.getListCustomers();
     }
 }

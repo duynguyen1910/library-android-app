@@ -37,6 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Đừng Để Nỗi Sợ Cản Đường Bạn"
+                android:maxLength="35"
                 android:textStyle="bold" />
 
             <TextView
@@ -45,6 +46,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Helen Odessky" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textSize="13dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Instock: " />
+                <TextView
+                    android:textSize="13dp"
+                    android:id="@+id/bookInStock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1" />
+            </LinearLayout>
+
+
 
 
         </LinearLayout>

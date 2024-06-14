@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements
         getSupportActionBar().hide();
 
 
-        toolbarTitleTv.setText("Trang chủ");
+        toolbarTitleTv.setText("Home");
         setupViewPager();
 
         bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -104,31 +104,28 @@ public class MainActivity extends AppCompatActivity implements
                 @Override
                 public void onPageSelected(int position) {
                     Fragment fragment = viewPagerAdapter.getItem(position);
-                    if (fragment instanceof BookFragment) {
-                        backImv.setVisibility(View.VISIBLE);
-                    } else {
-                        backImv.setVisibility(View.GONE);
-                    }
+                    backImv.setVisibility(View.GONE);
 
 
                     switch (position) {
                         case 0:
-                            onSetPageSelected(R.id.homeMenu, "Trang chủ");
+                            onSetPageSelected(R.id.homeMenu, "Home");
                             break;
                         case 1:
-                            onSetPageSelected(R.id.categoryMenu, "Danh mục");
+                            onSetPageSelected(R.id.categoryMenu, "Category");
                             break;
                         case 2:
-                            onSetPageSelected(R.id.receiptMenu, "Phiếu mượn");
+                            onSetPageSelected(R.id.receiptMenu, "Receipt");
                             break;
                         case 3:
-                            onSetPageSelected(R.id.memberMenu, "Thành viên");
+                            onSetPageSelected(R.id.memberMenu, "Member");
                             break;
                         case 4:
-                            onSetPageSelected(R.id.profileMenu, "Hồ sơ");
+                            onSetPageSelected(R.id.profileMenu, "Profile");
                             break;
                         default:
-                            throw new IllegalArgumentException("Invalid position: " + position);
+                            onSetPageSelected(R.id.categoryMenu, "Category");
+                            break;
                     }
                 }
 
@@ -152,7 +149,6 @@ public class MainActivity extends AppCompatActivity implements
 
                 BookFragment bookFragment = BookFragment.newInstance(category);
                 viewPagerAdapter.addFragment(bookFragment, "Book");
-                Toast.makeText(this, viewPagerAdapter.getCount() + "", Toast.LENGTH_SHORT).show();
                 mViewPager.setCurrentItem(viewPagerAdapter.getCount() - 1);
             } catch (Exception e) {
                 Log.e("MainActivity", "Error adding fragment", e);
@@ -161,15 +157,7 @@ public class MainActivity extends AppCompatActivity implements
 
         @Override
         public void onBackButtonClicked () {
-            Log.d("AAAAAAA: ", "");
-//        if (mViewPager.getCurrentItem() > 0) {
-//            mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
-//            if (mViewPager.getCurrentItem() == 0) {
-//                backImv.setVisibility(View.GONE);
-//            }
-//        } else {
-//            finish();
-//        }
+            mViewPager.setCurrentItem(1);
         }
         private void Mapping () {
 
